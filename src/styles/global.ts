@@ -13,6 +13,18 @@ const GlobalStyles = createGlobalStyle`
 
   html, body, #__next {
     height: 100%;
+    overflow: hidden
+
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    &::-webkit-scrollbar {
+      width: 0 !important;
+    }
   }
 
   body {
