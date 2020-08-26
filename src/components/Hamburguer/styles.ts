@@ -29,14 +29,14 @@ export const Btn = styled.div`
 `
 
 export const Span = styled.span`
-  background: #056839;
+  background: #EF8321;
   height: 3px;
   width: 30px;
   position: absolute;
   transition: .2s all;
 
   &::before {
-    background: #056839;
+    background: #EF8321;
     content: ' ';
     height: 3px;
     position: absolute;
@@ -46,7 +46,7 @@ export const Span = styled.span`
   }
 
   &::after {
-    background: #056839;
+    background: #EF8321;
     bottom: -9px;
     content: ' ';
     height: 3px;

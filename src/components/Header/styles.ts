@@ -10,6 +10,7 @@ export const TopBar = styled.header`
   justify-content: space-between;
   position: fixed;
   z-index: 1;
+  box-shadow: 0px 1px 8px #000;
 
   @media only screen and (min-width: 1024px) {
     position: relative;

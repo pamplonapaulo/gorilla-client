@@ -4,8 +4,6 @@ import Instagram from 'components/Instagram'
 const Footer = ({ address = 'gorillapack' }) => (
   <S.Wrapper>
     <S.Instagram>
-      <S.P>{'Vem com o Gorilla!'}</S.P>
-
       <S.A
         target="_blank"
         rel="noreferrer"
@@ -17,7 +15,7 @@ const Footer = ({ address = 'gorillapack' }) => (
     </S.Instagram>
 
     <S.Copy>
-      <S.PCopy>{'© 2020 Todos os direitos reservados'}</S.PCopy>
+      <S.PCopy>{'© 2020 Todos os direitos reservados | Gorilla Pack'}</S.PCopy>
     </S.Copy>
   </S.Wrapper>
 )

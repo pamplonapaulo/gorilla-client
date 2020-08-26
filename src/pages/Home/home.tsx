@@ -1,12 +1,14 @@
 import styled from 'styled-components'
 import VideoBg from 'components/VideoBG'
 import Logo from 'components/Logo'
+import MadeInNikiti from 'components/MadeIn'
 
 const Home = () => (
   <>
     <VideoBg />
     <Container>
       <Logo />
+      <MadeInNikiti />
     </Container>
   </>
 )
@@ -18,6 +20,7 @@ const Container = styled.div`
   justify-content: center;
   display: flex;
   align-items: center;
+  flex-direction: column;
 `
 
 export default Home

@@ -8,7 +8,7 @@ function App({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
-        <title>Gorilla Pack</title>
+        <title>Gorilla Pack | Snack maromba de Nikiti</title>
         <meta
           name="viewport"
           content="width=device-width, initial-scale=1, shrink-to-fit=no"
@@ -19,7 +19,7 @@ function App({ Component, pageProps }: AppProps) {
         <link rel="manifest" href="/manifest.json" />
         <meta
           name="description"
-          content="Snacks de banana desidratada. Entregas para toda cidade de Niterói."
+          content="Snacks saudáveis de banana desidratada em Niterói."
         />
         <link
           href="https://fonts.googleapis.com/css2?family=PT+Serif&display=swap"

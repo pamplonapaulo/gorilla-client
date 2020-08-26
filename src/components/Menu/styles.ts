@@ -20,11 +20,10 @@ export const SideBar = styled.div`
     transform: translateX(0px);
     height: 70px;
     width: unset;
-    right: 5vw;
   }
 `
 export const List = styled.ul`
-  background: #ccc;
+  background: #facb37;
   height: 100%;
   padding: 0 25px;
   width: 100%;
@@ -37,12 +36,13 @@ export const List = styled.ul`
   @media only screen and (min-width: 1024px) {
     background: transparent;
     flex-direction: row;
+    margin-left: 5vw;
     padding: 0;
   }
 `
 export const Item = styled.li`
   align-items: center;
-  border: 1px solid #056839;
+  border: 1px solid #2DA650;
   display: flex;
   height: 70px;
   justify-content: center;
@@ -50,7 +50,7 @@ export const Item = styled.li`
 
   @media only screen and (min-width: 1024px) {
     border: none;
-    margin-left: 5vw;
+    margin-left: 1vw;
     padding: 0 15px;
     height: 40px;
     border: transparent solid 1px;
@@ -59,8 +59,8 @@ export const Item = styled.li`
     color: #47311b;
 
     &:hover {
-      border: white solid 1px;
-      color: #fff;
+      border: #EF8321 solid 1px;
+      color: #EF8321;
     }
   }
 }
@@ -70,8 +70,12 @@ export const A = styled.a`
   position: relative;
 `
 export const H1 = styled.h1`
-  color: inherit;
+  color: #2da650;
   text-align: center;
   white-space: nowrap;
   font-weight: 300;
+
+  @media only screen and (min-width: 1024px) {
+    color: inherit;
+  }
 `

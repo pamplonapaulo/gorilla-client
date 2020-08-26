@@ -1,12 +1,14 @@
 import styled from 'styled-components'
 
 export const Wrapper = styled.footer`
-  background: #fff;
   display: flex;
   flex-direction: column;
   padding-top: 4rem;
   justify-content: center;
   width: 100%;
+
+  position: fixed;
+  bottom: 0;
 
   @media only screen and (min-width: 1024px) {
     height: 200px;
@@ -45,6 +47,8 @@ export const A = styled.a`
 export const P = styled.p`
   align-items: center;
   font-size: 2.5rem;
+  color: #ef8321;
+  text-shadow: 1px 1px 1px #000;
 `
 
 export const Copy = styled.div`
@@ -58,7 +62,8 @@ export const Copy = styled.div`
 `
 
 export const PCopy = styled.div`
-  color: #000f08;
+  color: #ef8321;
   font-size: 1.5rem;
   margin-top: 3rem;
+  text-shadow: 1px 1px 1px #000;
 `
