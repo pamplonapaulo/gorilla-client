@@ -4,17 +4,20 @@ export const Wrapper = styled.footer`
   display: flex;
   flex-direction: column;
   padding-top: 4rem;
-  justify-content: center;
+  justify-content: space-evenly;
   width: 100%;
   position: absolute;
-  bottom: -200px;
+  bottom: -150px;
   background: #2da650;
-  height: 200px;
+  height: 150px;
+
+  padding-top: 3rem;
 
   @media only screen and (min-width: 1024px) {
     bottom: 0;
     background: transparent;
     height: 200px;
+    justify-content: center;
     padding: 4rem 5vw 0;
     position: fixed;
   }
@@ -52,7 +55,10 @@ export const P = styled.p`
   align-items: center;
   font-size: 2.5rem;
   color: #ef8321;
-  text-shadow: 1px 1px 1px #000;
+
+  @media only screen and (min-width: 1024px) {
+    text-shadow: 1px 1px 1px #000;
+  }
 `
 
 export const Copy = styled.div`
@@ -66,8 +72,12 @@ export const Copy = styled.div`
 `
 
 export const PCopy = styled.div`
-  color: #ef8321;
+  color: #47311b;
   font-size: 1.5rem;
   margin-top: 3rem;
-  text-shadow: 1px 1px 1px #000;
+
+  @media only screen and (min-width: 1024px) {
+    color: #ef8321;
+    text-shadow: 1px 1px 1px #000;
+  }
 `

@@ -8,7 +8,7 @@ function App({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
-        <title>Gorilla Pack | Snack maromba de Nikiti</title>
+        <title>Gorilla Pack | O snack saudável de Nikiti</title>
         <meta
           name="viewport"
           content="width=device-width, initial-scale=1, shrink-to-fit=no"
