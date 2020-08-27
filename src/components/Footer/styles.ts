@@ -6,13 +6,17 @@ export const Wrapper = styled.footer`
   padding-top: 4rem;
   justify-content: center;
   width: 100%;
-
-  position: fixed;
-  bottom: 0;
+  position: absolute;
+  bottom: -200px;
+  background: #2da650;
+  height: 200px;
 
   @media only screen and (min-width: 1024px) {
+    bottom: 0;
+    background: transparent;
     height: 200px;
     padding: 4rem 5vw 0;
+    position: fixed;
   }
 `
 

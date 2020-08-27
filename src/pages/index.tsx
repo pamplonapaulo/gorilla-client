@@ -15,7 +15,6 @@ export default function Home() {
 }
 
 const Container = styled.div`
-  background-color: #ccc;
   color: #000f08;
   width: 100%;
   height: 100%;

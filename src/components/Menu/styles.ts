@@ -25,7 +25,7 @@ export const SideBar = styled.div`
 export const List = styled.ul`
   background: #facb37;
   height: 100%;
-  padding: 0 25px;
+  padding: 0 25px 50px;
   width: 100%;
   align-items: center;
   display: flex;
