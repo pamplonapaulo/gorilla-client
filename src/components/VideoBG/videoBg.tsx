@@ -16,6 +16,7 @@ const Footage = styled.video`
   bottom: 0;
   min-width: 100%;
   min-height: 100%;
+  z-index: -1;
 
   @media (min-aspect-ratio: 16/9) {
     width: 100%;
