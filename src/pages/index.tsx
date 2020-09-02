@@ -3,7 +3,7 @@ import VideoBg from 'components/VideoBG'
 import Logo from 'components/Logo'
 import MadeInNikiti from 'components/MadeIn'
 
-const Home = () => (
+const Index = () => (
   <>
     <VideoBg />
     <Container>
@@ -12,13 +12,6 @@ const Home = () => (
     </Container>
   </>
 )
-
-export async function getServerSideProps() {
-  await new Promise((resolve) => {
-    setTimeout(resolve, 500)
-  })
-  return { props: {} }
-}
 
 const Container = styled.div`
   height: 100%;
@@ -44,4 +37,4 @@ const Container = styled.div`
   }
 `
 
-export default Home
+export default Index
