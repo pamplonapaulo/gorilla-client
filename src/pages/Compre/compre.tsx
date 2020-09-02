@@ -1,19 +1,22 @@
 import styled from 'styled-components'
-import VideoBg from 'components/VideoBG'
-import Logo from 'components/Logo'
-import MadeInNikiti from 'components/MadeIn'
 
-const Home = () => (
+const Compre = () => (
   <>
-    <VideoBg />
     <Container>
-      <Logo />
-      <MadeInNikiti />
+      <H>Page Compre</H>
     </Container>
   </>
 )
 
+export async function getServerSideProps() {
+  await new Promise((resolve) => {
+    setTimeout(resolve, 500)
+  })
+  return { props: {} }
+}
+
 const Container = styled.div`
+  background: #facb37;
   height: 100%;
   width: 100%;
   justify-content: center;
@@ -37,4 +40,10 @@ const Container = styled.div`
   }
 `
 
-export default Home
+const H = styled.h1`
+  color: #000f08;
+  font-weight: 700;
+  font-size: 3rem;
+`
+
+export default Compre

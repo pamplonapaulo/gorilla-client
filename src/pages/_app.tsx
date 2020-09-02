@@ -1,8 +1,23 @@
+import Router from 'next/router'
+import NProgress from 'nprogress'
+
 import { AppProps } from 'next/app'
 import Head from 'next/head'
 
+import styled from 'styled-components'
+
 import GlobalStyles from 'styles/global'
 import { MenuProvider } from '../contexts'
+
+import Header from 'components/Header'
+import Footer from 'components/Footer'
+
+Router.events.on('routeChangeStart', (url) => {
+  console.log(`Loading: ${url}`)
+  NProgress.start()
+})
+Router.events.on('routeChangeComplete', () => NProgress.done())
+Router.events.on('routeChangeError', () => NProgress.done())
 
 function App({ Component, pageProps }: AppProps) {
   return (
@@ -25,13 +40,46 @@ function App({ Component, pageProps }: AppProps) {
           href="https://fonts.googleapis.com/css2?family=PT+Serif&display=swap"
           rel="stylesheet"
         />
+        <link rel="stylesheet" type="text/css" href="/nprogress.css" />
       </Head>
       <GlobalStyles />
       <MenuProvider>
-        <Component {...pageProps} />
+        <ContainerOuter>
+          <Header />
+          <ContainerInner>
+            <Component {...pageProps} />
+          </ContainerInner>
+          <Footer />
+        </ContainerOuter>
       </MenuProvider>
     </>
   )
 }
+
+const ContainerOuter = styled.div`
+  color: #000f08;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  padding-top: 70px;
+  @media only screen and (min-width: 1024px) {
+    padding-top: 0rem;
+  }
+`
+
+const ContainerInner = styled.main`
+  height: 100%;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  &::-webkit-scrollbar {
+    width: 0 !important;
+  }
+  @media only screen and (min-width: 1024px) {
+    height: unset;
+  }
+`
 
 export default App

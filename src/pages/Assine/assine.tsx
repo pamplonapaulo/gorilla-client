@@ -1,14 +1,9 @@
 import styled from 'styled-components'
-import VideoBg from 'components/VideoBG'
-import Logo from 'components/Logo'
-import MadeInNikiti from 'components/MadeIn'
 
-const Home = () => (
+const Assine = () => (
   <>
-    <VideoBg />
     <Container>
-      <Logo />
-      <MadeInNikiti />
+      <H>Page Assine</H>
     </Container>
   </>
 )
@@ -21,6 +16,7 @@ export async function getServerSideProps() {
 }
 
 const Container = styled.div`
+  background: #47311b;
   height: 100%;
   width: 100%;
   justify-content: center;
@@ -44,4 +40,10 @@ const Container = styled.div`
   }
 `
 
-export default Home
+const H = styled.h1`
+  color: #000f08;
+  font-weight: 700;
+  font-size: 3rem;
+`
+
+export default Assine
