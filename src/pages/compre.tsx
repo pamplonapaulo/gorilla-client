@@ -8,7 +8,7 @@ const Compre = () => (
   </>
 )
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
   await new Promise((resolve) => {
     setTimeout(resolve, 500)
   })
