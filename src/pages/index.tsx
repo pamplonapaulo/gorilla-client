@@ -1,17 +1,27 @@
+import { useEffect } from 'react'
+import { useRouter } from 'next/router'
 import styled from 'styled-components'
-import VideoBg from 'components/VideoBG'
-import Logo from 'components/Logo'
-import MadeInNikiti from 'components/MadeIn'
 
-const Index = () => (
-  <>
-    <VideoBg />
-    <Container>
-      <Logo />
-      <MadeInNikiti />
-    </Container>
-  </>
-)
+const useUser = () => ({ user: null, loading: false })
+
+const Index = () => {
+  const { user, loading } = useUser()
+  const router = useRouter()
+
+  useEffect(() => {
+    if (!(user || loading)) {
+      router.push('/home')
+    }
+  }, [user, loading, router])
+
+  return (
+    <>
+      <Container>
+        <H>Loading...</H>
+      </Container>
+    </>
+  )
+}
 
 const Container = styled.div`
   height: 100%;
@@ -35,6 +45,12 @@ const Container = styled.div`
   @media only screen and (min-width: 1024px) {
     position: fixed;
   }
+`
+
+const H = styled.h1`
+  color: #000f08;
+  font-weight: 700;
+  font-size: 3rem;
 `
 
 export default Index
