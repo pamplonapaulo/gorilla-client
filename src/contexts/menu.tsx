@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react'
+import React from 'react'
 
 export function createCtx<ContextType>() {
   const ctx = React.createContext<ContextType | undefined>(undefined)

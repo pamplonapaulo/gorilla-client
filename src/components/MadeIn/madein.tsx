@@ -1,13 +1,10 @@
 import * as S from './styles'
 
-const MadeIn = ({
-  nikitiStampTop = 'MADE IN',
-  nikitiStampBottom = 'NIKITI CITY'
-}) => (
+const MadeInNikiti = () => (
   <S.Container>
-    <S.Stamp>{nikitiStampTop}</S.Stamp>
-    <S.Stamp>{nikitiStampBottom}</S.Stamp>
+    <S.Stamp>{'MADE IN'}</S.Stamp>
+    <S.Stamp>{'NIKITI CITY'}</S.Stamp>
   </S.Container>
 )
 
-export default MadeIn
+export default MadeInNikiti

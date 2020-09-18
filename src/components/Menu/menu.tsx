@@ -6,7 +6,7 @@ import { useMenu } from 'contexts'
 
 const Menu = ({
   pages = [
-    ['home', '/'],
+    ['home', '/home'],
     ['conheça', '/conheca'],
     ['compre', '/compre'],
     ['assine', '/assine'],
