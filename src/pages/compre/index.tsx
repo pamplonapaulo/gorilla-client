@@ -3,6 +3,7 @@ import { GetStaticProps } from 'next'
 import client from 'graphql/client'
 import GET_PRODUCTS from 'graphql/queries/getProducts'
 import { ProductsCollection } from 'types/api'
+import { getImageUrl } from 'utils/getImageUrl'
 
 import styled from 'styled-components'
 
@@ -12,9 +13,12 @@ const Compre = ({ products }: ProductsCollection) => (
       <H>{products.length}</H>
       {products.map((p) => (
         <div key={p.id}>
-          <H>{p.id}</H>
           <H>{p.Name}</H>
-          <H>{p.Price}</H>
+          <H>{'R$' + p.Price}</H>
+          <Photo
+            src={getImageUrl(p.Image[0]['formats']['medium']['url'])}
+            alt={p.Name}
+          />
         </div>
       ))}
     </Container>
@@ -65,8 +69,8 @@ const H = styled.h1`
   margin-bottom: 2rem;
 `
 
-// const Photo = styled.img`
-//   max-width: 300px;
-// `
+const Photo = styled.img`
+  max-width: 300px;
+`
 
 export default Compre
