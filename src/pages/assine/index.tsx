@@ -30,11 +30,10 @@ export const getStaticProps: GetStaticProps = async () => {
   const { product } = await client.request(GET_SINGLE_PRODUCT)
 
   //console.log(product)
-
-  console.log(product.Name)
+  // console.log(product.Name)
   // console.log(product.Image[0])
-  console.log(product.Image[0]['formats']['small']['url'])
-  console.log(product.Image[0]['formats']['medium']['url'])
+  // console.log(product.Image[0]['formats']['small']['url'])
+  // console.log(product.Image[0]['formats']['medium']['url'])
 
   // console.log(Object.values(product.Image[0])[0])
 

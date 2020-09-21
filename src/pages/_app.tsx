@@ -80,6 +80,13 @@ const ContainerInner = styled.main`
   height: 100%;
   -ms-overflow-style: none;
   scrollbar-width: none;
+  position: relative;
+  min-height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
   &::-webkit-scrollbar {
     display: none;
   }

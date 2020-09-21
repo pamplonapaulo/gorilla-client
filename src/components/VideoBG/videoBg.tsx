@@ -26,6 +26,10 @@ const Footage = styled.video`
     width: auto;
     height: 100%;
   }
+
+  @media only screen and (min-width: 1024px) {
+    position: relative;
+  }
 `
 
 export default VideoBg

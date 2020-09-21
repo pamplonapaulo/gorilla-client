@@ -12,8 +12,7 @@ const GlobalStyles = createGlobalStyle`
   }
 
   html, body, #__next {
-    height: 100%;
-    overflow: hidden;
+    height: auto;
 
     -ms-overflow-style: none;
     scrollbar-width: none;

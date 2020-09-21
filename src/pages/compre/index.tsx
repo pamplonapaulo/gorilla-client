@@ -34,8 +34,6 @@ const Compre = ({ products }: ProductsCollection) => (
 export const getStaticProps: GetStaticProps = async () => {
   const { products } = await client.request(GET_PRODUCTS)
 
-  console.log(products)
-
   return {
     props: {
       products
@@ -81,6 +79,7 @@ const Wrapper = styled.section`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  height: 100%;
   justify-content: space-around;
   max-width: 75%;
 `
