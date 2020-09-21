@@ -1,13 +1,16 @@
 import { gql } from 'graphql-request'
 
-const GET_PRODUCT_NAME = gql`
-  query GET_PRODUCT_NAME {
-    product(id: 4) {
+const GET_PRODUCTS = gql`
+  query GET_PRODUCTS {
+    products {
+      id
       Name
       Price
-      Description
+      Image {
+        formats
+      }
     }
   }
 `
 
-export default GET_PRODUCT_NAME
+export default GET_PRODUCTS

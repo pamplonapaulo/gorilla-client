@@ -1,18 +1,54 @@
+import { GetServerSideProps } from 'next'
+
+import client from 'graphql/client'
+import GET_SINGLE_PRODUCT from 'graphql/queries/getSingleProduct'
+import { ProductNameProps } from 'types/api'
+import { getImageUrl } from 'utils/getImageUrl'
+
 import styled from 'styled-components'
 
-const Assine = () => (
+const Assine = ({ Name, Price, Description, Url }: ProductNameProps) => (
   <>
     <Container>
-      <H>Page Assine</H>
+      <H>{Name}</H>
+      <H>{Price}</H>
+      <H>{Description}</H>
+      <H>{Url}</H>
+      <Photo src={getImageUrl(Url)} alt={'Product Image'} />
     </Container>
   </>
 )
 
-export async function getStaticProps() {
-  await new Promise((resolve) => {
-    setTimeout(resolve, 500)
-  })
-  return { props: {} }
+// export async function getStaticProps() {
+//   await new Promise((resolve) => {
+//     setTimeout(resolve, 500)
+//   })
+//   return { props: {} }
+// }
+
+export const getServerSideProps: GetServerSideProps = async () => {
+  const { product } = await client.request(GET_SINGLE_PRODUCT)
+
+  //console.log(product)
+
+  console.log(product.Name)
+  // console.log(product.Image[0])
+  console.log(product.Image[0]['formats']['small']['url'])
+  console.log(product.Image[0]['formats']['medium']['url'])
+
+  // console.log(Object.values(product.Image[0])[0])
+
+  return {
+    // props: {
+    //   ...product
+    // }
+    props: {
+      Name: product.Name,
+      Price: product.Price,
+      Description: product.Description,
+      Url: product.Image[0]['formats']['small']['url']
+    }
+  }
 }
 
 const Container = styled.div`
@@ -43,7 +79,12 @@ const Container = styled.div`
 const H = styled.h1`
   color: #000f08;
   font-weight: 700;
-  font-size: 3rem;
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+`
+
+const Photo = styled.img`
+  max-width: 300px;
 `
 
 export default Assine
