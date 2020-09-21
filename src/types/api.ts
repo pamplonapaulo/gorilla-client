@@ -18,14 +18,20 @@ export type Product = {
 
 export type formats = {
   formats: {
-    medium: {
-      url: string
-    }
-    small: {
-      url: string
-    }
-    thumbnail: {
-      url: string
-    }
+    medium: FormatProps
+    small: FormatProps
+    thumbnail: FormatProps
   }
+}
+
+export type FormatProps = {
+  ext: string
+  url: string
+  hash: string
+  mime: string
+  name: string
+  path: null
+  size: number
+  width: number
+  height: number
 }
