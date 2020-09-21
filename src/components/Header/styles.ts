@@ -13,7 +13,6 @@ export const TopBar = styled.header`
   box-shadow: 0px 1px 8px #000;
 
   @media only screen and (min-width: 1024px) {
-    position: relative;
     padding: 0 5vw;
   }
 `
