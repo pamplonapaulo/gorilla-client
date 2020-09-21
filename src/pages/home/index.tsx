@@ -41,7 +41,8 @@ const Container = styled.div`
   }
 
   @media only screen and (min-width: 1024px) {
-    position: fixed;
+    position: absolute;
+    top: 0;
   }
 `
 
