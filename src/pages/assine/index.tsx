@@ -1,4 +1,4 @@
-import { GetServerSideProps } from 'next'
+import { GetStaticProps } from 'next'
 
 import client from 'graphql/client'
 import GET_SINGLE_PRODUCT from 'graphql/queries/getSingleProduct'
@@ -26,7 +26,7 @@ const Assine = ({ Name, Price, Description, Url }: ProductNameProps) => (
 //   return { props: {} }
 // }
 
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getStaticProps: GetStaticProps = async () => {
   const { product } = await client.request(GET_SINGLE_PRODUCT)
 
   //console.log(product)

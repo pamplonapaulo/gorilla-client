@@ -1,4 +1,4 @@
-import { GetServerSideProps } from 'next'
+import { GetStaticProps } from 'next'
 
 import client from 'graphql/client'
 import GET_PRODUCTS from 'graphql/queries/getProducts'
@@ -21,7 +21,7 @@ const Compre = ({ products }: ProductsCollection) => (
   </>
 )
 
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getStaticProps: GetStaticProps = async () => {
   const { products } = await client.request(GET_PRODUCTS)
 
   console.log(products)
