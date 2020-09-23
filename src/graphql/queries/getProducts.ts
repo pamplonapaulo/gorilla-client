@@ -6,8 +6,23 @@ const GET_PRODUCTS = gql`
       id
       Name
       Price
+      Weight
+      Description
+      InStock
       Image {
         formats
+      }
+      NutritionFacts {
+        Obs
+        Carbohydrates
+        SaturatedFat
+        Portion
+        Proteins
+        TransFat
+        TotalFat
+        EnergeticValue
+        DietaryFiber
+        Sodium
       }
     }
   }

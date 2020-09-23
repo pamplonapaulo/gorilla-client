@@ -6,6 +6,8 @@ import GET_PRODUCTS from 'graphql/queries/getProducts'
 import { ProductsCollection } from 'types/api'
 import { getImageUrl } from 'utils/getImageUrl'
 
+import { replaceSpecialChars } from 'utils/replaceSpecialChars'
+
 import styled from 'styled-components'
 
 const Compre = ({ products }: ProductsCollection) => (
@@ -21,8 +23,13 @@ const Compre = ({ products }: ProductsCollection) => (
             />
             <H>{p.Name}</H>
             <H>{'R$' + p.Price}</H>
-            <Link href={'#'}>
-              <Btn>{'Comprar'}</Btn>
+            <Link
+              as={`/produtos/${replaceSpecialChars(p.Name)}`}
+              href={{
+                pathname: '/produtos/[slug]'
+              }}
+            >
+              <Btn>{p.id}</Btn>
             </Link>
           </Item>
         ))}
