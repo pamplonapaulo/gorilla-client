@@ -63,14 +63,6 @@ export type Item = {
   Name: string
 }
 
-export type Paths = {
-  paths: {
-    params: {
-      slug: string
-    }
-  }
-}
-
 export type Params = {
   params: {
     slug: string

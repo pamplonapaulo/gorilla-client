@@ -8,8 +8,7 @@ const Menu = ({
   pages = [
     ['home', '/home'],
     ['conheça', '/conheca'],
-    ['compre', '/compre'],
-    ['assine', '/assine'],
+    ['snacks', '/snacks'],
     ['chame', '/chame'],
     ['siga', '/siga']
   ]

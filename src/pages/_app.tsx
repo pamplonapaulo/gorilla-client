@@ -95,6 +95,7 @@ const ContainerInner = styled.main`
   }
   @media only screen and (min-width: 1024px) {
     height: unset;
+    min-height: calc(100vh - 70px);
   }
 `
 
