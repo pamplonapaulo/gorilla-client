@@ -1,16 +1,18 @@
 import { GetStaticProps } from 'next'
+
 import Link from 'next/link'
 
 import client from 'graphql/client'
 import GET_PRODUCTS from 'graphql/queries/getProducts'
-import { ProductsCollection } from 'types/api'
-import { getImageUrl } from 'utils/getImageUrl'
 
+import { ProductsCollection } from 'types/api'
+
+import { getImageUrl } from 'utils/getImageUrl'
 import { replaceSpecialChars } from 'utils/replaceSpecialChars'
 
 import styled from 'styled-components'
 
-const Compre = ({ products }: ProductsCollection) => (
+const Snacks = ({ products }: ProductsCollection) => (
   <>
     <Container>
       <T>{'Nossos Produtos'}</T>
@@ -29,7 +31,7 @@ const Compre = ({ products }: ProductsCollection) => (
                 pathname: '/produtos/[slug]'
               }}
             >
-              <Btn>{p.id}</Btn>
+              <Btn>{'Comprar'}</Btn>
             </Link>
           </Item>
         ))}
@@ -115,6 +117,11 @@ const H = styled.h1`
   }
 `
 
+const Photo = styled.img`
+  border-radius: 5px;
+  max-width: 250px;
+`
+
 const Btn = styled.button`
   background: #2da650;
   border: none;
@@ -134,9 +141,4 @@ const Btn = styled.button`
   width: 140px;
 `
 
-const Photo = styled.img`
-  border-radius: 5px;
-  max-width: 250px;
-`
-
-export default Compre
+export default Snacks
