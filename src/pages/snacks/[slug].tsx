@@ -73,14 +73,30 @@ export default function Produto({ ...product }: Product) {
                 <H>Informação Nutricional</H>
                 <Portion>{`Tamanho da porção: ${product.NutritionFacts.Portion} gramas`}</Portion>
                 <FactsDetails>
-                  <FactItem>{`Valor Energético: ${product.NutritionFacts.EnergeticValue}`}</FactItem>
-                  <FactItem>{`Proteínas: ${product.NutritionFacts.Proteins}`}</FactItem>
-                  <FactItem>{`Carbohidratos: ${product.NutritionFacts.Carbohydrates}`}</FactItem>
-                  <FactItem>{`Fibras: ${product.NutritionFacts.DietaryFiber}`}</FactItem>
-                  <FactItem>{`Sódio: ${product.NutritionFacts.Sodium}`}</FactItem>
-                  <FactItem>{`Gordura Saturada: ${product.NutritionFacts.SaturatedFat}`}</FactItem>
-                  <FactItem>{`Gordura Trans: ${product.NutritionFacts.TransFat}`}</FactItem>
-                  <FactItem>{`Gorduras Totais: ${product.NutritionFacts.TotalFat}`}</FactItem>
+                  <FactItem>
+                    <P>{`Valor Energético: ${product.NutritionFacts.EnergeticValue}`}</P>
+                  </FactItem>
+                  <FactItem>
+                    <P>{`Proteínas: ${product.NutritionFacts.Proteins}`}</P>
+                  </FactItem>
+                  <FactItem>
+                    <P>{`Carbohidratos: ${product.NutritionFacts.Carbohydrates}`}</P>
+                  </FactItem>
+                  <FactItem>
+                    <P>{`Fibras: ${product.NutritionFacts.DietaryFiber}`}</P>
+                  </FactItem>
+                  <FactItem>
+                    <P>{`Sódio: ${product.NutritionFacts.Sodium}`}</P>
+                  </FactItem>
+                  <FactItem>
+                    <P>{`Gordura Saturada: ${product.NutritionFacts.SaturatedFat}`}</P>
+                  </FactItem>
+                  <FactItem>
+                    <P>{`Gordura Trans: ${product.NutritionFacts.TransFat}`}</P>
+                  </FactItem>
+                  <FactItem>
+                    <P>{`Gorduras Totais: ${product.NutritionFacts.TotalFat}`}</P>
+                  </FactItem>
                 </FactsDetails>
               </Facts>
             </Columns>
@@ -200,26 +216,30 @@ const Portion = styled.h2`
 
 const FactsDetails = styled.div`
   display: flex;
-  display: table;
+  flex-wrap: wrap;
   margin-top: 25px;
   border-collapse: separate;
   border-spacing: 10px;
-  margin-left: -10px;
+  margin-left: -5px;
+  max-width: 50%;
 `
 
-const FactItem = styled.p`
+const FactItem = styled.div`
   background: #47311b;
-  height: 60px;
   text-transform: uppercase;
   text-align: center;
-  display: block;
   vertical-align: middle;
-  display: table-cell;
+  flex-wrap: wrap;
   width: auto;
   margin: 5px;
   padding: 5px;
   border-radius: 30px;
   color: white;
+  display: table;
+`
+
+const P = styled.p`
+  display: table;
 `
 
 const Columns = styled.div`
