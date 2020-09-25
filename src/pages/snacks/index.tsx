@@ -26,9 +26,9 @@ const Snacks = ({ products }: ProductsCollection) => (
             <H>{p.Name}</H>
             <H>{'R$' + p.Price}</H>
             <Link
-              as={`/produtos/${replaceSpecialChars(p.Name)}`}
+              as={`/snacks/${replaceSpecialChars(p.Name)}`}
               href={{
-                pathname: '/produtos/[slug]'
+                pathname: '/snacks/[slug]'
               }}
             >
               <Btn>{'Comprar'}</Btn>
