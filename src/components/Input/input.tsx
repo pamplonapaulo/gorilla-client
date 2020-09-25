@@ -51,6 +51,15 @@ const Btn = styled.button`
   text-align: center;
   width: 50px;
   height: 50px;
+
+  &:hover {
+    background: #e8c48e;
+  }
+
+  &:active {
+    background: #c09060;
+    color: #fff;
+  }
 `
 
 const FakeInput = styled.div`
