@@ -74,28 +74,52 @@ export default function Produto({ ...product }: Product) {
                 <Portion>{`Tamanho da porção: ${product.NutritionFacts.Portion} gramas`}</Portion>
                 <FactsDetails>
                   <FactItem>
-                    <P>{`Valor Energético: ${product.NutritionFacts.EnergeticValue}`}</P>
+                    <P>Valor Energético</P>
+                    <P>
+                      <Span>{product.NutritionFacts.EnergeticValue} cal</Span>
+                    </P>
                   </FactItem>
                   <FactItem>
-                    <P>{`Proteínas: ${product.NutritionFacts.Proteins}`}</P>
+                    <P>Proteínas</P>
+                    <P>
+                      <Span>{product.NutritionFacts.Proteins} gr</Span>
+                    </P>
                   </FactItem>
                   <FactItem>
-                    <P>{`Carbohidratos: ${product.NutritionFacts.Carbohydrates}`}</P>
+                    <P>Carbohidratos</P>
+                    <P>
+                      <Span>{product.NutritionFacts.Carbohydrates} gr</Span>
+                    </P>
                   </FactItem>
                   <FactItem>
-                    <P>{`Fibras: ${product.NutritionFacts.DietaryFiber}`}</P>
+                    <P>Fibras</P>
+                    <P>
+                      <Span>{product.NutritionFacts.DietaryFiber} gr</Span>
+                    </P>
                   </FactItem>
                   <FactItem>
-                    <P>{`Sódio: ${product.NutritionFacts.Sodium}`}</P>
+                    <P>Sódio</P>
+                    <P>
+                      <Span>{product.NutritionFacts.Sodium} gr</Span>
+                    </P>
                   </FactItem>
                   <FactItem>
-                    <P>{`Gordura Saturada: ${product.NutritionFacts.SaturatedFat}`}</P>
+                    <P>Gordura Saturada</P>
+                    <P>
+                      <Span>{product.NutritionFacts.SaturatedFat} gr</Span>
+                    </P>
                   </FactItem>
                   <FactItem>
-                    <P>{`Gordura Trans: ${product.NutritionFacts.TransFat}`}</P>
+                    <P>Gordura Trans</P>
+                    <P>
+                      <Span>{product.NutritionFacts.TransFat} ml</Span>
+                    </P>
                   </FactItem>
                   <FactItem>
-                    <P>{`Gorduras Totais: ${product.NutritionFacts.TotalFat}`}</P>
+                    <P>Gorduras Totais</P>
+                    <P>
+                      <Span>{product.NutritionFacts.TotalFat} ml</Span>
+                    </P>
                   </FactItem>
                 </FactsDetails>
               </Facts>
@@ -221,25 +245,35 @@ const FactsDetails = styled.div`
   border-collapse: separate;
   border-spacing: 10px;
   margin-left: -5px;
-  max-width: 50%;
+  width: 50%;
 `
 
 const FactItem = styled.div`
-  background: #47311b;
   text-transform: uppercase;
   text-align: center;
   vertical-align: middle;
   flex-wrap: wrap;
   width: auto;
   margin: 5px;
-  padding: 5px;
-  border-radius: 30px;
+  padding: 10px;
   color: white;
-  display: table;
+  display: flex;
+  border: 1px solid #47311b;
+  width: 200px;
+  justify-content: space-between;
 `
 
 const P = styled.p`
+  text-transform: none;
+  font-size: 13px;
+  align-self: center;
+`
+
+const Span = styled.span`
   display: table;
+  font-size: 16px;
+  text-align: center;
+  font-weight: bolder;
 `
 
 const Columns = styled.div`
@@ -296,22 +330,73 @@ const H = styled.h1`
 `
 
 const Btn = styled.button`
-  background: #000f08;
+  background: transparent;
   color: #fff;
-  border: none;
-  border-radius: 0;
-  cursor: pointer;
-  text-decoration: none;
-  display: inline-block;
-  padding: 0.7em 1em;
-  font-size: 1.2rem;
-  font-weight: 500;
-  letter-spacing: 1px;
+  font-weight: 100;
   text-transform: uppercase;
-  transition: all 0.2s;
-  text-align: center;
   width: 140px;
   height: 50px;
+  position: relative;
+  display: inline-block;
+  margin: 15px;
+  padding: 12px 27px;
+  text-align: center;
+  font-size: 12px;
+  letter-spacing: 1px;
+  text-decoration: none;
+  border: 2px solid #fff;
+  cursor: pointer;
+  transition: ease-out 0.1s;
+
+  &:hover {
+    animation: pulse 1s ease-out 0.4s;
+    color: #222222;
+
+    &:after {
+      width: calc(100% + 2px);
+      height: calc(100% + 2px);
+      visibility: visible;
+      transition: width 0.05s ease 0.1s, height 0.05s ease 0.15s,
+        visibility 0s 0.1s;
+      transition: width 0.05s ease 0.1s, height 0.05s ease 0.15s,
+        visibility 0s 0.1s;
+    }
+
+    &:before {
+      width: calc(100% + 2px);
+      height: calc(100% + 2px);
+      visibility: visible;
+      transition: width 0.05s ease 0.1s, height 0.05s ease 0.15s,
+        visibility 0s 0.1s;
+      transition: width 0.05s ease, height 0.05s ease 0.05s;
+    }
+  }
+  &:after {
+    position: absolute;
+    content: '';
+    width: 0%;
+    height: 0%;
+    visibility: hidden;
+    bottom: -2px;
+    right: -2px;
+    border-left: 2px solid #222222;
+    border-bottom: 2px solid #222222;
+    transition: width 0.05s ease 0.05s, height 0.05s ease, visibility 0s 0.1s;
+  }
+
+  &:before {
+    position: absolute;
+    content: '';
+    width: 0%;
+    height: 0%;
+    visibility: hidden;
+    top: -2px;
+    left: -2px;
+    border-top: 2px solid #222222;
+    border-right: 2px solid #222222;
+    transition: width 0.05s ease 0.15s, height 0.05s ease 0.1s,
+      visibility 0s 0.2s;
+  }
 `
 
 // const RadioWrapper = styled.div`
