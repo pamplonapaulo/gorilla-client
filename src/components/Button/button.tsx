@@ -14,7 +14,6 @@ const Btn = styled.button`
   text-decoration: none;
   display: inline-block;
   padding: 0.7em 1em;
-  margin-top: 5px;
   font-size: 1.2rem;
   font-weight: 500;
   letter-spacing: 1px;
