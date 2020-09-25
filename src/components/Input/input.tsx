@@ -1,17 +1,34 @@
 import styled from 'styled-components'
+import React, { useState } from 'react'
 
-const Input = () => (
-  <>
-    <Container>
-      <Btn>{'-'}</Btn>
-      <FakeInput>
-        <P>{'2'}</P>
-      </FakeInput>
-      <Btn>{'+'}</Btn>
-      {/* <S.Input defaultValue={'1'} type="number" min="0" /> */}
-    </Container>
-  </>
-)
+const Input = () => {
+  const [quantity, setQuantity] = useState(0)
+
+  function changeQuantity(value: string) {
+    if (value === '-' && quantity > 0) {
+      setQuantity(quantity - 1)
+    } else if (value === '+') {
+      setQuantity(quantity + 1)
+    }
+  }
+
+  return (
+    <>
+      <Container>
+        <Btn onClick={() => changeQuantity('-')}>{'-'}</Btn>
+        <FakeInput>
+          <P>{quantity}</P>
+        </FakeInput>
+        <Btn onClick={() => changeQuantity('+')}>{'+'}</Btn>
+        <HiddenInput defaultValue={quantity} type="number" min="0" />
+      </Container>
+    </>
+  )
+}
+
+const HiddenInput = styled.input`
+  display: none;
+`
 
 const Container = styled.div`
   margin-right: 15px;
