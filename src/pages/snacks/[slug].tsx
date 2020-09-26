@@ -11,6 +11,8 @@ import { Product, Item, Params } from 'types/api'
 import { getImageUrl } from 'utils/getImageUrl'
 import { replaceSpecialChars } from 'utils/replaceSpecialChars'
 
+import { HeartOutline } from 'components/Heart'
+
 import Input from 'components/Input'
 
 import styled from 'styled-components'
@@ -39,7 +41,10 @@ export default function Produto({ ...product }: Product) {
             </Wrapper>
             <Columns>
               <Head>
-                <HHuge>{product.Name}</HHuge>
+                <ProdName>
+                  <HHuge>{product.Name}</HHuge>
+                  <HeartOutline />
+                </ProdName>
                 <H>{`R$ ${product.Price}`}</H>
                 <H>{` ${product.Weight}g`}</H>
                 {/* <div>
@@ -196,6 +201,16 @@ const Head = styled.div`
   }
 `
 
+const ProdName = styled.div`
+  justify-content: space-between;
+  height: 80px;
+  display: flex;
+  flex-direction: row;
+  display: table;
+  min-width: 410px;
+  max-width: 510px;
+`
+
 const Actions = styled.div`
   display: flex;
   flex-direction: column;
@@ -321,6 +336,8 @@ const HHuge = styled.h1`
   color: #000f08;
   font-weight: 700;
   font-size: 5rem;
+  display: table-cell;
+  vertical-align: middle;
 `
 
 const H = styled.h1`
