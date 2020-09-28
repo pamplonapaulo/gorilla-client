@@ -48,6 +48,11 @@ export const Item = styled.li`
   justify-content: center;
   width: 100%;
 
+  &.active {
+    border: #FACB37 solid 1px;
+    color: #FACB37;
+  }
+
   @media only screen and (min-width: 1024px) {
     border: none;
     margin-left: 1vw;
@@ -65,10 +70,7 @@ export const Item = styled.li`
   }
 }
 `
-export const A = styled.a`
-  align-items: center;
-  position: relative;
-`
+
 export const H1 = styled.h1`
   color: #2da650;
   text-align: center;
