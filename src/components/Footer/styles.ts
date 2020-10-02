@@ -49,10 +49,11 @@ export const A = styled.a`
 
 export const P = styled.p`
   align-items: center;
-  font-size: 2.5rem;
+  font-size: 2rem;
   color: #ef8321;
 
   @media only screen and (min-width: 1024px) {
+    font-size: 2.5rem;
     text-shadow: 1px 1px 1px #000;
   }
 `
@@ -69,10 +70,11 @@ export const Copy = styled.div`
 
 export const PCopy = styled.div`
   color: #47311b;
-  font-size: 1.5rem;
+  font-size: 11px;
   margin-top: 3rem;
 
   @media only screen and (min-width: 1024px) {
+    font-size: 1.5rem;
     color: #ef8321;
     text-shadow: 1px 1px 1px #000;
   }
