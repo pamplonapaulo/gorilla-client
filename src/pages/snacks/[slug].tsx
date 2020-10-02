@@ -12,7 +12,7 @@ import { getImageUrl } from 'utils/getImageUrl'
 import { replaceSpecialChars } from 'utils/replaceSpecialChars'
 
 import { HeartOutline } from 'components/Heart'
-
+import Button from 'components/Button'
 import Input from 'components/Input'
 
 import styled from 'styled-components'
@@ -25,125 +25,115 @@ export default function Produto({ ...product }: Product) {
       {router.isFallback ? (
         <H>Loading…</H>
       ) : (
-        <Container>
-          <meta
-            property="og:image"
-            content={getImageUrl(
-              product.Image[0]['formats']['thumbnail']['url']
-            )}
-          />
-          <Rows>
-            <Wrapper>
-              <Photo
-                src={getImageUrl(product.Image[0]['formats']['medium']['url'])}
-                alt={product.Name}
-              />
-            </Wrapper>
-            <Columns>
-              <Head>
-                <ProdName>
-                  <HHuge>{product.Name}</HHuge>
-                  <HeartOutline />
-                </ProdName>
-                <H>{`R$ ${product.Price}`}</H>
-                <H>{` ${product.Weight}g`}</H>
-                {/* <div>
-                  <p>Comprar uma vez ou assinar?</p>
-                  <RadioWrapper>
-                    <input type="radio" id="buy" name="deal" value="Comprar" />
-                    <label htmlFor="buy">Comprar</label>
-                  </RadioWrapper>
-                  <RadioWrapper>
-                    <input
-                      type="radio"
-                      id="subscription"
-                      name="deal"
-                      value="Assinar"
-                    />
-                    <label htmlFor="subscription">Assinar</label>
-                  </RadioWrapper>
-                </div> */}
-              </Head>
-              <Actions>
-                <Rows>
-                  <Input />
-                  <Btn>{'Assinar'}</Btn>
-                </Rows>
-                <Rows>
-                  <Input />
-                  <Btn>{'Comprar'}</Btn>
-                </Rows>
-              </Actions>
-              <Facts>
-                <H>Informação Nutricional</H>
-                <Portion>{`Tamanho da porção: ${product.NutritionFacts.Portion} gramas`}</Portion>
-                <FactsDetails>
-                  <FactItem>
-                    <P>Valor Energético</P>
-                    <P>
-                      <Span>{product.NutritionFacts.EnergeticValue} cal</Span>
-                    </P>
-                  </FactItem>
-                  <FactItem>
-                    <P>Proteínas</P>
-                    <P>
-                      <Span>{product.NutritionFacts.Proteins} gr</Span>
-                    </P>
-                  </FactItem>
-                  <FactItem>
-                    <P>Carbohidratos</P>
-                    <P>
-                      <Span>{product.NutritionFacts.Carbohydrates} gr</Span>
-                    </P>
-                  </FactItem>
-                  <FactItem>
-                    <P>Fibras</P>
-                    <P>
-                      <Span>{product.NutritionFacts.DietaryFiber} gr</Span>
-                    </P>
-                  </FactItem>
-                  <FactItem>
-                    <P>Sódio</P>
-                    <P>
-                      <Span>{product.NutritionFacts.Sodium} gr</Span>
-                    </P>
-                  </FactItem>
-                  <FactItem>
-                    <P>Gordura Saturada</P>
-                    <P>
-                      <Span>{product.NutritionFacts.SaturatedFat} gr</Span>
-                    </P>
-                  </FactItem>
-                  <FactItem>
-                    <P>Gordura Trans</P>
-                    <P>
-                      <Span>{product.NutritionFacts.TransFat} ml</Span>
-                    </P>
-                  </FactItem>
-                  <FactItem>
-                    <P>Gorduras Totais</P>
-                    <P>
-                      <Span>{product.NutritionFacts.TotalFat} ml</Span>
-                    </P>
-                  </FactItem>
-                </FactsDetails>
-              </Facts>
-            </Columns>
-          </Rows>
-        </Container>
+        <Background>
+          <ContainerOuter>
+            <meta
+              property="og:image"
+              content={getImageUrl(
+                product.Image[0]['formats']['thumbnail']['url']
+              )}
+            />
+            <ContainerInner>
+              <Wrapper>
+                <Photo
+                  src={getImageUrl(
+                    product.Image[0]['formats']['medium']['url']
+                  )}
+                  alt={product.Name}
+                />
+              </Wrapper>
+              <Columns>
+                <Head>
+                  <ProdName>
+                    <HHuge>{product.Name}</HHuge>
+                    <HeartOutline />
+                  </ProdName>
+                  <Rows>
+                    <H>{`R$ ${product.Price}`}</H>
+                    <H>{` ${product.Weight}g`}</H>
+                  </Rows>
+                </Head>
+                <Actions>
+                  <BtnsWrapper>
+                    <Input />
+                    <Button bg={'#fff'}>Assinar</Button>
+                  </BtnsWrapper>
+                  <BtnsWrapper>
+                    <Input />
+                    <Button bg={'#fff'}>Comprar</Button>
+                  </BtnsWrapper>
+                </Actions>
+                <Facts>
+                  <NutriTitle>Informação Nutricional</NutriTitle>
+                  <Portion>{`Tamanho da porção: ${product.NutritionFacts.Portion} gramas`}</Portion>
+                  <FactsDetails>
+                    <FactItem>
+                      <P>Valor Energético</P>
+                      <P>
+                        <Span>{product.NutritionFacts.EnergeticValue} cal</Span>
+                      </P>
+                    </FactItem>
+                    <FactItem>
+                      <P>Proteínas</P>
+                      <P>
+                        <Span>{product.NutritionFacts.Proteins} gr</Span>
+                      </P>
+                    </FactItem>
+                    <FactItem>
+                      <P>Carbohidratos</P>
+                      <P>
+                        <Span>{product.NutritionFacts.Carbohydrates} gr</Span>
+                      </P>
+                    </FactItem>
+                    <FactItem>
+                      <P>Fibras</P>
+                      <P>
+                        <Span>{product.NutritionFacts.DietaryFiber} gr</Span>
+                      </P>
+                    </FactItem>
+                    <FactItem>
+                      <P>Sódio</P>
+                      <P>
+                        <Span>{product.NutritionFacts.Sodium} gr</Span>
+                      </P>
+                    </FactItem>
+                    <FactItem>
+                      <P>Gordura Saturada</P>
+                      <P>
+                        <Span>{product.NutritionFacts.SaturatedFat} gr</Span>
+                      </P>
+                    </FactItem>
+                    <FactItem>
+                      <P>Gordura Trans</P>
+                      <P>
+                        <Span>{product.NutritionFacts.TransFat} ml</Span>
+                      </P>
+                    </FactItem>
+                    <FactItem>
+                      <P>Gorduras Totais</P>
+                      <P>
+                        <Span>{product.NutritionFacts.TotalFat} ml</Span>
+                      </P>
+                    </FactItem>
+                  </FactsDetails>
+                </Facts>
+              </Columns>
+            </ContainerInner>
+          </ContainerOuter>
+        </Background>
       )}
     </>
   )
 }
 
-const Container = styled.div`
+const Background = styled.div`
+  background: #ef8321;
   height: 100%;
   width: 100%;
   justify-content: center;
   display: flex;
   align-items: center;
   flex-direction: column;
-  background: #EF8321;
 
   -ms-overflow-style: none;
   scrollbar-width: none;
@@ -158,26 +148,68 @@ const Container = styled.div`
 
   @media only screen and (min-width: 1024px) {
     height: calc(100vh - 70px);
-    padding: 35px 5vw 0;
-    margin-top 70px;
+    padding: 35px 0vw 0;
+    margin: 70px auto 0;
+  }
+`
+
+const ContainerOuter = styled.div`
+  height: 100%;
+  width: 100%;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  &::-webkit-scrollbar {
+    width: 0 !important;
+  }
+
+  @media only screen and (min-width: 1024px) {
+    height: calc(100vh - 70px);
+    padding: 35px 0vw 0;
+    max-width: 1200px;
+    margin: 70px auto 0;
+  }
+`
+
+const ContainerInner = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+  position: relative;
+  height: auto;
+  padding-top: 35px;
+  align-items: center;
+  flex-direction: column;
+
+  @media only screen and (min-width: 1024px) {
+    flex-direction: row;
+    padding: 0;
+    height: 100%;
+    justify-content: flex-start;
   }
 `
 
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  padding-top: 4rem;
   justify-content: space-evenly;
   width: 100%;
   position: relative;
-  height: 150px;
-
-  padding-top: 3rem;
+  height: auto;
 
   @media only screen and (min-width: 1024px) {
     height: 100%;
     padding: 0;
-    width: 40%;
+    width: 50%;
     justify-content: end;
     align-items: end;
   }
@@ -186,46 +218,35 @@ const Wrapper = styled.div`
 const Head = styled.div`
   display: flex;
   flex-direction: column;
-  padding-top: 4rem;
+  height: 150px;
   justify-content: space-evenly;
+  padding: 0 40px;
   width: 100%;
   position: relative;
-  height: 150px;
-
-  padding-top: 3rem;
 
   @media only screen and (min-width: 1024px) {
     justify-content: end;
     padding: 0;
-    height: 400px;
+    margin: 0 auto;
+    max-width: 80%;
   }
-`
-
-const ProdName = styled.div`
-  justify-content: space-between;
-  height: 80px;
-  display: flex;
-  flex-direction: row;
-  display: table;
-  min-width: 410px;
-  max-width: 510px;
 `
 
 const Actions = styled.div`
   display: flex;
   flex-direction: column;
-  padding-top: 4rem;
-  justify-content: space-evenly;
-  width: 100%;
-  position: relative;
   height: 150px;
-
-  padding-top: 3rem;
+  justify-content: space-evenly;
+  padding: 3rem 10px 0;
+  position: relative;
+  width: 100%;
 
   @media only screen and (min-width: 1024px) {
-    justify-content: center;
-    padding: 0;
     height: 120px;
+    justify-content: center;
+    margin: 0 auto;
+    max-width: 80%;
+    padding: 0;
   }
 `
 
@@ -236,21 +257,16 @@ const Facts = styled.div`
   justify-content: space-evenly;
   width: 100%;
   position: relative;
-  height: 150px;
-
-  padding-top: 3rem;
+  height: auto;
+  margin-top: 3rem;
 
   @media only screen and (min-width: 1024px) {
     justify-content: end;
     height: 100%;
     padding: 50px 0;
+    margin: 0 auto;
+    max-width: 80%;
   }
-`
-
-const Portion = styled.h2`
-  color: #000f08;
-  font-weight: 700;
-  font-size: 2rem;
 `
 
 const FactsDetails = styled.div`
@@ -259,8 +275,13 @@ const FactsDetails = styled.div`
   margin-top: 25px;
   border-collapse: separate;
   border-spacing: 10px;
-  margin-left: -5px;
-  width: 50%;
+  width: 420px;
+  padding: 5px;
+
+  @media only screen and (min-width: 1024px) {
+    padding: 0;
+    margin-left: -5px;
+  }
 `
 
 const FactItem = styled.div`
@@ -268,58 +289,76 @@ const FactItem = styled.div`
   text-align: center;
   vertical-align: middle;
   flex-wrap: wrap;
-  width: auto;
   margin: 5px;
   padding: 10px;
   color: white;
   display: flex;
   border: 1px solid #47311b;
-  width: 200px;
   justify-content: space-between;
+  width: calc(50vw - 15px);
+
+  @media only screen and (min-width: 1024px) {
+    width: 200px;
+  }
 `
 
 const P = styled.p`
   text-transform: none;
-  font-size: 13px;
+  font-size: 11px;
   align-self: center;
+
+  @media only screen and (min-width: 1024px) {
+    font-size: 13px;
+  }
 `
 
 const Span = styled.span`
   display: table;
-  font-size: 16px;
   text-align: center;
-  font-weight: bolder;
+
+  @media only screen and (min-width: 1024px) {
+    font-size: 16px;
+    font-weight: bolder;
+  }
 `
 
 const Columns = styled.div`
   display: flex;
   flex-direction: column;
-  padding-top: 4rem;
   justify-content: space-evenly;
   width: 100%;
   position: relative;
-  height: 150px;
-
-  padding-top: 3rem;
+  height: auto;
 
   @media only screen and (min-width: 1024px) {
     justify-content: center;
     height: 100%;
-    padding: 0 5vw;
+    padding: 0;
+    width: 50%;
   }
 `
 
 const Rows = styled.div`
   display: flex;
   flex-direction: row;
-  padding-top: 4rem;
-  justify-content: space-evenly;
   width: 100%;
   position: relative;
-  height: 150px;
-
-  padding-top: 3rem;
   align-items: center;
+  justify-content: space-between;
+
+  @media only screen and (min-width: 1024px) {
+    padding: 0;
+    height: 100%;
+  }
+`
+
+const BtnsWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  position: relative;
+  align-items: center;
+  justify-content: space-between;
 
   @media only screen and (min-width: 1024px) {
     padding: 0;
@@ -329,96 +368,73 @@ const Rows = styled.div`
 `
 
 const Photo = styled.img`
-  border-radius: 5px;
+  margin: 0 auto;
+  max-width: 80%;
+`
+
+const ProdName = styled.div`
+  justify-content: space-between;
+  height: 80px;
+  display: flex;
+  flex-direction: row;
+  display: table;
+  max-width: 510px;
+  padding: 0;
+  text-align: left;
+
+  @media only screen and (min-width: 1024px) {
+    justify-content: end;
+    margin: 0 auto;
+    min-width: 410px;
+    width: 100%;
+  }
 `
 
 const HHuge = styled.h1`
   color: #000f08;
   font-weight: 700;
-  font-size: 5rem;
+  font-size: 3rem;
   display: table-cell;
   vertical-align: middle;
+
+  @media only screen and (min-width: 1024px) {
+    font-size: 5rem;
+  }
 `
 
 const H = styled.h1`
   color: #000f08;
   font-weight: 700;
-  font-size: 3rem;
-`
+  font-size: 2rem;
 
-const Btn = styled.button`
-  background: transparent;
-  color: #fff;
-  font-weight: 100;
-  text-transform: uppercase;
-  width: 140px;
-  height: 50px;
-  position: relative;
-  display: inline-block;
-  margin: 15px;
-  padding: 12px 27px;
-  text-align: center;
-  font-size: 12px;
-  letter-spacing: 1px;
-  text-decoration: none;
-  border: 2px solid #fff;
-  cursor: pointer;
-  transition: ease-out 0.1s;
-
-  &:hover {
-    animation: pulse 1s ease-out 0.4s;
-    color: #222222;
-
-    &:after {
-      width: calc(100% + 2px);
-      height: calc(100% + 2px);
-      visibility: visible;
-      transition: width 0.05s ease 0.1s, height 0.05s ease 0.15s,
-        visibility 0s 0.1s;
-      transition: width 0.05s ease 0.1s, height 0.05s ease 0.15s,
-        visibility 0s 0.1s;
-    }
-
-    &:before {
-      width: calc(100% + 2px);
-      height: calc(100% + 2px);
-      visibility: visible;
-      transition: width 0.05s ease 0.1s, height 0.05s ease 0.15s,
-        visibility 0s 0.1s;
-      transition: width 0.05s ease, height 0.05s ease 0.05s;
-    }
-  }
-  &:after {
-    position: absolute;
-    content: '';
-    width: 0%;
-    height: 0%;
-    visibility: hidden;
-    bottom: -2px;
-    right: -2px;
-    border-left: 2px solid #222222;
-    border-bottom: 2px solid #222222;
-    transition: width 0.05s ease 0.05s, height 0.05s ease, visibility 0s 0.1s;
-  }
-
-  &:before {
-    position: absolute;
-    content: '';
-    width: 0%;
-    height: 0%;
-    visibility: hidden;
-    top: -2px;
-    left: -2px;
-    border-top: 2px solid #222222;
-    border-right: 2px solid #222222;
-    transition: width 0.05s ease 0.15s, height 0.05s ease 0.1s,
-      visibility 0s 0.2s;
+  @media only screen and (min-width: 1024px) {
+    font-size: 3rem;
   }
 `
 
-// const RadioWrapper = styled.div`
-//   position: relative;
-// `
+const NutriTitle = styled.h1`
+  color: #000f08;
+  font-weight: 700;
+  font-size: 1.5rem;
+  padding-left: 10px;
+
+  @media only screen and (min-width: 1024px) {
+    padding-left: 0;
+    font-size: 2rem;
+  }
+`
+
+const Portion = styled.h2`
+  color: #000f08;
+  font-weight: 700;
+  font-size: 1rem;
+  padding-left: 10px;
+
+  @media only screen and (min-width: 1024px) {
+    padding-left: 0;
+    font-size: 2rem;
+  }
+`
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const { products } = await client.request(GET_PORTFOLIO)

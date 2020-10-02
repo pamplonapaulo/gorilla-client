@@ -31,8 +31,11 @@ const HiddenInput = styled.input`
 `
 
 const Container = styled.div`
-  margin-right: 15px;
   display: flex;
+
+  @media only screen and (min-width: 1024px) {
+    margin-right: 15px;
+  }
 `
 const Btn = styled.button`
   background: wheat;
@@ -70,7 +73,6 @@ const FakeInput = styled.div`
   -webkit-text-decoration: none;
   text-decoration: none;
   padding: 0.7em 1em;
-
   font-size: 1.2rem;
   font-weight: 500;
   -webkit-letter-spacing: 1px;
@@ -82,11 +84,15 @@ const FakeInput = styled.div`
   transition: all 0.2s;
   color: rgba(0, 0, 0, 0.9);
   text-align: center;
-  width: 140px;
   height: 50px;
   align-items: center;
   display: flex;
   padding: 0;
+  width: calc(50vw - 115px);
+
+  @media only screen and (min-width: 1024px) {
+    width: 140px;
+  }
 `
 
 const P = styled.p`
