@@ -47,10 +47,11 @@ export const Item = styled.li`
   height: 70px;
   justify-content: center;
   width: 100%;
+  color: #2da650;
 
   &.active {
-    border: #FACB37 solid 1px;
-    color: #FACB37;
+    border: #EF8321 solid 1px;
+    color: #EF8321;
   }
 
   @media only screen and (min-width: 1024px) {
@@ -67,17 +68,17 @@ export const Item = styled.li`
       border: #EF8321 solid 1px;
       color: #EF8321;
     }
+
+    &.active {
+      border: #FACB37 solid 1px;
+      color: #FACB37;
+    }
   }
 }
 `
 
 export const H1 = styled.h1`
-  color: #2da650;
   text-align: center;
   white-space: nowrap;
   font-weight: 300;
-
-  @media only screen and (min-width: 1024px) {
-    color: inherit;
-  }
 `

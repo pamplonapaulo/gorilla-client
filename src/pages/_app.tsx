@@ -7,7 +7,7 @@ import Head from 'next/head'
 import styled from 'styled-components'
 
 import GlobalStyles from 'styles/global'
-import { MenuProvider } from '../contexts'
+import { MenuProvider, UserProvider } from '../contexts'
 
 import Header from 'components/Header'
 import Footer from 'components/Footer'
@@ -44,13 +44,15 @@ function App({ Component, pageProps }: AppProps) {
       </Head>
       <GlobalStyles />
       <MenuProvider>
-        <ContainerOuter>
-          <Header />
-          <ContainerInner>
-            <Component {...pageProps} />
-          </ContainerInner>
-          <Footer />
-        </ContainerOuter>
+        <UserProvider>
+          <ContainerOuter>
+            <Header />
+            <ContainerInner>
+              <Component {...pageProps} />
+            </ContainerInner>
+            <Footer />
+          </ContainerOuter>
+        </UserProvider>
       </MenuProvider>
     </>
   )
