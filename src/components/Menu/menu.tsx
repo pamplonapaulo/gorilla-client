@@ -13,7 +13,7 @@ const Menu = ({
     ['siga', '/siga']
   ]
 }) => {
-  const { menu } = useMenu()
+  const { menu, setMenu } = useMenu()
   const [current, setCurrent] = useState('string')
 
   Router.events.on('routeChangeStart', (url) => {
@@ -21,6 +21,7 @@ const Menu = ({
 
     if (match) {
       setCurrent(match[0])
+      setMenu(!menu)
     }
   })
 
