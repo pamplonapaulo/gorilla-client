@@ -25,9 +25,13 @@ const UserSection = () => {
   return (
     <>
       <S.Container>
-        {userLog !== 'false' ? <h1>{`Olá, ${userLog}!`}</h1> : <h1></h1>}
         <div onClick={() => handleUser()}>
           <User />
+          {userLog !== 'false' ? (
+            <S.Hello>{`Fala ${userLog}!`}</S.Hello>
+          ) : (
+            <h1></h1>
+          )}
         </div>
         <div onClick={() => handleBag()}>
           <Bag />

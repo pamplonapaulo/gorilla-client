@@ -133,3 +133,17 @@ export const Input = styled.input`
     }
   }
 `
+
+export const Hello = styled.h1`
+  position: absolute;
+  font-size: 11px;
+  bottom: 0;
+  white-space: nowrap;
+  font-weight: 300;
+  color: rgb(250, 203, 55);
+  background: rgba(45, 166, 80, 0.9);
+  padding: 3px;
+  border: 1px solid rgba(70, 49, 27, 0.5);
+  transform: translate(calc(-100% + 40px), -25%);
+  min-width: fit-content;
+`
