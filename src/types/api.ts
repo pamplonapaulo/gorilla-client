@@ -9,6 +9,13 @@ export type ProductsCollection = {
   products: Product[]
 }
 
+export type Snack = {
+  id: string
+  Name: string
+  Price: number
+  Image: Image
+}
+
 export type Product = {
   id: string
   Name: string
@@ -18,7 +25,7 @@ export type Product = {
   InStock: number
   Active: boolean
   NutritionFacts: NutritionFacts
-  Image: formats[]
+  Image: Image
 }
 
 export type NutritionFacts = {
@@ -33,6 +40,8 @@ export type NutritionFacts = {
   DietaryFiber: number
   Sodium: number
 }
+
+export type Image = formats[]
 
 export type formats = {
   formats: {

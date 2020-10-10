@@ -1,53 +1,48 @@
-import { GetStaticProps } from 'next'
-
 import Link from 'next/link'
 
-import client from 'graphql/client'
+import { useQuery } from '@apollo/client'
 import GET_PRODUCTS from 'graphql/queries/getProducts'
 
-import { ProductsCollection } from 'types/api'
+import { Snack } from 'types/api'
 
 import { getImageUrl } from 'utils/getImageUrl'
 import { replaceSpecialChars } from 'utils/replaceSpecialChars'
 
 import styled from 'styled-components'
 
-const Snacks = ({ products }: ProductsCollection) => (
-  <>
-    <Container>
-      <T>{'Nossos Produtos'}</T>
-      <Wrapper>
-        {products.map((p) => (
-          <Item key={p.id}>
-            <Photo
-              src={getImageUrl(p.Image[0]['formats']['medium']['url'])}
-              alt={p.Name}
-            />
-            <H>{p.Name}</H>
-            <H>{'R$' + p.Price}</H>
-            <Link
-              as={`/snacks/${replaceSpecialChars(p.Name)}`}
-              href={{
-                pathname: '/snacks/[slug]'
-              }}
-            >
-              <Btn>{'Comprar'}</Btn>
-            </Link>
-          </Item>
-        ))}
-      </Wrapper>
-    </Container>
-  </>
-)
+const Snacks = () => {
+  const { loading, error, data } = useQuery(GET_PRODUCTS)
 
-export const getStaticProps: GetStaticProps = async () => {
-  const { products } = await client.request(GET_PRODUCTS)
+  if (loading) return <p>Loading...</p>
+  if (error) return <p>Error :(</p>
 
-  return {
-    props: {
-      products
-    }
-  }
+  return (
+    <>
+      <Container>
+        <T>{'Nossos Produtos'}</T>
+        <Wrapper>
+          {data.products.map((p: Snack) => (
+            <Item key={p.id}>
+              <Photo
+                src={getImageUrl(p.Image[0]['formats']['medium']['url'])}
+                alt={p.Name}
+              />
+              <H>{p.Name}</H>
+              <H>{'R$' + p.Price}</H>
+              <Link
+                as={`/snacks/${replaceSpecialChars(p.Name)}`}
+                href={{
+                  pathname: '/snacks/[slug]'
+                }}
+              >
+                <Btn>{'Comprar'}</Btn>
+              </Link>
+            </Item>
+          ))}
+        </Wrapper>
+      </Container>
+    </>
+  )
 }
 
 const Container = styled.div`

@@ -47,7 +47,7 @@ const RegisterForm = ({ popup, setPopup }: Props) => {
       console.log(JSON.stringify(data, undefined, 2))
       setUserLog(data.createPotentialClient.potentialClient.firstName)
     }
-    submit().catch((error) => console.error(error))
+    submit().catch((error) => console.log(error))
 
     setPopup(!popup)
   }

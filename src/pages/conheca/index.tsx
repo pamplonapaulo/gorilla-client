@@ -1,18 +1,38 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import * as React from 'react'
+
+import { useMutation } from '@apollo/client'
+import CREATE_POTENTIAL_CUSTOMER from 'graphql/mutations/createPotentialCustomer'
+
+import Button from 'components/Button'
+
 import styled from 'styled-components'
 
-const Conheca = () => (
-  <>
-    <Container>
-      <H>Page Conheça</H>
-    </Container>
-  </>
-)
+const Conheca: React.FunctionComponent = () => {
+  const customer = {
+    firstName: 'Apollo',
+    lastName: 'GraphQL',
+    email: 'apollo123@apollo.com',
+    postCode: '22240-000',
+    password: 'xyz09'
+  }
 
-export async function getStaticProps() {
-  await new Promise((resolve) => {
-    setTimeout(resolve, 500)
-  })
-  return { props: {} }
+  const [addPotentialCustomer, { data }] = useMutation(
+    CREATE_POTENTIAL_CUSTOMER
+  )
+
+  return (
+    <Container>
+      <div
+        onClick={() => {
+          addPotentialCustomer({ variables: { data: customer } })
+          console.log(data)
+        }}
+      >
+        <Button bg={'#000'}>New Customer</Button>
+      </div>
+    </Container>
+  )
 }
 
 const Container = styled.div`
@@ -40,10 +60,11 @@ const Container = styled.div`
   }
 `
 
-const H = styled.h1`
-  color: #000f08;
-  font-weight: 700;
-  font-size: 3rem;
-`
+export async function getStaticProps() {
+  await new Promise((resolve) => {
+    setTimeout(resolve, 500)
+  })
+  return { props: {} }
+}
 
 export default Conheca

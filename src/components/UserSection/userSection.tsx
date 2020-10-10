@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import RegisterForm from 'components/RegisterForm'
 
 import User from 'components/User'
+import UserOn from 'components/UserOn'
 import Bag from 'components/Bag'
 
 import { useUser } from 'contexts'
@@ -25,24 +26,26 @@ const UserSection = () => {
   return (
     <>
       <S.Container>
-        <div onClick={() => handleUser()}>
-          <User />
-          {userLog !== 'false' ? (
+        {userLog !== 'false' ? (
+          <>
+            <UserOn />
             <S.Hello>{`Fala ${userLog}!`}</S.Hello>
-          ) : (
-            <h1></h1>
-          )}
-        </div>
+          </>
+        ) : (
+          <>
+            <div onClick={() => handleUser()}>
+              <User />
+            </div>
+          </>
+        )}
         <div onClick={() => handleBag()}>
           <Bag />
         </div>
       </S.Container>
       {popup && (
         <S.Overlay>
-          {userLog === 'false' ? (
+          {userLog === 'false' && (
             <RegisterForm popup={popup} setPopup={setPopup} />
-          ) : (
-            <h1>{`Olá, ${userLog}!`}</h1>
           )}
         </S.Overlay>
       )}

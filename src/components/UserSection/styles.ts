@@ -146,4 +146,5 @@ export const Hello = styled.h1`
   border: 1px solid rgba(70, 49, 27, 0.5);
   transform: translate(calc(-100% + 40px), -25%);
   min-width: fit-content;
+  cursor: default;
 `

@@ -1,16 +1,22 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import App from 'next/app'
+import React from 'react'
+
 import Router from 'next/router'
 import NProgress from 'nprogress'
 
-import { AppProps } from 'next/app'
 import Head from 'next/head'
 
-import styled from 'styled-components'
+import { ApolloProvider } from '@apollo/client'
+import { client } from 'lib/apollo/client'
 
-import GlobalStyles from 'styles/global'
 import { MenuProvider, UserProvider } from '../contexts'
 
 import Header from 'components/Header'
 import Footer from 'components/Footer'
+
+import styled from 'styled-components'
+import GlobalStyles from 'styles/global'
 
 Router.events.on('routeChangeStart', (url) => {
   console.log(`Loading: ${url}`)
@@ -19,43 +25,48 @@ Router.events.on('routeChangeStart', (url) => {
 Router.events.on('routeChangeComplete', () => NProgress.done())
 Router.events.on('routeChangeError', () => NProgress.done())
 
-function App({ Component, pageProps }: AppProps) {
-  return (
-    <>
-      <Head>
-        <title>Gorilla Pack | O snack saudável de Nikiti</title>
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1, shrink-to-fit=no"
-          key="viewport"
-        />
-        <link rel="shortcut icon" href="/img/icon-380.png" />
-        <link rel="apple-touch-icon" href="/img/icon-380.png" />
-        <link rel="manifest" href="/manifest.json" />
-        <meta
-          name="description"
-          content="Snacks saudáveis de banana desidratada em Niterói."
-        />
-        <link
-          href="https://fonts.googleapis.com/css2?family=PT+Serif&display=swap"
-          rel="stylesheet"
-        />
-        <link rel="stylesheet" type="text/css" href="/nprogress.css" />
-      </Head>
-      <GlobalStyles />
-      <MenuProvider>
-        <UserProvider>
-          <ContainerOuter>
-            <Header />
-            <ContainerInner>
-              <Component {...pageProps} />
-            </ContainerInner>
-            <Footer />
-          </ContainerOuter>
-        </UserProvider>
-      </MenuProvider>
-    </>
-  )
+class MyApp extends App<any> {
+  render() {
+    const { Component, pageProps } = this.props
+    return (
+      <>
+        <Head>
+          <title>Gorilla Pack | O snack saudável de Nikiti</title>
+          <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, shrink-to-fit=no"
+            key="viewport"
+          />
+          <link rel="shortcut icon" href="/img/icon-380.png" />
+          <link rel="apple-touch-icon" href="/img/icon-380.png" />
+          <link rel="manifest" href="/manifest.json" />
+          <meta
+            name="description"
+            content="Snacks saudáveis de banana desidratada em Niterói."
+          />
+          <link
+            href="https://fonts.googleapis.com/css2?family=PT+Serif&display=swap"
+            rel="stylesheet"
+          />
+          <link rel="stylesheet" type="text/css" href="/nprogress.css" />
+        </Head>
+        <GlobalStyles />
+        <ApolloProvider client={client}>
+          <MenuProvider>
+            <UserProvider>
+              <ContainerOuter>
+                <Header />
+                <ContainerInner>
+                  <Component {...pageProps} />
+                </ContainerInner>
+                <Footer />
+              </ContainerOuter>
+            </UserProvider>
+          </MenuProvider>
+        </ApolloProvider>
+      </>
+    )
+  }
 }
 
 const ContainerOuter = styled.div`
@@ -101,4 +112,4 @@ const ContainerInner = styled.main`
   }
 `
 
-export default App
+export default MyApp
