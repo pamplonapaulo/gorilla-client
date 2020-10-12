@@ -13,7 +13,7 @@ type Props = {
   setPopup: Dispatch<SetStateAction<boolean>>
 }
 
-const RegisterForm = ({ popup, setPopup }: Props) => {
+const FormRegister = ({ popup, setPopup }: Props) => {
   const { setUserLog } = useUser()
 
   const [inputData, setInputData] = useState({
@@ -53,13 +53,13 @@ const RegisterForm = ({ popup, setPopup }: Props) => {
   }
 
   return (
-    <S.SignUp>
+    <>
       <S.Form>
         <S.Field>
           <S.Legend>Cadastro</S.Legend>
           <S.Input
             type="text"
-            name="firstName"
+            name="username"
             placeholder="Nome"
             onChange={handleInputChange}
           />
@@ -93,8 +93,8 @@ const RegisterForm = ({ popup, setPopup }: Props) => {
       <div onClick={() => createCustomer()}>
         <Button bg={'#facb37'}>Gravar</Button>
       </div>
-    </S.SignUp>
+    </>
   )
 }
 
-export default RegisterForm
+export default FormRegister

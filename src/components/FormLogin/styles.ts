@@ -80,7 +80,7 @@ export const Submit = styled.button`
 
 export const Field = styled.fieldset`
   display: flex;
-  flex-direction: rows;
+  flex-direction: column;
   height: 100%;
   border: none;
   padding: 10% 0;
