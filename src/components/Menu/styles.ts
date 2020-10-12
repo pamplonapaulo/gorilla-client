@@ -72,6 +72,10 @@ export const Item = styled.li`
     &.active {
       border: #FACB37 solid 1px;
       color: #FACB37;
+      border-left: transparent;
+      border-top: transparent;
+      border-right: transparent;
+      cursor: default;
     }
   }
 }
