@@ -1,10 +1,11 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { Dispatch, SetStateAction, useState } from 'react'
-import CREATE_POTENTIAL_CLIENT from 'graphql/mutations/createPotentialClient'
-import client from 'graphql/client'
+import axios from 'axios'
+import { endpoint } from 'lib/apollo/client'
 
 import Button from 'components/Button'
 
-import { useUser } from 'contexts'
+// import { useUser } from 'contexts'
 
 import * as S from './styles'
 
@@ -14,24 +15,22 @@ type Props = {
 }
 
 const FormRegister = ({ popup, setPopup }: Props) => {
-  const { setUserLog } = useUser()
+  // const { setUserLog } = useUser()
 
   const [inputData, setInputData] = useState({
-    firstName: '',
+    username: '',
     lastName: '',
-    email: '',
     postCode: '',
+    email: '',
     password: ''
   })
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const target = e.target
-    const value = target.type === 'checkbox' ? target.checked : target.value
-    const name = target.name
 
     setInputData({
       ...inputData,
-      [name]: value
+      [target.name]: target.value
     })
   }
 
@@ -41,15 +40,28 @@ const FormRegister = ({ popup, setPopup }: Props) => {
         ...inputData
       }
     }
-
-    async function submit() {
-      const data = await client.request(CREATE_POTENTIAL_CLIENT, variables)
-      console.log(JSON.stringify(data, undefined, 2))
-      setUserLog(data.createPotentialClient.potentialClient.firstName)
-    }
-    submit().catch((error) => console.log(error))
-
-    setPopup(!popup)
+    axios
+      .post(endpoint + 'auth/local/register', {
+        username: variables.data.username,
+        lastName: variables.data.lastName,
+        postCode: variables.data.postCode,
+        email: variables.data.email,
+        password: variables.data.password
+      })
+      .then((response: { data: { user: any; jwt: any } }) => {
+        // Handle success.
+        console.log('Well done!')
+        console.log('User profile', response.data.user)
+        console.log('User token', response.data.jwt)
+        setPopup(!popup)
+      })
+      .catch((error: { response: any }) => {
+        // Handle error.
+        console.log(
+          'error:',
+          error.response.data.message[0].messages[0].message
+        )
+      })
   }
 
   return (

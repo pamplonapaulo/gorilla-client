@@ -2,8 +2,8 @@ import { GetStaticPaths } from 'next'
 
 import { useRouter } from 'next/router'
 
-import { gql } from 'graphql-request'
-import client from 'graphql/client'
+import { gql, GraphQLClient } from 'graphql-request'
+import { endpoint } from 'lib/apollo/client'
 import GET_PORTFOLIO from 'graphql/queries/getPortfolio'
 
 import { Product, Item, Params } from 'types/api'
@@ -16,6 +16,8 @@ import Button from 'components/Button'
 import Input from 'components/Input'
 
 import styled from 'styled-components'
+
+const client = new GraphQLClient(endpoint + 'graphql')
 
 export default function Produto({ ...product }: Product) {
   const router = useRouter()

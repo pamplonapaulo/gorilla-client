@@ -1,7 +1,9 @@
 import { ApolloClient, InMemoryCache } from '@apollo/client'
-import { endpoint } from 'graphql/client'
+
+// export const endpoint = 'http://localhost:1337/'
+export const endpoint = 'https://packgorilla.herokuapp.com/'
 
 export const client = new ApolloClient({
-  uri: endpoint,
+  uri: endpoint + 'graphql',
   cache: new InMemoryCache()
 })
