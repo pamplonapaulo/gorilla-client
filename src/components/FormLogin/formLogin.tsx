@@ -6,6 +6,7 @@ import Button from 'components/Button'
 import { useUser } from 'contexts'
 
 import axios from 'axios'
+import { endpoint } from 'lib/apollo/client'
 
 import * as S from './styles'
 
@@ -30,7 +31,7 @@ const FormLogin = () => {
 
   const loginCustomer = () => {
     axios
-      .post('http://localhost:1337/auth/local', {
+      .post(endpoint + 'auth/local', {
         identifier: inputData.email,
         password: inputData.password
       })
@@ -43,7 +44,10 @@ const FormLogin = () => {
       })
       .catch((error: { response: any }) => {
         // Handle error.
-        console.log('An error occurred:', error.response)
+        console.log(
+          'An error occurred:',
+          error.response.data.message[0].messages[0].message
+        )
       })
   }
 
