@@ -81,7 +81,7 @@ const UserSection = () => {
                   <CheckMark />
                 </S.Top>
                 <S.Bottom>
-                  <div onClick={() => console.log('gerenciar conta')}>
+                  <div onClick={() => handleUser()}>
                     <Button bg={'#facb37'}>Voltar</Button>
                   </div>
                 </S.Bottom>
