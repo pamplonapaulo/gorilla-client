@@ -20,12 +20,10 @@ const FormLogin = () => {
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const target = e.target
-    const value = target.type === 'checkbox' ? target.checked : target.value
-    const name = target.name
 
     setInputData({
       ...inputData,
-      [name]: value
+      [target.name]: target.value
     })
   }
 

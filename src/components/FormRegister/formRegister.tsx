@@ -22,7 +22,8 @@ const FormRegister = ({ popup, setPopup }: Props) => {
     lastName: '',
     postCode: '',
     email: '',
-    password: ''
+    password: '',
+    confirmed: false
   })
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {

@@ -16,12 +16,6 @@ const Snacks = () => {
   if (loading) return <p>Loading...</p>
   if (error) return <p>Error :(</p>
 
-  console.log(data)
-  console.log(data.products[0])
-  console.log(data.products[0].Image['formats'])
-  console.log(data.products[0].Image['formats']['medium']['url'])
-  // console.log(data[0].Image[0]['formats']['medium']['url'])
-
   return (
     <>
       <Container>
