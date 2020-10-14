@@ -41,9 +41,7 @@ export type NutritionFacts = {
   Sodium: number
 }
 
-export type Image = formats[]
-
-export type formats = {
+export type Image = {
   formats: {
     medium: FormatProps
     small: FormatProps

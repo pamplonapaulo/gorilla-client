@@ -32,15 +32,13 @@ export default function Produto({ ...product }: Product) {
             <meta
               property="og:image"
               content={getImageUrl(
-                product.Image[0]['formats']['thumbnail']['url']
+                product.Image['formats']['thumbnail']['url']
               )}
             />
             <ContainerInner>
               <Wrapper>
                 <Photo
-                  src={getImageUrl(
-                    product.Image[0]['formats']['medium']['url']
-                  )}
+                  src={getImageUrl(product.Image['formats']['medium']['url'])}
                   alt={product.Name}
                 />
               </Wrapper>

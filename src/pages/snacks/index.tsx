@@ -16,6 +16,12 @@ const Snacks = () => {
   if (loading) return <p>Loading...</p>
   if (error) return <p>Error :(</p>
 
+  console.log(data)
+  console.log(data.products[0])
+  console.log(data.products[0].Image['formats'])
+  console.log(data.products[0].Image['formats']['medium']['url'])
+  // console.log(data[0].Image[0]['formats']['medium']['url'])
+
   return (
     <>
       <Container>
@@ -24,7 +30,7 @@ const Snacks = () => {
           {data.products.map((p: Snack) => (
             <Item key={p.id}>
               <Photo
-                src={getImageUrl(p.Image[0]['formats']['medium']['url'])}
+                src={getImageUrl(p.Image['formats']['medium']['url'])}
                 alt={p.Name}
               />
               <H>{p.Name}</H>
