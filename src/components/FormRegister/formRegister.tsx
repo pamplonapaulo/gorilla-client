@@ -17,6 +17,9 @@ type Props = {
 const FormRegister = ({ popup, setPopup }: Props) => {
   // const { setUserLog } = useUser()
 
+  const [form, setForm] = useState(true)
+  const [message, setMessage] = useState('')
+
   const [inputData, setInputData] = useState({
     username: '',
     lastName: '',
@@ -51,10 +54,12 @@ const FormRegister = ({ popup, setPopup }: Props) => {
       })
       .then((response: { data: { user: any; jwt: any } }) => {
         // Handle success.
-        console.log('Well done!')
         console.log('User profile', response.data.user)
         console.log('User token', response.data.jwt)
-        setPopup(!popup)
+        setForm(!form)
+        setTimeout(() => {
+          setPopup(!popup)
+        }, 6000)
       })
       .catch((error: { response: any }) => {
         // Handle error.
@@ -62,50 +67,64 @@ const FormRegister = ({ popup, setPopup }: Props) => {
           'error:',
           error.response.data.message[0].messages[0].message
         )
+        setMessage(error.response.data.message[0].messages[0].message)
       })
   }
 
   return (
     <>
-      <S.Form>
-        <S.Field>
-          <S.Legend>Cadastro</S.Legend>
-          <S.Input
-            type="text"
-            name="username"
-            placeholder="Nome"
-            onChange={handleInputChange}
-          />
-          <S.Input
-            type="text"
-            name="lastName"
-            placeholder="Sobrenome"
-            onChange={handleInputChange}
-          />
-          <S.Input
-            type="text"
-            name="postCode"
-            placeholder="CEP"
-            pattern="(\d{5})-(\d{3})"
-            onChange={handleInputChange}
-          />
-          <S.Input
-            type="email"
-            name="email"
-            placeholder="E-mail"
-            onChange={handleInputChange}
-          />
-          <S.Input
-            type="password"
-            name="password"
-            placeholder="Senha"
-            onChange={handleInputChange}
-          />
-        </S.Field>
-      </S.Form>
-      <div onClick={() => createCustomer()}>
-        <Button bg={'#facb37'}>Gravar</Button>
-      </div>
+      {form && (
+        <>
+          <S.Form>
+            <S.Field>
+              <S.Legend>Cadastro</S.Legend>
+              {message !== '' && <S.Error>{message}</S.Error>}
+              <S.Input
+                type="text"
+                name="username"
+                placeholder="Nome"
+                onChange={handleInputChange}
+              />
+              <S.Input
+                type="text"
+                name="lastName"
+                placeholder="Sobrenome"
+                onChange={handleInputChange}
+              />
+              <S.Input
+                type="text"
+                name="postCode"
+                placeholder="CEP"
+                pattern="(\d{5})-(\d{3})"
+                onChange={handleInputChange}
+              />
+              <S.Input
+                type="email"
+                name="email"
+                placeholder="E-mail"
+                onChange={handleInputChange}
+              />
+              <S.Input
+                type="password"
+                name="password"
+                placeholder="Senha"
+                onChange={handleInputChange}
+              />
+            </S.Field>
+          </S.Form>
+          <div onClick={() => createCustomer()}>
+            <Button bg={'#facb37'}>Gravar</Button>
+          </div>
+        </>
+      )}
+      {!form && (
+        <S.Success>
+          {'Enviamos um email para que você valide o seu cadastro.'}
+          <br />
+          <br />
+          {'Se necessário, verifique o ANTI-SPAM do seu email'}
+        </S.Success>
+      )}
     </>
   )
 }
