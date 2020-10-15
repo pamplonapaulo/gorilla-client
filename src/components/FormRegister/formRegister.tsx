@@ -25,17 +25,68 @@ const FormRegister = ({ popup, setPopup }: Props) => {
     lastName: '',
     postCode: '',
     email: '',
-    password: '',
-    confirmed: false
+    password: ''
   })
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    console.log(inputData)
     const target = e.target
 
-    setInputData({
-      ...inputData,
-      [target.name]: target.value
-    })
+    if (target.name === 'postCode') {
+      setInputData({
+        ...inputData,
+        [target.name]: postcodeMask(target.value)
+      })
+    } else if (target.name === 'email' && emailValidation(target.value)) {
+      setInputData({
+        ...inputData,
+        [target.name]: target.value
+      })
+    } else if (
+      target.name === 'password' ||
+      target.name === 'username' ||
+      target.name === 'lastName'
+    ) {
+      setInputData({
+        ...inputData,
+        [target.name]: target.value
+      })
+    }
+  }
+
+  const emailValidation = (value: string) => {
+    const globalRegex = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g
+
+    return globalRegex.test(value)
+  }
+
+  const postcodeMask = (value: string) => {
+    return value
+      .replace(/\D+/g, '')
+      .replace(/(\d{5})(\d)/, '$1-$2')
+      .replace(/(-\d{3})\d+?$/, '$1')
+  }
+
+  const handleRegister = () => {
+    if (
+      inputData.username !== '' &&
+      inputData.lastName !== '' &&
+      inputData.postCode !== '' &&
+      inputData.email !== '' &&
+      inputData.password !== ''
+    ) {
+      createCustomer()
+    } else if (inputData.username === '') {
+      setMessage('Preencha o campo "Nome"')
+    } else if (inputData.lastName === '') {
+      setMessage('Preencha o campo "Sobrenome"')
+    } else if (inputData.postCode === '') {
+      setMessage('Preencha o campo "CEP"')
+    } else if (inputData.email === '') {
+      setMessage('Preencha o campo "Email"')
+    } else if (inputData.password === '') {
+      setMessage('Preencha o campo "Senha"')
+    }
   }
 
   const createCustomer = () => {
@@ -96,6 +147,7 @@ const FormRegister = ({ popup, setPopup }: Props) => {
                 name="postCode"
                 placeholder="CEP"
                 pattern="(\d{5})-(\d{3})"
+                value={inputData.postCode}
                 onChange={handleInputChange}
               />
               <S.Input
@@ -112,7 +164,7 @@ const FormRegister = ({ popup, setPopup }: Props) => {
               />
             </S.Field>
           </S.Form>
-          <div onClick={() => createCustomer()}>
+          <div onClick={() => handleRegister()}>
             <Button bg={'#facb37'}>Gravar</Button>
           </div>
         </>
