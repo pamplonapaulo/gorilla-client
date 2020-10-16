@@ -5,6 +5,10 @@ const show = keyframes`
  100% { opacity: 1; }
 `
 
+type Props = {
+  isValid: boolean
+}
+
 export const Container = styled.div`
   padding: 0;
   z-index: 9;
@@ -96,14 +100,15 @@ export const Legend = styled.legend`
   transform: translateY(-100%);
 `
 
-export const Input = styled.input`
+export const Input = styled.input<{ isValid: boolean }>`
   padding: 5px;
   border: solid 1px transparent;
   margin: 0 12.5% 3rem;
   outline-color: white;
   outline-width: 1px;
-  background: rgba(255, 255, 255, 0.1);
-  color: #facb37;
+  background: ${(p) =>
+    p.isValid ? 'rgba(255, 255, 255, 0.1)' : 'rgba(255, 0, 0, 0.1)'};
+  color: ${(p) => (p.isValid ? '#facb37' : '#FF0000')};
   padding-left: 10px;
   font-weight: 100;
   letter-spacing: 1.3px;
@@ -122,6 +127,7 @@ export const Input = styled.input`
     text-transform: uppercase;
     transition: 0.2s all;
     letter-spacing: 5px;
+    color: ${(p) => (p.isValid ? 'rgb(117, 117, 117)' : '#FF0000')};
   }
 
   &:focus {
@@ -149,25 +155,4 @@ export const Success = styled.h1`
   position: absolute;
   width: 100%;
   text-align: center;
-`
-
-export const Error = styled.h1`
-  align-items: center;
-  background: rgba(255, 255, 255, 0.1);
-  box-shadow: 0 0 0 2px inset #ff0000;
-  color: #fff;
-  display: flex;
-  font-size: 1.5rem;
-  font-weight: 100;
-  height: 75px;
-  justify-content: center;
-  letter-spacing: 5px;
-  line-height: 1.5;
-  padding: 0 15px;
-  position: absolute;
-  width: calc(100% - 60px);
-  top: 0;
-  text-align: center;
-  text-shadow: 1px 1px 1px #000;
-  transform: translateY(50%);
 `

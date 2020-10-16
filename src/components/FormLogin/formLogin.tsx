@@ -2,8 +2,11 @@
 import React, { useState } from 'react'
 
 import Button from 'components/Button'
+import ErrorMessage from 'components/ErrorMessage'
 
 import { useUser } from 'contexts'
+
+import { isEmailValid } from 'utils/formValidations'
 
 import axios from 'axios'
 import { endpoint } from 'lib/apollo/client'
@@ -17,6 +20,7 @@ const FormLogin = () => {
     email: '',
     password: ''
   })
+  const [message, setMessage] = useState('')
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const target = e.target
@@ -25,6 +29,19 @@ const FormLogin = () => {
       ...inputData,
       [target.name]: target.value
     })
+  }
+
+  const handleLogin = () => {
+    if (isEmailValid(inputData.email) && inputData.password !== '')
+      loginCustomer()
+
+    if (!isEmailValid(inputData.email))
+      setMessage('Algo estranho no campo "Email"')
+
+    if (inputData.password === '') setMessage('Preencha o campo "Senha"')
+
+    if (!isEmailValid(inputData.email) && inputData.password === '')
+      setMessage('"Senha" e "Email" não foram preenchidos corretamente.')
   }
 
   const loginCustomer = () => {
@@ -54,6 +71,7 @@ const FormLogin = () => {
       <S.Form>
         <S.Field>
           <S.Legend>ÁREA DO CLIENTE</S.Legend>
+          {message !== '' && <ErrorMessage>{message}</ErrorMessage>}
           <S.Input
             type="email"
             name="email"
@@ -68,7 +86,7 @@ const FormLogin = () => {
           />
         </S.Field>
       </S.Form>
-      <div onClick={() => loginCustomer()}>
+      <div onClick={() => handleLogin()}>
         <Button bg={'#facb37'}>Entrar</Button>
       </div>
     </>
