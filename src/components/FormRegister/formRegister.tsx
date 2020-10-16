@@ -4,6 +4,9 @@ import axios from 'axios'
 import { endpoint } from 'lib/apollo/client'
 
 import Button from 'components/Button'
+import ErrorMessage from 'components/ErrorMessage'
+
+import { isEmailValid, postcodeMask } from 'utils/formValidations'
 
 // import { useUser } from 'contexts'
 
@@ -20,6 +23,14 @@ const FormRegister = ({ popup, setPopup }: Props) => {
   const [form, setForm] = useState(true)
   const [message, setMessage] = useState('')
 
+  const [validation, setValidation] = useState({
+    username: true,
+    lastName: true,
+    postCode: true,
+    email: true,
+    password: true
+  })
+
   const [inputData, setInputData] = useState({
     username: '',
     lastName: '',
@@ -28,64 +39,115 @@ const FormRegister = ({ popup, setPopup }: Props) => {
     password: ''
   })
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(inputData)
+  const handleFocusOut = (e: React.FocusEvent<HTMLInputElement>) => {
     const target = e.target
 
-    if (target.name === 'postCode') {
-      setInputData({
-        ...inputData,
-        [target.name]: postcodeMask(target.value)
+    if (target.name === 'username' && target.value.length > 1) {
+      setValidation({
+        ...validation,
+        [target.name]: true
       })
-    } else if (target.name === 'email' && emailValidation(target.value)) {
-      setInputData({
-        ...inputData,
-        [target.name]: target.value
+    } else if (target.name === 'username' && target.value.length <= 1) {
+      setValidation({
+        ...validation,
+        [target.name]: false
       })
-    } else if (
-      target.name === 'password' ||
-      target.name === 'username' ||
-      target.name === 'lastName'
-    ) {
-      setInputData({
-        ...inputData,
-        [target.name]: target.value
+    }
+
+    if (target.name === 'lastName' && target.value.length > 1) {
+      setValidation({
+        ...validation,
+        [target.name]: true
+      })
+    } else if (target.name === 'lastName' && target.value.length <= 1) {
+      setValidation({
+        ...validation,
+        [target.name]: false
+      })
+    }
+
+    if (target.name === 'postCode' && inputData.postCode.length === 9) {
+      setValidation({
+        ...validation,
+        [target.name]: true
+      })
+    } else if (target.name === 'postCode' && inputData.postCode.length !== 9) {
+      setValidation({
+        ...validation,
+        [target.name]: false
+      })
+    }
+
+    if (target.name === 'email' && isEmailValid(target.value)) {
+      setValidation({
+        ...validation,
+        [target.name]: true
+      })
+    } else if (target.name === 'email' && !isEmailValid(target.value)) {
+      setValidation({
+        ...validation,
+        [target.name]: false
+      })
+    }
+
+    if (target.name === 'password' && target.value.length >= 8) {
+      setValidation({
+        ...validation,
+        [target.name]: true
+      })
+    } else if (target.name === 'password' && target.value.length < 8) {
+      setValidation({
+        ...validation,
+        [target.name]: false
       })
     }
   }
 
-  const emailValidation = (value: string) => {
-    const globalRegex = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const target = e.target
 
-    return globalRegex.test(value)
-  }
+    if (target.name === 'postCode')
+      setInputData({
+        ...inputData,
+        [target.name]: postcodeMask(target.value)
+      })
 
-  const postcodeMask = (value: string) => {
-    return value
-      .replace(/\D+/g, '')
-      .replace(/(\d{5})(\d)/, '$1-$2')
-      .replace(/(-\d{3})\d+?$/, '$1')
+    if (target.name === 'email' && isEmailValid(target.value))
+      setInputData({
+        ...inputData,
+        [target.name]: target.value
+      })
+
+    if (
+      target.name === 'password' ||
+      target.name === 'username' ||
+      target.name === 'lastName'
+    )
+      setInputData({
+        ...inputData,
+        [target.name]: target.value
+      })
   }
 
   const handleRegister = () => {
     if (
       inputData.username !== '' &&
       inputData.lastName !== '' &&
-      inputData.postCode !== '' &&
+      inputData.postCode.length === 9 &&
       inputData.email !== '' &&
-      inputData.password !== ''
+      inputData.password.length >= 8
     ) {
       createCustomer()
     } else if (inputData.username === '') {
       setMessage('Preencha o campo "Nome"')
     } else if (inputData.lastName === '') {
       setMessage('Preencha o campo "Sobrenome"')
-    } else if (inputData.postCode === '') {
+    } else if (inputData.postCode.length !== 9) {
       setMessage('Preencha o campo "CEP"')
     } else if (inputData.email === '') {
       setMessage('Preencha o campo "Email"')
-    } else if (inputData.password === '') {
-      setMessage('Preencha o campo "Senha"')
+    } else if (inputData.password.length < 8) {
+      setMessage('"Senha" deve conter pelo menos 8 caracteres')
     }
   }
 
@@ -129,18 +191,22 @@ const FormRegister = ({ popup, setPopup }: Props) => {
           <S.Form>
             <S.Field>
               <S.Legend>Cadastro</S.Legend>
-              {message !== '' && <S.Error>{message}</S.Error>}
+              {message !== '' && <ErrorMessage>{message}</ErrorMessage>}
               <S.Input
                 type="text"
                 name="username"
                 placeholder="Nome"
                 onChange={handleInputChange}
+                onBlur={handleFocusOut}
+                isValid={validation.username}
               />
               <S.Input
                 type="text"
                 name="lastName"
                 placeholder="Sobrenome"
                 onChange={handleInputChange}
+                onBlur={handleFocusOut}
+                isValid={validation.lastName}
               />
               <S.Input
                 type="text"
@@ -149,18 +215,24 @@ const FormRegister = ({ popup, setPopup }: Props) => {
                 pattern="(\d{5})-(\d{3})"
                 value={inputData.postCode}
                 onChange={handleInputChange}
+                onBlur={handleFocusOut}
+                isValid={validation.postCode}
               />
               <S.Input
                 type="email"
                 name="email"
                 placeholder="E-mail"
                 onChange={handleInputChange}
+                onBlur={handleFocusOut}
+                isValid={validation.email}
               />
               <S.Input
                 type="password"
                 name="password"
                 placeholder="Senha"
                 onChange={handleInputChange}
+                onBlur={handleFocusOut}
+                isValid={validation.password}
               />
             </S.Field>
           </S.Form>
