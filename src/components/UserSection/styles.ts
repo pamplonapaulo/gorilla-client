@@ -50,7 +50,7 @@ export const Top = styled.div`
 `
 
 export const Bottom = styled.div`
-  height: 50%;
+  height: 35%;
   width: 100%;
   justify-content: center;
   display: flex;

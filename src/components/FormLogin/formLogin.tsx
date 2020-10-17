@@ -59,10 +59,7 @@ const FormLogin = () => {
       })
       .catch((error: { response: any }) => {
         // Handle error.
-        console.log(
-          'An error occurred:',
-          error.response.data.message[0].messages[0].message
-        )
+        setMessage(error.response.data.message[0].messages[0].message)
       })
   }
 
