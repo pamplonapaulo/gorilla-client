@@ -88,6 +88,7 @@ export const Field = styled.fieldset`
   height: 100%;
   border: none;
   padding: 10% 0;
+  align-items: center;
 `
 
 export const Legend = styled.legend`
@@ -155,4 +156,34 @@ export const Success = styled.h1`
   position: absolute;
   width: 100%;
   text-align: center;
+`
+
+export const PasswordAlert = styled.h1<{ isValid: boolean }>`
+  align-items: center;
+  background: rgba(255, 255, 0, 1);
+  border-radius: 15px;
+  // color: #ff0000;
+  display: flex;
+  font-size: 1rem;
+  text-transform: uppercase;
+  justify-content: center;
+  letter-spacing: 5px;
+  line-height: 1.5;
+  padding: 9px 12px;
+  position: absolute;
+  bottom: 25%;
+  text-align: center;
+  z-index: 1;
+  transition: 0.2s ease opacity;
+  opacity: ${(p) => (p.isValid ? 1 : 0)};
+
+  &::before {
+    content: '';
+    background: rgba(255, 255, 0, 1);
+    height: 20px;
+    width: 20px;
+    transform: rotate(45deg) translate(-10px, -10px);
+    position: absolute;
+    z-index: -1;
+  }
 `

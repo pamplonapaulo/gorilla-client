@@ -22,6 +22,7 @@ const FormRegister = ({ popup, setPopup }: Props) => {
 
   const [form, setForm] = useState(true)
   const [message, setMessage] = useState('')
+  const [passwordAlert, setPasswordAlert] = useState(false)
 
   const [validation, setValidation] = useState({
     username: true,
@@ -106,6 +107,12 @@ const FormRegister = ({ popup, setPopup }: Props) => {
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const target = e.target
 
+    if (target.name === 'password' && target.value.length >= 8)
+      setPasswordAlert(false)
+
+    if (target.name === 'password' && target.value.length < 8)
+      setPasswordAlert(true)
+
     if (target.name === 'postCode')
       setInputData({
         ...inputData,
@@ -130,24 +137,45 @@ const FormRegister = ({ popup, setPopup }: Props) => {
   }
 
   const handleRegister = () => {
+    const errors = []
+
     if (
       inputData.username !== '' &&
       inputData.lastName !== '' &&
       inputData.postCode.length === 9 &&
       inputData.email !== '' &&
       inputData.password.length >= 8
-    ) {
+    )
       createCustomer()
-    } else if (inputData.username === '') {
-      setMessage('Preencha o campo "Nome"')
-    } else if (inputData.lastName === '') {
-      setMessage('Preencha o campo "Sobrenome"')
-    } else if (inputData.postCode.length !== 9) {
-      setMessage('Preencha o campo "CEP"')
-    } else if (inputData.email === '') {
-      setMessage('Preencha o campo "Email"')
-    } else if (inputData.password.length < 8) {
-      setMessage('"Senha" deve conter pelo menos 8 caracteres')
+
+    if (inputData.username === '') {
+      errors.push('username')
+    }
+
+    if (inputData.lastName === '') {
+      errors.push('lastName')
+    }
+
+    if (inputData.postCode.length !== 9) {
+      errors.push('postCode')
+    }
+
+    if (inputData.email === '') {
+      errors.push('email')
+    }
+
+    if (inputData.password.length < 8) {
+      errors.push('password')
+    }
+
+    if (errors.length > 0) {
+      let alert = {}
+      errors.forEach((err) => (alert = { ...alert, [err]: false }))
+      setValidation({
+        ...validation,
+        ...alert
+      })
+      setMessage('Todos os campos precisam ser preenchidos corretamente')
     }
   }
 
@@ -176,10 +204,6 @@ const FormRegister = ({ popup, setPopup }: Props) => {
       })
       .catch((error: { response: any }) => {
         // Handle error.
-        console.log(
-          'error:',
-          error.response.data.message[0].messages[0].message
-        )
         setMessage(error.response.data.message[0].messages[0].message)
       })
   }
@@ -234,6 +258,9 @@ const FormRegister = ({ popup, setPopup }: Props) => {
                 onBlur={handleFocusOut}
                 isValid={validation.password}
               />
+              <S.PasswordAlert isValid={passwordAlert}>
+                Mínimo de 8 caracteres.
+              </S.PasswordAlert>
             </S.Field>
           </S.Form>
           <div onClick={() => handleRegister()}>
