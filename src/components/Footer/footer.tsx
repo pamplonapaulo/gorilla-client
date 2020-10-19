@@ -9,7 +9,7 @@ const Footer = ({ address = 'gorillapack' }) => (
         rel="noreferrer"
         href={`https://www.instagram.com/${address}/`}
       >
-        <Instagram />
+        <Instagram color={'#47311b'} />
         <S.P>{`@${address}`}</S.P>
       </S.A>
     </S.Instagram>
