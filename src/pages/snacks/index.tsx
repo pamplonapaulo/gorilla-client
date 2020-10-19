@@ -19,7 +19,7 @@ const Snacks = () => {
   return (
     <>
       <Container>
-        <T>{'Nossos Produtos'}</T>
+        <T>{'Snacks'}</T>
         <Wrapper>
           {data.products.map((p: Snack) => (
             <Item key={p.id}>
@@ -53,7 +53,6 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
-  padding-top: 70px;
 
   -ms-overflow-style: none;
   scrollbar-width: none;
@@ -67,6 +66,7 @@ const Container = styled.div`
   }
 
   @media only screen and (min-width: 1024px) {
+    padding-top: 70px;
     position: relative;
   }
 `
@@ -75,17 +75,24 @@ const T = styled.h1`
   color: #ef8321;
   font-weight: 400;
   font-size: 3.5rem;
-  margin: 70px 0;
+  margin: 30px 0;
   text-transform: uppercase;
+
+  @media only screen and (min-width: 1024px) {
+    margin: 70px 0;
+  }
 `
 
 const Wrapper = styled.section`
   display: flex;
-  flex-direction: row;
   flex-wrap: wrap;
   height: 100%;
   justify-content: space-around;
-  max-width: 75%;
+
+  @media only screen and (min-width: 1024px) {
+    max-width: 75%;
+    flex-direction: row;
+  }
 `
 
 const Item = styled.div`
@@ -98,42 +105,58 @@ const H = styled.h1`
   font-weight: 200;
   margin-bottom: 2.5px;
   text-align: center;
+  font-size: 1.4rem;
+  margin-top: 5px;
 
   &&:nth-of-type(1) {
-    font-size: 2.5rem;
-    margin-top: 5px;
     text-transform: lowercase;
+
+    @media only screen and (min-width: 1024px) {
+      font-size: 2.5rem;
+    }
   }
 
   &&:nth-of-type(2) {
-    font-size: 2rem;
-    margin-top: 5px;
     text-transform: uppercase;
+
+    @media only screen and (min-width: 1024px) {
+      font-size: 2rem;
+    }
   }
 `
 
 const Photo = styled.img`
   border-radius: 5px;
-  max-width: 250px;
+  max-width: 145px;
+
+  @media only screen and (min-width: 1024px) {
+    max-width: 250px;
+  }
 `
 
 const Btn = styled.button`
   background: #2da650;
   border: none;
   border-radius: 0;
+  color: rgba(0, 0, 0, 0.9);
   cursor: pointer;
-  text-decoration: none;
   display: inline-block;
-  padding: 0.7em 1em;
-  margin-top: 5px;
-  font-size: 1.2rem;
+  font-size: 1rem;
   font-weight: 500;
   letter-spacing: 1px;
+  margin-top: 5px;
+  padding: 0.7em 1em;
+  text-align: center;
+  text-decoration: none;
   text-transform: uppercase;
   transition: all 0.2s;
-  color: rgba(0, 0, 0, 0.9);
-  text-align: center;
-  width: 140px;
+  width: 80px;
+
+  @media only screen and (min-width: 1024px) {
+    font-size: 1.2rem;
+    max-width: 250px;
+    width: 140px;
+  }
 `
 
 export default Snacks

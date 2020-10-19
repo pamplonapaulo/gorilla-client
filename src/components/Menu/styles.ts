@@ -22,6 +22,14 @@ export const SideBar = styled.div`
     width: unset;
   }
 `
+
+export const D = styled.div`
+  width: 100%;
+
+  @media only screen and (min-width: 1024px) {
+    width: unset;
+  }
+`
 export const List = styled.ul`
   background: #facb37;
   height: 100%;
@@ -60,7 +68,6 @@ export const Item = styled.li`
     padding: 0 15px;
     height: 40px;
     border: transparent solid 1px;
-    transition: 0.2s all;
     cursor: pointer;
     color: #47311b;
 
@@ -85,4 +92,8 @@ export const H1 = styled.h1`
   text-align: center;
   white-space: nowrap;
   font-weight: 300;
+`
+
+export const A = styled.a`
+  text-decoration: none;
 `

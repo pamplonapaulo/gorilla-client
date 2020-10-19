@@ -50,11 +50,10 @@ export const A = styled.a`
 export const P = styled.p`
   align-items: center;
   font-size: 2rem;
-  color: #ef8321;
+  color: #47311b;
 
   @media only screen and (min-width: 1024px) {
     font-size: 2.5rem;
-    text-shadow: 1px 1px 1px #000;
   }
 `
 
@@ -75,7 +74,6 @@ export const PCopy = styled.div`
 
   @media only screen and (min-width: 1024px) {
     font-size: 1.5rem;
-    color: #ef8321;
-    text-shadow: 1px 1px 1px #000;
+    color: #47311b;
   }
 `
