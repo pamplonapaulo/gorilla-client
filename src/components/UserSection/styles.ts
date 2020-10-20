@@ -5,6 +5,10 @@ const show = keyframes`
  100% { opacity: 1; }
 `
 
+type Props = {
+  height: string
+}
+
 export const Container = styled.div`
   padding: 0;
   z-index: 9;
@@ -23,12 +27,14 @@ export const Container = styled.div`
   }
 `
 
-export const Overlay = styled.div`
+export const Overlay = styled.div<{
+  height: string
+}>`
   animation-duration: 0.2s;
   animation-iteration-count: 1;
   animation-name: ${show};
   background: rgba(0, 0, 0, 0.85);
-  height: calc(100vh - 70px);
+  height: calc(${(p) => p.height} - 70px);
   margin: 70px 0 0;
   position: fixed;
   transition: opacity 0.2s;
@@ -47,6 +53,11 @@ export const Top = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-bottom: 5rem;
+
+  @media only screen and (min-width: 1024px) {
+    margin-bottom: 0;
+  }
 `
 
 export const Bottom = styled.div`
@@ -56,6 +67,11 @@ export const Bottom = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 5rem;
+
+  @media only screen and (min-width: 1024px) {
+    margin-top: 0;
+  }
 `
 
 export const Form = styled.form`
@@ -165,7 +181,9 @@ export const HWrap = styled.h1`
   line-height: 3;
 `
 
-export const PopUp = styled.div`
+export const PopUp = styled.div<{
+  height: string
+}>`
   align-items: center;
   align-self: center;
   animation-duration: 0.2s;
@@ -175,7 +193,7 @@ export const PopUp = styled.div`
   box-shadow: 0px 1px 8px #000;
   display: flex;
   flex-direction: column;
-  height: calc(100vh - 90px);
+  height: calc(${(p) => p.height} - 90px);
   justify-content: space-around;
   margin: 80px 2.5vw 0;
   padding: 10px 10px 50px;

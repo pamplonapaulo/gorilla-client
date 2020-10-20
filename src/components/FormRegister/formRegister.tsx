@@ -175,7 +175,7 @@ const FormRegister = ({ popup, setPopup }: Props) => {
         ...validation,
         ...alert
       })
-      setMessage('Todos os campos precisam ser preenchidos corretamente')
+      setMessage('Preencha os campos corretamente')
     }
   }
 
@@ -218,9 +218,9 @@ const FormRegister = ({ popup, setPopup }: Props) => {
               {message !== '' && (
                 <ErrorMessage
                   bottom={'unset'}
-                  bottomMobile={'20vh'}
+                  bottomMobile={'unset'}
                   top={'0'}
-                  topMobile={'unset'}
+                  topMobile={'75px'}
                 >
                   {message}
                 </ErrorMessage>
