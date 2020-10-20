@@ -104,7 +104,7 @@ export const Legend = styled.legend`
   font-size: 2rem;
   font-weight: 100;
   letter-spacing: 5px;
-  margin-bottom: 25px;
+  margin-bottom: 30px;
 
   @media only screen and (min-width: 1024px) {
     transform: translateY(-100%);

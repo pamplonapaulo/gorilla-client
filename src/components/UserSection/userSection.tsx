@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 import FormLogin from 'components/FormLogin'
 import FormRegister from 'components/FormRegister'
@@ -19,6 +19,7 @@ const UserSection = () => {
 
   const [popup, setPopup] = useState<boolean>(false)
   const [register, setRegister] = useState<boolean>(false)
+  const [height, setHeight] = useState<string>('0px')
 
   const handleUser = () => {
     setPopup(!popup)
@@ -31,6 +32,12 @@ const UserSection = () => {
   const handleRegister = () => {
     setRegister(!register)
   }
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setHeight(window.innerHeight + 'px')
+    }
+  }, [])
 
   return (
     <>
@@ -52,8 +59,8 @@ const UserSection = () => {
         </div>
       </S.Container>
       {popup && (
-        <S.Overlay>
-          <S.PopUp>
+        <S.Overlay height={height}>
+          <S.PopUp height={height}>
             {userLog === 'false' && !register && (
               <>
                 <S.Top>

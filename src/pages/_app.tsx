@@ -34,7 +34,7 @@ class MyApp extends App<any> {
           <title>Gorilla Pack | O snack saudável de Nikiti</title>
           <meta
             name="viewport"
-            content="width=device-width, initial-scale=1, shrink-to-fit=no"
+            content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no"
             key="viewport"
           />
           <link rel="shortcut icon" href="/img/icon-380.png" />
