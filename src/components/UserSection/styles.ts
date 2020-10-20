@@ -143,11 +143,15 @@ export const H = styled.h1`
   color: #facb37;
   text-align: center;
   text-transform: uppercase;
-  font-size: 2rem;
+  font-size: 1.7rem;
   font-weight: 100;
   letter-spacing: 5px;
   white-space: nowrap;
   margin-bottom: 4rem;
+
+  @media only screen and (min-width: 1024px) {
+    font-size: 2rem;
+  }
 `
 
 export const HWrap = styled.h1`
@@ -172,9 +176,9 @@ export const PopUp = styled.div`
   display: flex;
   flex-direction: column;
   height: calc(100vh - 90px);
-  justify-content: center;
+  justify-content: space-around;
   margin: 80px 2.5vw 0;
-  padding: 10px;
+  padding: 10px 10px 50px;
   position: fixed;
   top: 0;
   transition: opacity 0.2s;
@@ -183,6 +187,7 @@ export const PopUp = styled.div`
 
   @media only screen and (min-width: 1024px) {
     height: calc(100vh - 160px);
+    justify-content: center;
     margin: 40px 40vw 0;
     padding: 30px;
     width: 20vw;
