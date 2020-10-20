@@ -4,11 +4,28 @@ import * as S from './styles'
 
 type Props = {
   children: React.ReactNode
+  bottom: string
+  top: string
+  bottomMobile: string
+  topMobile: string
 }
 
-const ErrorMessage = ({ children }: Props) => (
+const ErrorMessage = ({
+  children,
+  bottom,
+  top,
+  bottomMobile,
+  topMobile
+}: Props) => (
   <>
-    <S.Error>{children}</S.Error>
+    <S.Error
+      top={top}
+      topMobile={topMobile}
+      bottom={bottom}
+      bottomMobile={bottomMobile}
+    >
+      {children}
+    </S.Error>
   </>
 )
 

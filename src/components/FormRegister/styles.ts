@@ -74,7 +74,10 @@ export const SignUp = styled.div`
 
 export const Form = styled.form`
   width: 100%;
-  padding-top: 5rem;
+
+  @media only screen and (min-width: 1024px) {
+    padding-top: 5rem;
+  }
 `
 
 export const Submit = styled.button`
@@ -83,12 +86,15 @@ export const Submit = styled.button`
 `
 
 export const Field = styled.fieldset`
+  align-items: center;
+  border: none;
   display: flex;
   flex-direction: column;
   height: 100%;
-  border: none;
-  padding: 10% 0;
-  align-items: center;
+
+  @media only screen and (min-width: 1024px) {
+    padding: 10% 0;
+  }
 `
 
 export const Legend = styled.legend`
@@ -98,7 +104,12 @@ export const Legend = styled.legend`
   font-size: 2rem;
   font-weight: 100;
   letter-spacing: 5px;
-  transform: translateY(-100%);
+  margin-bottom: 25px;
+
+  @media only screen and (min-width: 1024px) {
+    transform: translateY(-100%);
+    margin: 0;
+  }
 `
 
 export const Input = styled.input<{ isValid: boolean }>`
@@ -116,7 +127,7 @@ export const Input = styled.input<{ isValid: boolean }>`
   font-size: 16px;
   font-family: sans-serif;
   transition: 0.2s all;
-  margin: 0 0 3rem;
+  margin: 0 0 2rem;
   width: 100%;
   letter-spacing: 1.3px;
   font-size: 16px;
@@ -138,6 +149,10 @@ export const Input = styled.input<{ isValid: boolean }>`
     &::-webkit-input-placeholder {
       color: transparent;
     }
+  }
+
+  @media only screen and (min-width: 1024px) {
+    margin: 0 0 3rem;
   }
 `
 
@@ -162,7 +177,6 @@ export const PasswordAlert = styled.h1<{ isValid: boolean }>`
   align-items: center;
   background: rgba(255, 255, 0, 1);
   border-radius: 15px;
-  // color: #ff0000;
   display: flex;
   font-size: 1rem;
   text-transform: uppercase;
@@ -170,12 +184,11 @@ export const PasswordAlert = styled.h1<{ isValid: boolean }>`
   letter-spacing: 5px;
   line-height: 1.5;
   padding: 9px 12px;
-  position: absolute;
-  bottom: 25%;
   text-align: center;
   z-index: 1;
   transition: 0.2s ease opacity;
   opacity: ${(p) => (p.isValid ? 1 : 0)};
+  box-shadow: 0px 1px 8px #000;
 
   &::before {
     content: '';
@@ -185,5 +198,10 @@ export const PasswordAlert = styled.h1<{ isValid: boolean }>`
     transform: rotate(45deg) translate(-10px, -10px);
     position: absolute;
     z-index: -1;
+  }
+
+  @media only screen and (min-width: 1024px) {
+    position: absolute;
+    bottom: 25%;
   }
 `

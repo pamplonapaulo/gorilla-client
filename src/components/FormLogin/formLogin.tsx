@@ -16,11 +16,45 @@ import * as S from './styles'
 const FormLogin = () => {
   const { setUserLog } = useUser()
 
+  const [validation, setValidation] = useState({
+    email: true,
+    password: true
+  })
+
   const [inputData, setInputData] = useState({
     email: '',
     password: ''
   })
+
   const [message, setMessage] = useState('')
+
+  const handleFocusOut = (e: React.FocusEvent<HTMLInputElement>) => {
+    const target = e.target
+
+    if (target.name === 'email' && isEmailValid(target.value)) {
+      setValidation({
+        ...validation,
+        [target.name]: true
+      })
+    } else if (target.name === 'email' && !isEmailValid(target.value)) {
+      setValidation({
+        ...validation,
+        [target.name]: false
+      })
+    }
+
+    if (target.name === 'password' && target.value.length >= 8) {
+      setValidation({
+        ...validation,
+        [target.name]: true
+      })
+    } else if (target.name === 'password' && target.value.length < 8) {
+      setValidation({
+        ...validation,
+        [target.name]: false
+      })
+    }
+  }
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const target = e.target
@@ -32,16 +66,29 @@ const FormLogin = () => {
   }
 
   const handleLogin = () => {
-    if (isEmailValid(inputData.email) && inputData.password !== '')
+    const errors = []
+
+    if (isEmailValid(inputData.email) && inputData.password.length >= 8)
       loginCustomer()
 
-    if (!isEmailValid(inputData.email))
-      setMessage('Algo estranho no campo "Email"')
+    if (isEmailValid(inputData.email) && inputData.password.length < 8) {
+      errors.push('password')
+      setMessage('Senha incorreta.')
+    }
 
-    if (inputData.password === '') setMessage('Preencha o campo "Senha"')
+    if (!isEmailValid(inputData.email)) {
+      errors.push('email')
+      setMessage('E-mail inválido.')
+    }
 
-    if (!isEmailValid(inputData.email) && inputData.password === '')
-      setMessage('"Senha" e "Email" não foram preenchidos corretamente.')
+    if (errors.length > 0) {
+      let alert = {}
+      errors.forEach((err) => (alert = { ...alert, [err]: false }))
+      setValidation({
+        ...validation,
+        ...alert
+      })
+    }
   }
 
   const loginCustomer = () => {
@@ -52,7 +99,6 @@ const FormLogin = () => {
       })
       .then((response: { data: { user: any; jwt: any } }) => {
         // Handle success.
-        console.log('Well done!')
         console.log('User profile', response.data.user)
         console.log('User token', response.data.jwt)
         setUserLog(response.data.user.username)
@@ -65,22 +111,36 @@ const FormLogin = () => {
 
   return (
     <>
+      {message !== '' && (
+        <ErrorMessage
+          bottom={'unset'}
+          bottomMobile={'unset'}
+          top={'0'}
+          topMobile={'0'}
+        >
+          {message}
+        </ErrorMessage>
+      )}
       <S.Form>
         <S.Field>
           <S.Legend>ÁREA DO CLIENTE</S.Legend>
-          {message !== '' && <ErrorMessage>{message}</ErrorMessage>}
           <S.Input
             type="email"
             name="email"
             placeholder="E-mail"
             onChange={handleInputChange}
+            onBlur={handleFocusOut}
+            isValid={validation.email}
           />
           <S.Input
             type="password"
             name="password"
             placeholder="Senha"
             onChange={handleInputChange}
+            onBlur={handleFocusOut}
+            isValid={validation.password}
           />
+          <S.Forgot href="#">Esqueceu a senha?</S.Forgot>
         </S.Field>
       </S.Form>
       <div onClick={() => handleLogin()}>

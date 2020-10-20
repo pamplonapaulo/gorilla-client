@@ -215,7 +215,16 @@ const FormRegister = ({ popup, setPopup }: Props) => {
           <S.Form>
             <S.Field>
               <S.Legend>Cadastro</S.Legend>
-              {message !== '' && <ErrorMessage>{message}</ErrorMessage>}
+              {message !== '' && (
+                <ErrorMessage
+                  bottom={'unset'}
+                  bottomMobile={'20vh'}
+                  top={'0'}
+                  topMobile={'unset'}
+                >
+                  {message}
+                </ErrorMessage>
+              )}
               <S.Input
                 type="text"
                 name="username"

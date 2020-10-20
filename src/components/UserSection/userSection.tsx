@@ -8,6 +8,7 @@ import CheckMark from 'components/CheckMark'
 import UserOn from 'components/UserOn'
 import Bag from 'components/Bag'
 import Button from 'components/Button'
+import Back from 'components/Back'
 
 import { useUser } from 'contexts'
 
@@ -59,7 +60,7 @@ const UserSection = () => {
                   <FormLogin />
                 </S.Top>
                 <S.Bottom>
-                  <S.H>Fazer cadastro</S.H>
+                  <S.H>Não tem cadastro?</S.H>
                   <div onClick={() => handleRegister()}>
                     <Button bg={'#facb37'}>Cadastrar</Button>
                   </div>
@@ -69,7 +70,7 @@ const UserSection = () => {
             {userLog === 'false' && register && (
               <>
                 <div onClick={() => handleRegister()}>
-                  <Button bg={'#facb37'}>← Voltar</Button>
+                  <Back color={'#facb37'} />
                 </div>
                 <FormRegister popup={popup} setPopup={setPopup} />
               </>

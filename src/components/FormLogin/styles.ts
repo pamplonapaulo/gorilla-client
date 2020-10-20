@@ -5,6 +5,10 @@ const show = keyframes`
  100% { opacity: 1; }
 `
 
+type Props = {
+  isValid: boolean
+}
+
 export const Container = styled.div`
   padding: 0;
   z-index: 9;
@@ -83,27 +87,37 @@ export const Field = styled.fieldset`
   flex-direction: column;
   height: 100%;
   border: none;
-  padding: 10% 0;
+  padding: 20% 0 10%;
+
+  @media only screen and (min-width: 1024px) {
+    padding: 10% 0;
+  }
 `
 
 export const Legend = styled.legend`
   color: #facb37;
-  text-align: center;
-  text-transform: uppercase;
-  font-size: 2rem;
+  font-size: 1.7rem;
   font-weight: 100;
   letter-spacing: 5px;
-  transform: translateY(-100%);
+  text-align: center;
+  text-transform: uppercase;
+  transform: translateY(250%);
+
+  @media only screen and (min-width: 1024px) {
+    font-size: 2rem;
+    transform: translateY(-100%);
+  }
 `
 
-export const Input = styled.input`
+export const Input = styled.input<{ isValid: boolean }>`
   padding: 5px;
   border: solid 1px transparent;
   margin: 0 12.5% 3rem;
   outline-color: white;
   outline-width: 1px;
-  background: rgba(255, 255, 255, 0.1);
-  color: #facb37;
+  background: ${(p) =>
+    p.isValid ? 'rgba(255, 255, 255, 0.1)' : 'rgba(255, 0, 0, 0.1)'};
+  color: ${(p) => (p.isValid ? '#facb37' : '#FF0000')};
   padding-left: 10px;
   font-weight: 100;
   letter-spacing: 1.3px;
@@ -122,6 +136,7 @@ export const Input = styled.input`
     text-transform: uppercase;
     transition: 0.2s all;
     letter-spacing: 5px;
+    color: ${(p) => (p.isValid ? 'rgb(117, 117, 117)' : '#FF0000')};
   }
 
   &:focus {
@@ -131,5 +146,26 @@ export const Input = styled.input`
     &::-webkit-input-placeholder {
       color: transparent;
     }
+  }
+
+  &:nth-of-type(2) {
+    margin-bottom: 10px;
+  }
+`
+
+export const Forgot = styled.a`
+  color: #ccc;
+  cursor: pointer;
+  font-weight: 100;
+  letter-spacing: 1.5px;
+  opacity: 0.5;
+  text-align: right;
+  text-decoration: none;
+  text-transform: uppercase;
+
+  &:hover {
+    color: #facb37;
+    opacity: 1;
+    text-decoration: underline;
   }
 `
