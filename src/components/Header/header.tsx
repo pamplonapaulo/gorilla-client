@@ -8,8 +8,10 @@ import * as S from './styles'
 const Header = () => (
   <S.TopBar>
     <Logotype />
-    <UserSection />
-    <Hamburguer />
+    <S.Wrapper>
+      <UserSection />
+      <Hamburguer />
+    </S.Wrapper>
     <Menu />
   </S.TopBar>
 )
