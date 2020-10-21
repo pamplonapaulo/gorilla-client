@@ -10,9 +10,10 @@ import Head from 'next/head'
 import { ApolloProvider } from '@apollo/client'
 import { client } from 'lib/apollo/client'
 
-import { MenuProvider, UserProvider } from '../contexts'
+import { MenuProvider, UserProvider, OverlayProvider } from 'contexts'
 
 import Header from 'components/Header'
+import LoginOverlay from 'components/LoginOverlay'
 import Footer from 'components/Footer'
 
 import styled from 'styled-components'
@@ -28,6 +29,7 @@ Router.events.on('routeChangeError', () => NProgress.done())
 class MyApp extends App<any> {
   render() {
     const { Component, pageProps } = this.props
+
     return (
       <>
         <Head>
@@ -54,13 +56,16 @@ class MyApp extends App<any> {
         <ApolloProvider client={client}>
           <MenuProvider>
             <UserProvider>
-              <ContainerOuter>
-                <Header />
-                <ContainerInner>
-                  <Component {...pageProps} />
-                </ContainerInner>
-                <Footer />
-              </ContainerOuter>
+              <OverlayProvider>
+                <ContainerOuter>
+                  <Header />
+                  <ContainerInner>
+                    <LoginOverlay />
+                    <Component {...pageProps} />
+                  </ContainerInner>
+                  <Footer />
+                </ContainerOuter>
+              </OverlayProvider>
             </UserProvider>
           </MenuProvider>
         </ApolloProvider>
@@ -93,9 +98,9 @@ const ContainerInner = styled.main`
   height: 100%;
   -ms-overflow-style: none;
   scrollbar-width: none;
+  overflow-y: hidden;
   position: relative;
-  min-height: 100vh;
-
+  min-height: calc(100vh - 70px);
   display: flex;
   flex-direction: column;
   justify-content: center;

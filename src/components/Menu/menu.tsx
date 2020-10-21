@@ -23,7 +23,9 @@ const Menu = ({
   Router.events.on('routeChangeStart', (url) => {
     const match: RegExpExecArray | null = /\/[a-z]{3,}/g.exec(url)
 
-    if (match) {
+    if (match && url === '/home') {
+      setCurrent(match[0])
+    } else if (match) {
       setCurrent(match[0])
       setMenu(!menu)
     }

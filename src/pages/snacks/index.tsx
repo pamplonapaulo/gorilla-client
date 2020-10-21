@@ -46,13 +46,13 @@ const Snacks = () => {
 }
 
 const Container = styled.div`
-  background: #47311b;
-  height: 100%;
-  width: 100%;
-  justify-content: center;
-  display: flex;
   align-items: center;
+  background: #47311b;
+  display: flex;
   flex-direction: column;
+  height: 100%;
+  justify-content: center;
+  width: 100%;
 
   -ms-overflow-style: none;
   scrollbar-width: none;
@@ -96,8 +96,12 @@ const Wrapper = styled.section`
 `
 
 const Item = styled.div`
-  margin: 0 20px 50px;
+  margin: 0 0 50px;
   text-align: center;
+
+  @media only screen and (min-width: 1024px) {
+    margin: 0 20px 50px;
+  }
 `
 
 const H = styled.h1`

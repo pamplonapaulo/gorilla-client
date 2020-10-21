@@ -77,12 +77,10 @@ export const Item = styled.li`
     }
 
     &.active {
-      border: #FACB37 solid 1px;
       color: #FACB37;
-      border-left: transparent;
-      border-top: transparent;
-      border-right: transparent;
       cursor: default;
+      border-image: linear-gradient( to right, yellow, rgba(0, 0, 0, 0) ) 1 0%;
+      border-top: transparent;
     }
   }
 }

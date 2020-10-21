@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { Dispatch, SetStateAction, useState } from 'react'
+import React, { useState } from 'react'
 import axios from 'axios'
 import { endpoint } from 'lib/apollo/client'
 
@@ -8,21 +8,15 @@ import ErrorMessage from 'components/ErrorMessage'
 
 import { isEmailValid, postcodeMask } from 'utils/formValidations'
 
-// import { useUser } from 'contexts'
+import { useOverlay } from 'contexts'
 
 import * as S from './styles'
 
-type Props = {
-  popup: boolean
-  setPopup: Dispatch<SetStateAction<boolean>>
-}
-
-const FormRegister = ({ popup, setPopup }: Props) => {
-  // const { setUserLog } = useUser()
-
+const FormRegister = () => {
   const [form, setForm] = useState(true)
   const [message, setMessage] = useState('')
   const [passwordAlert, setPasswordAlert] = useState(false)
+  const { overlay, setOverlay } = useOverlay()
 
   const [validation, setValidation] = useState({
     username: true,
@@ -39,6 +33,12 @@ const FormRegister = ({ popup, setPopup }: Props) => {
     email: '',
     password: ''
   })
+
+  const handleFocusIn = (e: React.FocusEvent<HTMLInputElement>) => {
+    if (window.innerWidth < 1024) {
+      window.scrollTo(0, e.target.offsetTop + 15)
+    }
+  }
 
   const handleFocusOut = (e: React.FocusEvent<HTMLInputElement>) => {
     const target = e.target
@@ -199,7 +199,7 @@ const FormRegister = ({ popup, setPopup }: Props) => {
         console.log('User token', response.data.jwt)
         setForm(!form)
         setTimeout(() => {
-          setPopup(!popup)
+          setOverlay(!overlay)
         }, 6000)
       })
       .catch((error: { response: any }) => {
@@ -226,6 +226,7 @@ const FormRegister = ({ popup, setPopup }: Props) => {
                 </ErrorMessage>
               )}
               <S.Input
+                onFocus={handleFocusIn}
                 type="text"
                 name="username"
                 placeholder="Nome"
@@ -234,6 +235,7 @@ const FormRegister = ({ popup, setPopup }: Props) => {
                 isValid={validation.username}
               />
               <S.Input
+                onFocus={handleFocusIn}
                 type="text"
                 name="lastName"
                 placeholder="Sobrenome"
@@ -242,6 +244,7 @@ const FormRegister = ({ popup, setPopup }: Props) => {
                 isValid={validation.lastName}
               />
               <S.Input
+                onFocus={handleFocusIn}
                 type="text"
                 name="postCode"
                 placeholder="CEP"
@@ -252,6 +255,7 @@ const FormRegister = ({ popup, setPopup }: Props) => {
                 isValid={validation.postCode}
               />
               <S.Input
+                onFocus={handleFocusIn}
                 type="email"
                 name="email"
                 placeholder="E-mail"
@@ -260,6 +264,7 @@ const FormRegister = ({ popup, setPopup }: Props) => {
                 isValid={validation.email}
               />
               <S.Input
+                onFocus={handleFocusIn}
                 type="password"
                 name="password"
                 placeholder="Senha"
