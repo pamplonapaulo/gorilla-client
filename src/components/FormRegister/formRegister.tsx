@@ -36,7 +36,7 @@ const FormRegister = () => {
 
   const handleFocusIn = (e: React.FocusEvent<HTMLInputElement>) => {
     if (window.innerWidth < 1024) {
-      window.scrollTo(0, e.target.offsetTop + 15)
+      window.scrollTo(0, e.target.offsetTop - 75)
     }
   }
 
