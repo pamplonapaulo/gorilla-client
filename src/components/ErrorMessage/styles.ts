@@ -24,11 +24,12 @@ export const Error = styled.h1<{
   justify-content: center;
   letter-spacing: 5px;
   line-height: 1.5;
+  margin-top: 7.5px;
   padding: 5px 0;
   position: absolute;
   text-align: center;
   text-shadow: 1px 1px 1px #000;
-  width: calc(100% - 20px);
+  width: calc(100% - 30px);
   top: ${(p) => p.topMobile};
   transform: translateY(10px);
   height: auto;
@@ -41,5 +42,7 @@ export const Error = styled.h1<{
     transform: translateY(50%);
     width: calc(100% - 60px);
     top: ${(p) => p.top};
+
+    width: calc(20vw - 10px);
   }
 `
