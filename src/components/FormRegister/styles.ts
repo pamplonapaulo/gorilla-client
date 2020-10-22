@@ -158,6 +158,10 @@ export const Input = styled.input<{ isValid: boolean }>`
     }
   }
 
+  &&:nth-of-type(5) {
+    margin-bottom: 0;
+  }
+
   @media only screen and (min-width: 1024px) {
     margin: 0 0 3rem;
 
