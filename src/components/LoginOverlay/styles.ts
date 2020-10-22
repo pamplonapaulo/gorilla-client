@@ -46,7 +46,8 @@ export const PopUp = styled.div<{
   display: flex;
   flex-direction: column;
   height: calc(${(p) => p.height} - 90px);
-  justify-content: space-around;
+  // justify-content: space-around;
+  justify-content: end;
   margin: 10px 2.5vw 0;
   // margin: 45px 2.5vw 0;
   padding: 10px 10px 50px;
@@ -96,15 +97,11 @@ export const H = styled.h1`
   color: #facb37;
   text-align: center;
   text-transform: uppercase;
-  font-size: 1.7rem;
+  font-size: 2rem;
   font-weight: 100;
   letter-spacing: 5px;
   white-space: nowrap;
   margin-bottom: 4rem;
-
-  @media only screen and (min-width: 1024px) {
-    font-size: 2rem;
-  }
 `
 
 export const HWrap = styled.h1`
@@ -116,4 +113,13 @@ export const HWrap = styled.h1`
   letter-spacing: 5px;
   margin-bottom: 4rem;
   line-height: 3;
+`
+
+export const BtnBack = styled.div`
+  align-self: baseline;
+  z-index: 9;
+
+  @media only screen and (min-width: 1024px) {
+    align-self: auto;
+  }
 `

@@ -74,6 +74,7 @@ export const SignUp = styled.div`
 
 export const Form = styled.form`
   width: 100%;
+  padding-top: 5rem;
 
   @media only screen and (min-width: 1024px) {
     padding-top: 5rem;
@@ -86,7 +87,7 @@ export const Submit = styled.button`
 `
 
 export const Field = styled.fieldset`
-  align-items: center;
+  // align-items: center;
   border: none;
   display: flex;
   flex-direction: column;
@@ -105,10 +106,16 @@ export const Legend = styled.legend`
   font-weight: 100;
   letter-spacing: 5px;
   margin-bottom: 30px;
+  transform: translateY(100%);
+  position: absolute;
+  top: 0;
+  width: calc(100% - 40px);
+  z-index: 0;
 
   @media only screen and (min-width: 1024px) {
-    transform: translateY(-100%);
     margin: 0;
+    position: relative;
+    transform: translateY(-100%);
   }
 `
 
@@ -153,6 +160,10 @@ export const Input = styled.input<{ isValid: boolean }>`
 
   @media only screen and (min-width: 1024px) {
     margin: 0 0 3rem;
+
+    &&:nth-of-type(5) {
+      margin-bottom: 1.5rem;
+    }
   }
 `
 
@@ -177,18 +188,20 @@ export const PasswordAlert = styled.h1<{ isValid: boolean }>`
   align-items: center;
   background: rgba(255, 255, 0, 1);
   border-radius: 15px;
+  box-shadow: 0px 1px 8px #000;
   display: flex;
   font-size: 1rem;
-  text-transform: uppercase;
   justify-content: center;
   letter-spacing: 5px;
   line-height: 1.5;
-  padding: 9px 12px;
-  text-align: center;
-  z-index: 1;
-  transition: 0.2s ease opacity;
   opacity: ${(p) => (p.isValid ? 1 : 0)};
-  box-shadow: 0px 1px 8px #000;
+  padding: 9px 12px;
+  position: absolute;
+  text-align: center;
+  text-transform: uppercase;
+  top: calc(267px + calc(4 * 2rem));
+  transition: 0.2s ease opacity;
+  z-index: 1;
 
   &::before {
     content: '';
@@ -201,7 +214,16 @@ export const PasswordAlert = styled.h1<{ isValid: boolean }>`
   }
 
   @media only screen and (min-width: 1024px) {
-    position: absolute;
-    bottom: 25%;
+    position: unset;
+  }
+`
+
+export const BtnSave = styled.div`
+  align-self: flex-end;
+  margin-top: 15px;
+
+  @media only screen and (min-width: 1024px) {
+    align-self: unset;
+    margin-top: unset;
   }
 `

@@ -220,7 +220,7 @@ const FormRegister = () => {
                   bottom={'unset'}
                   bottomMobile={'unset'}
                   top={'0'}
-                  topMobile={'75px'}
+                  topMobile={'58px'}
                 >
                   {message}
                 </ErrorMessage>
@@ -277,9 +277,9 @@ const FormRegister = () => {
               </S.PasswordAlert>
             </S.Field>
           </S.Form>
-          <div onClick={() => handleRegister()}>
+          <S.BtnSave onClick={() => handleRegister()}>
             <Button bg={'#facb37'}>Gravar</Button>
-          </div>
+          </S.BtnSave>
         </>
       )}
       {!form && (

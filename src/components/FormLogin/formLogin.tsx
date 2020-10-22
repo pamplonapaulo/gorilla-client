@@ -111,19 +111,19 @@ const FormLogin = () => {
 
   return (
     <>
-      {message !== '' && (
-        <ErrorMessage
-          bottom={'unset'}
-          bottomMobile={'unset'}
-          top={'0'}
-          topMobile={'0'}
-        >
-          {message}
-        </ErrorMessage>
-      )}
       <S.Form>
         <S.Field>
           <S.Legend>ÁREA DO CLIENTE</S.Legend>
+          {message !== '' && (
+            <ErrorMessage
+              bottom={'unset'}
+              bottomMobile={'unset'}
+              top={'0'}
+              topMobile={'58px'}
+            >
+              {message}
+            </ErrorMessage>
+          )}
           <S.Input
             type="email"
             name="email"

@@ -25,9 +25,11 @@ const Menu = ({
 
     if (match && url === '/home') {
       setCurrent(match[0])
-    } else if (match) {
+    } else if (match && url === '/snacks') {
       setCurrent(match[0])
       setMenu(!menu)
+    } else if (match) {
+      setCurrent(match[0])
     }
   })
 

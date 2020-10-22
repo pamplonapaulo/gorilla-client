@@ -22,27 +22,26 @@ export const Error = styled.h1<{
   font-size: 10px;
   font-weight: 100;
   justify-content: center;
-  letter-spacing: 5px;
+  height: auto;
+  letter-spacing: 3px;
   line-height: 1.5;
   margin-top: 7.5px;
   padding: 5px 0;
   position: absolute;
   text-align: center;
   text-shadow: 1px 1px 1px #000;
-  width: calc(100% - 30px);
+  // width: calc(100% - 30px);
+  width: calc(100% - 38px);
   top: ${(p) => p.topMobile};
-  transform: translateY(10px);
-  height: auto;
 
   @media only screen and (min-width: 1024px) {
     bottom: ${(p) => p.bottom};
     font-size: 1.5rem;
     height: 75px;
+    margin-left: -25px;
     padding: 5px 15px;
     transform: translateY(50%);
-    width: calc(100% - 60px);
     top: ${(p) => p.top};
-
     width: calc(20vw - 10px);
   }
 `

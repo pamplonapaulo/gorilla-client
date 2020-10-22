@@ -52,9 +52,9 @@ const LoginOverlay = () => {
             )}
             {userLog === 'false' && register && (
               <>
-                <div onClick={() => handleRegister()}>
+                <S.BtnBack onClick={() => handleRegister()}>
                   <Back color={'#facb37'} />
-                </div>
+                </S.BtnBack>
                 <FormRegister />
               </>
             )}

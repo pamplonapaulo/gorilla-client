@@ -68,15 +68,19 @@ export const Field = styled.fieldset`
 
 export const Legend = styled.legend`
   color: #facb37;
-  font-size: 1.7rem;
+  font-size: 2rem;
   font-weight: 100;
   letter-spacing: 5px;
   text-align: center;
   text-transform: uppercase;
   transform: translateY(250%);
+  transform: translateY(100%);
+  position: absolute;
+  top: 0;
+  width: calc(100% - 40px);
 
   @media only screen and (min-width: 1024px) {
-    font-size: 2rem;
+    position: relative;
     transform: translateY(-100%);
   }
 `
@@ -96,7 +100,7 @@ export const Input = styled.input<{ isValid: boolean }>`
   font-size: 16px;
   font-family: sans-serif;
   transition: 0.2s all;
-  margin: 0 0 3rem;
+  margin: 0 0 1rem;
   width: 100%;
   letter-spacing: 1.3px;
   font-size: 16px;
@@ -118,10 +122,6 @@ export const Input = styled.input<{ isValid: boolean }>`
     &::-webkit-input-placeholder {
       color: transparent;
     }
-  }
-
-  &:nth-of-type(2) {
-    margin-bottom: 10px;
   }
 `
 
