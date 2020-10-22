@@ -1,6 +1,53 @@
+import Link from 'next/link'
+
+import { useQuery } from '@apollo/client'
+import GET_PRODUCTS from 'graphql/queries/getProducts'
+
+import { Snack } from 'types/api'
+
+import { getImageUrl } from 'utils/getImageUrl'
+import { replaceSpecialChars } from 'utils/replaceSpecialChars'
+
+import Loader from 'components/Loader'
+
 import styled from 'styled-components'
 
-export const Container = styled.div`
+const Snacks = () => {
+  const { loading, error, data } = useQuery(GET_PRODUCTS)
+
+  if (loading) return <Loader isHidden={false} />
+  if (error) return <p>Error :(</p>
+
+  return (
+    <>
+      <Container>
+        <T>{'Snacks'}</T>
+        <Wrapper>
+          {data.products.map((p: Snack) => (
+            <Item key={p.id}>
+              <Photo
+                src={getImageUrl(p.Image['formats']['medium']['url'])}
+                alt={p.Name}
+              />
+              <H>{p.Name}</H>
+              <H>{'R$' + p.Price}</H>
+              <Link
+                as={`/snacks/${replaceSpecialChars(p.Name)}`}
+                href={{
+                  pathname: '/snacks/[slug]'
+                }}
+              >
+                <Btn>{'Comprar'}</Btn>
+              </Link>
+            </Item>
+          ))}
+        </Wrapper>
+      </Container>
+    </>
+  )
+}
+
+const Container = styled.div`
   align-items: center;
   background: #47311b;
   display: flex;
@@ -26,7 +73,7 @@ export const Container = styled.div`
   }
 `
 
-export const T = styled.h1`
+const T = styled.h1`
   color: #ef8321;
   font-weight: 400;
   font-size: 3.5rem;
@@ -38,7 +85,7 @@ export const T = styled.h1`
   }
 `
 
-export const Wrapper = styled.section`
+const Wrapper = styled.section`
   display: flex;
   flex-wrap: wrap;
   height: 100%;
@@ -50,7 +97,7 @@ export const Wrapper = styled.section`
   }
 `
 
-export const Item = styled.div`
+const Item = styled.div`
   margin: 0 0 50px;
   text-align: center;
 
@@ -59,7 +106,7 @@ export const Item = styled.div`
   }
 `
 
-export const H = styled.h1`
+const H = styled.h1`
   color: #ef8321;
   font-weight: 200;
   margin-bottom: 2.5px;
@@ -84,7 +131,7 @@ export const H = styled.h1`
   }
 `
 
-export const Photo = styled.img`
+const Photo = styled.img`
   border-radius: 5px;
   max-width: 145px;
 
@@ -93,7 +140,7 @@ export const Photo = styled.img`
   }
 `
 
-export const Btn = styled.button`
+const Btn = styled.button`
   background: #2da650;
   border: none;
   border-radius: 0;
@@ -117,3 +164,5 @@ export const Btn = styled.button`
     width: 140px;
   }
 `
+
+export default Snacks
