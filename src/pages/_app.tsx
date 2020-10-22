@@ -19,8 +19,11 @@ import Footer from 'components/Footer'
 import styled from 'styled-components'
 import GlobalStyles from 'styles/global'
 
+let page: string
+
 Router.events.on('routeChangeStart', (url) => {
   console.log(`Loading: ${url}`)
+  page = url
   NProgress.start()
 })
 Router.events.on('routeChangeComplete', () => NProgress.done())
@@ -59,7 +62,7 @@ class MyApp extends App<any> {
               <OverlayProvider>
                 <ContainerOuter>
                   <Header />
-                  <ContainerInner>
+                  <ContainerInner page={page}>
                     <LoginOverlay />
                     <Component {...pageProps} />
                   </ContainerInner>
@@ -94,7 +97,8 @@ const ContainerOuter = styled.div`
   }
 `
 
-const ContainerInner = styled.main`
+const ContainerInner = styled.main<{ page: string }>`
+  background: ${(p) => (p.page === '/home' ? 'transparent' : '#47311b')};
   height: 100%;
   -ms-overflow-style: none;
   scrollbar-width: none;
