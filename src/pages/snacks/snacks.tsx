@@ -26,7 +26,7 @@ const Snacks = () => {
           {data.products.map((p: Snack) => (
             <Item key={p.id}>
               <Photo
-                src={getImageUrl(p.Image['formats']['medium']['url'])}
+                src={getImageUrl(p.Image['formats']['small']['url'])}
                 alt={p.Name}
               />
               <H>{p.Name}</H>

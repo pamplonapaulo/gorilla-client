@@ -4,6 +4,8 @@ import styled from 'styled-components'
 
 const useUser = () => ({ user: null, loading: false })
 
+import Loader from 'components/Loader'
+
 const Index = () => {
   const { user, loading } = useUser()
   const router = useRouter()
@@ -17,7 +19,7 @@ const Index = () => {
   return (
     <>
       <Container>
-        <H>Loading...</H>
+        <Loader isHidden={false} />
       </Container>
     </>
   )
@@ -45,12 +47,6 @@ const Container = styled.div`
   @media only screen and (min-width: 1024px) {
     position: fixed;
   }
-`
-
-const H = styled.h1`
-  color: #000f08;
-  font-weight: 700;
-  font-size: 3rem;
 `
 
 export default Index
