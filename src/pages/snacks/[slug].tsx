@@ -1,3 +1,5 @@
+import React, { useState } from 'react'
+
 import { GetStaticPaths } from 'next'
 
 import { useRouter } from 'next/router'
@@ -7,6 +9,8 @@ import { endpoint } from 'lib/apollo/client'
 import GET_PORTFOLIO from 'graphql/queries/getPortfolio'
 
 import { Product, Item, Params } from 'types/api'
+
+import { useBag } from 'contexts'
 
 import { getImageUrl } from 'utils/getImageUrl'
 import { replaceSpecialChars } from 'utils/replaceSpecialChars'
@@ -21,6 +25,45 @@ const client = new GraphQLClient(endpoint + 'graphql')
 
 export default function Produto({ ...product }: Product) {
   const router = useRouter()
+
+  const [quantityBuy, setQuantityBuy] = useState(0)
+  const [quantitySubscribe, setQuantitySubscribe] = useState(0)
+
+  const { bag, setBag } = useBag()
+
+  const handleSubscription = (p: string) => {
+    const quantity = []
+
+    for (let i = 0; i < quantitySubscribe; i++) {
+      quantity.push(p)
+    }
+
+    setBag({
+      toBuy: [...bag.toBuy],
+      toSubscribe: [...bag.toSubscribe, ...quantity]
+    })
+  }
+
+  const handleBuy = (p: string) => {
+    const quantity = []
+
+    for (let i = 0; i < quantityBuy; i++) {
+      quantity.push(p)
+    }
+
+    setBag({
+      ...bag,
+      toBuy: [...bag.toBuy, ...quantity]
+    })
+  }
+
+  const handleQuantityBuys = (total: number) => {
+    setQuantityBuy(total)
+  }
+
+  const handleQuantitySubscribe = (total: number) => {
+    setQuantitySubscribe(total)
+  }
 
   return (
     <>
@@ -55,12 +98,16 @@ export default function Produto({ ...product }: Product) {
                 </Head>
                 <Actions>
                   <BtnsWrapper>
-                    <Input />
-                    <Button bg={'#fff'}>Assinar</Button>
+                    <Input parentCallback={handleQuantitySubscribe} />
+                    <div onClick={() => handleSubscription(product.id)}>
+                      <Button bg={'#fff'}>Assinar</Button>
+                    </div>
                   </BtnsWrapper>
                   <BtnsWrapper>
-                    <Input />
-                    <Button bg={'#fff'}>Comprar</Button>
+                    <Input parentCallback={handleQuantityBuys} />
+                    <div onClick={() => handleBuy(product.id)}>
+                      <Button bg={'#fff'}>Comprar</Button>
+                    </div>
                   </BtnsWrapper>
                 </Actions>
                 <Facts>
@@ -465,6 +512,7 @@ export const getStaticProps = async ({ params }: Params) => {
   const GET_PRODUCT = gql`
     query GET_PRODUCT {
       product(id: ${productId}) {
+        id
         Name
         Price
         Weight

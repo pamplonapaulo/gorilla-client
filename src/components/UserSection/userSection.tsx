@@ -1,16 +1,18 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 
 import User from 'components/User'
 import UserOn from 'components/UserOn'
 import Bag from 'components/Bag'
 
-import { useUser, useOverlay } from 'contexts'
+import { useUser, useOverlay, useBag } from 'contexts'
 
 import * as S from './styles'
 
 const UserSection = () => {
   const { userLog } = useUser()
   const { overlay, setOverlay } = useOverlay()
+  const { bag } = useBag()
+  const [totalOnBag, setTotalOnBag] = useState(0)
 
   const handleUser = () => {
     console.log('handle user')
@@ -20,6 +22,11 @@ const UserSection = () => {
   const handleBag = () => {
     console.log('bag')
   }
+
+  useEffect(() => {
+    console.log(bag)
+    setTotalOnBag(bag.toBuy.length - 1 + (bag.toSubscribe.length - 1))
+  }, [bag, setTotalOnBag])
 
   return (
     <>
@@ -38,6 +45,7 @@ const UserSection = () => {
         )}
         <div onClick={() => handleBag()}>
           <Bag />
+          {totalOnBag > 0 && <S.OnBag>{totalOnBag}</S.OnBag>}
         </div>
       </S.Container>
     </>

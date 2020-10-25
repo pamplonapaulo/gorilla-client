@@ -30,3 +30,22 @@ export const Hello = styled.h1`
   min-width: fit-content;
   cursor: default;
 `
+
+export const OnBag = styled.h1`
+  align-items: center;
+  background: #facb37;
+  border-radius: 50%;
+  bottom: 0;
+  color: red;
+  cursor: default;
+  display: flex;
+  font-size: 11px;
+  font-weight: 700;
+  height: 22.5px;
+  justify-content: center;
+  padding: 3px;
+  position: absolute;
+  transform: translate(calc(-100% + 40px), -25%);
+  white-space: nowrap;
+  width: 22.5px;
+`
