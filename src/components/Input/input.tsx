@@ -1,13 +1,19 @@
 import styled from 'styled-components'
 import React, { useState } from 'react'
 
-const Input = () => {
+interface setValue {
+  parentCallback: (total: number) => void
+}
+
+const Input = ({ parentCallback }: setValue) => {
   const [quantity, setQuantity] = useState(0)
 
   function changeQuantity(value: string) {
     if (value === '-' && quantity > 0) {
+      parentCallback(quantity - 1)
       setQuantity(quantity - 1)
     } else if (value === '+') {
+      parentCallback(quantity + 1)
       setQuantity(quantity + 1)
     }
   }

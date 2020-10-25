@@ -10,7 +10,12 @@ import Head from 'next/head'
 import { ApolloProvider } from '@apollo/client'
 import { client } from 'lib/apollo/client'
 
-import { MenuProvider, UserProvider, OverlayProvider } from 'contexts'
+import {
+  MenuProvider,
+  UserProvider,
+  OverlayProvider,
+  BagProvider
+} from 'contexts'
 
 import Header from 'components/Header'
 import LoginOverlay from 'components/LoginOverlay'
@@ -59,16 +64,18 @@ class MyApp extends App<any> {
         <ApolloProvider client={client}>
           <MenuProvider>
             <UserProvider>
-              <OverlayProvider>
-                <ContainerOuter>
-                  <Header />
-                  <ContainerInner page={page}>
-                    <LoginOverlay />
-                    <Component {...pageProps} />
-                  </ContainerInner>
-                  <Footer />
-                </ContainerOuter>
-              </OverlayProvider>
+              <BagProvider>
+                <OverlayProvider>
+                  <ContainerOuter>
+                    <Header />
+                    <ContainerInner page={page}>
+                      <LoginOverlay />
+                      <Component {...pageProps} />
+                    </ContainerInner>
+                    <Footer />
+                  </ContainerOuter>
+                </OverlayProvider>
+              </BagProvider>
             </UserProvider>
           </MenuProvider>
         </ApolloProvider>
