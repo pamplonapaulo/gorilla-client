@@ -16,6 +16,19 @@ export type Snack = {
   Image: Image
 }
 
+export type SnackSmall = {
+  id: string
+  Name: string
+  Price: number
+  Image: ImageSmall
+}
+
+export type ImageSmall = {
+  formats: {
+    small: FormatPropsSmall
+  }
+}
+
 export type Product = {
   id: string
   Name: string
@@ -59,6 +72,10 @@ export type FormatProps = {
   size: number
   width: number
   height: number
+}
+
+export type FormatPropsSmall = {
+  url: string
 }
 
 export type Portfolio = {

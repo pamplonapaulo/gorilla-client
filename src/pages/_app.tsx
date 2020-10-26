@@ -14,21 +14,20 @@ import {
   MenuProvider,
   UserProvider,
   OverlayProvider,
+  BagOverlayProvider,
   BagProvider
 } from 'contexts'
 
 import Header from 'components/Header'
 import LoginOverlay from 'components/LoginOverlay'
+import BagOverlay from 'components/BagOverlay'
 import Footer from 'components/Footer'
 
 import styled from 'styled-components'
 import GlobalStyles from 'styles/global'
 
-let page: string
-
 Router.events.on('routeChangeStart', (url) => {
   console.log(`Loading: ${url}`)
-  page = url
   NProgress.start()
 })
 Router.events.on('routeChangeComplete', () => NProgress.done())
@@ -66,14 +65,17 @@ class MyApp extends App<any> {
             <UserProvider>
               <BagProvider>
                 <OverlayProvider>
-                  <ContainerOuter>
-                    <Header />
-                    <ContainerInner page={page}>
-                      <LoginOverlay />
-                      <Component {...pageProps} />
-                    </ContainerInner>
-                    <Footer />
-                  </ContainerOuter>
+                  <BagOverlayProvider>
+                    <ContainerOuter>
+                      <Header />
+                      <ContainerInner>
+                        <LoginOverlay />
+                        <BagOverlay />
+                        <Component {...pageProps} />
+                      </ContainerInner>
+                      <Footer />
+                    </ContainerOuter>
+                  </BagOverlayProvider>
                 </OverlayProvider>
               </BagProvider>
             </UserProvider>
@@ -104,8 +106,8 @@ const ContainerOuter = styled.div`
   }
 `
 
-const ContainerInner = styled.main<{ page: string }>`
-  background: ${(p) => (p.page === '/home' ? 'transparent' : '#47311b')};
+const ContainerInner = styled.main`
+  background: 'transparent';
   height: 100%;
   -ms-overflow-style: none;
   scrollbar-width: none;

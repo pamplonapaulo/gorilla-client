@@ -18,6 +18,7 @@ import { replaceSpecialChars } from 'utils/replaceSpecialChars'
 import { HeartOutline } from 'components/Heart'
 import Button from 'components/Button'
 import Input from 'components/Input'
+import Loader from 'components/Loader'
 
 import styled from 'styled-components'
 
@@ -68,7 +69,7 @@ export default function Produto({ ...product }: Product) {
   return (
     <>
       {router.isFallback ? (
-        <H>Loading…</H>
+        <Loader isHidden={false} />
       ) : (
         <Background>
           <ContainerOuter>
