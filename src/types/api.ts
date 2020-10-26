@@ -25,7 +25,7 @@ export type SnackSmall = {
 
 export type ImageSmall = {
   formats: {
-    small: FormatPropsSmall
+    small: FormatProps
   }
 }
 
