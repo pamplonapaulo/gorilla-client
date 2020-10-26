@@ -4,7 +4,7 @@ import User from 'components/User'
 import UserOn from 'components/UserOn'
 import Bag from 'components/Bag'
 
-import { useUser, useOverlay, useBag } from 'contexts'
+import { useUser, useOverlay, useBag, useBagOverlay } from 'contexts'
 
 import * as S from './styles'
 
@@ -12,16 +12,8 @@ const UserSection = () => {
   const { userLog } = useUser()
   const { overlay, setOverlay } = useOverlay()
   const { bag } = useBag()
+  const { setBagOverlay } = useBagOverlay()
   const [totalOnBag, setTotalOnBag] = useState(0)
-
-  const handleUser = () => {
-    console.log('handle user')
-    setOverlay(!overlay)
-  }
-
-  const handleBag = () => {
-    console.log('bag')
-  }
 
   useEffect(() => {
     console.log(bag)
@@ -38,15 +30,18 @@ const UserSection = () => {
           </>
         ) : (
           <>
-            <div onClick={() => handleUser()}>
+            <S.BtnWrapper onClick={() => setOverlay(!overlay)}>
               <User />
-            </div>
+            </S.BtnWrapper>
           </>
         )}
-        <div onClick={() => handleBag()}>
+        <S.BtnWrapper
+          onMouseLeave={() => setBagOverlay(true)}
+          onMouseEnter={() => setBagOverlay(true)}
+        >
           <Bag />
           {totalOnBag > 0 && <S.OnBag>{totalOnBag}</S.OnBag>}
-        </div>
+        </S.BtnWrapper>
       </S.Container>
     </>
   )

@@ -49,3 +49,7 @@ export const OnBag = styled.h1`
   white-space: nowrap;
   width: 22.5px;
 `
+
+export const BtnWrapper = styled.div`
+  display: flex;
+`
