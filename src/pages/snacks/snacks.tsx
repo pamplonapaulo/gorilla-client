@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { useQuery } from '@apollo/client'
 import GET_PRODUCTS from 'graphql/queries/getProducts'
 
-import { SnackSmall } from 'types/api'
+import { Snack } from 'types/api'
 
 import { getImageUrl } from 'utils/getImageUrl'
 import { replaceSpecialChars } from 'utils/replaceSpecialChars'
@@ -24,7 +24,7 @@ const Snacks = () => {
       <Container>
         <T>{'Snacks'}</T>
         <Wrapper>
-          {data.products.map((p: SnackSmall) => (
+          {data.products.map((p: Snack) => (
             <Item key={p.id}>
               <Photo
                 src={getImageUrl(p.Image['formats']['small']['url'])}

@@ -7,11 +7,7 @@ const GET_PRODUCTS = gql`
       Name
       Price
       Image {
-        formats {
-          small {
-            url
-          }
-        }
+        formats
       }
     }
   }
