@@ -79,7 +79,7 @@ export const Item = styled.li`
     &.active {
       color: #FACB37;
       cursor: default;
-      border-image: linear-gradient( to right, yellow, rgba(0, 0, 0, 0) ) 1 0%;
+      border-image: linear-gradient( to right,yellow,rgba(0,0,0,0) ) 0 0 1 0%;
       border-top: transparent;
     }
   }

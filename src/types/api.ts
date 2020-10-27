@@ -16,17 +16,9 @@ export type Snack = {
   Image: Image
 }
 
-export type SnackSmall = {
-  id: string
-  Name: string
-  Price: number
-  Image: ImageSmall
-}
-
-export type ImageSmall = {
-  formats: {
-    small: FormatProps
-  }
+export type Image = {
+  ext: string
+  hash: string
 }
 
 export type Product = {
@@ -52,30 +44,6 @@ export type NutritionFacts = {
   EnergeticValue: number
   DietaryFiber: number
   Sodium: number
-}
-
-export type Image = {
-  formats: {
-    medium: FormatProps
-    small: FormatProps
-    thumbnail: FormatProps
-  }
-}
-
-export type FormatProps = {
-  ext: string
-  url: string
-  hash: string
-  mime: string
-  name: string
-  path: null
-  size: number
-  width: number
-  height: number
-}
-
-export type FormatPropsSmall = {
-  url: string
 }
 
 export type Portfolio = {
