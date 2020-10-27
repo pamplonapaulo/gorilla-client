@@ -10,6 +10,7 @@ import Whatsapp from 'components/Whatsapp'
 
 const Menu = ({
   pages = [
+    ['debug', '/page-debug', 'true'],
     ['snacks', '/snacks', 'true'],
     ['whatsapp', 'https://api.whatsapp.com/send?phone=447471341741'],
     ['instagram', 'https://www.instagram.com/gorillapack/']
