@@ -76,13 +76,19 @@ export default function Produto({ ...product }: Product) {
             <meta
               property="og:image"
               content={getImageUrl(
-                product.Image['formats']['thumbnail']['url']
+                '/uploads/thumbnail_' +
+                  product.Image['hash'] +
+                  product.Image['ext']
               )}
             />
             <ContainerInner>
               <Wrapper>
                 <Photo
-                  src={getImageUrl(product.Image['formats']['medium']['url'])}
+                  src={getImageUrl(
+                    '/uploads/medium_' +
+                      product.Image['hash'] +
+                      product.Image['ext']
+                  )}
                   alt={product.Name}
                 />
               </Wrapper>
@@ -533,7 +539,8 @@ export const getStaticProps = async ({ params }: Params) => {
           Sodium
         }
         Image {
-          formats
+          ext
+          hash
         }
       }
     }
