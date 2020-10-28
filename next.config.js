@@ -8,3 +8,12 @@ module.exports = withPWA({
     disable: !isProd
   }
 })
+
+module.exports = {
+  images: {
+    deviceSizes: [320, 420, 768, 1024, 1200],
+    iconSizes: [],
+    domains: ['paulopamplona.com'],
+    loader: 'default'
+  }
+}
