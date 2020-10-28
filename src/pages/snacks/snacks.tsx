@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 
 import { useQuery } from '@apollo/client'
 import GET_PRODUCTS from 'graphql/queries/getProducts'
@@ -26,11 +27,12 @@ const Snacks = () => {
         <Wrapper>
           {data.products.map((p: Snack) => (
             <Item key={p.id}>
-              <Photo
+              <ImgWrap
                 src={getImageUrl(
                   '/uploads/small_' + p.Image['hash'] + p.Image['ext']
                 )}
                 alt={p.Name}
+                unsized
               />
               <H>{p.Name}</H>
               <H>{'R$' + p.Price}</H>
@@ -134,8 +136,7 @@ const H = styled.h1`
   }
 `
 
-const Photo = styled.img`
-  border-radius: 5px;
+const ImgWrap = styled(Image)`
   max-width: 145px;
 
   @media only screen and (min-width: 1024px) {
