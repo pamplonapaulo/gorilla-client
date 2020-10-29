@@ -59,6 +59,7 @@ const Container = styled.div`
   flex-direction: column;
   height: 100%;
   justify-content: center;
+  min-height: calc(100vh - 70px);
   width: 100%;
 
   -ms-overflow-style: none;
