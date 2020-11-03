@@ -45,7 +45,9 @@ const LoginOverlay = () => {
                 <S.Bottom>
                   <S.H>Não tem cadastro?</S.H>
                   <div onClick={() => handleRegister()}>
-                    <Button bg={'#facb37'}>Cadastrar</Button>
+                    <Button colorOne={'#facb37'} colorTwo={'#000'}>
+                      Cadastrar
+                    </Button>
                   </div>
                 </S.Bottom>
               </>
@@ -66,7 +68,9 @@ const LoginOverlay = () => {
                 </S.Top>
                 <S.Bottom>
                   <div onClick={() => handleClose()}>
-                    <Button bg={'#facb37'}>Fechar</Button>
+                    <Button colorOne={'#facb37'} colorTwo={'#000'}>
+                      Fechar
+                    </Button>
                   </div>
                 </S.Bottom>
               </>

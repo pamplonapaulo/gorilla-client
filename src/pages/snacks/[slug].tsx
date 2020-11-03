@@ -105,15 +105,27 @@ export default function Produto({ ...product }: Product) {
                 </Head>
                 <Actions>
                   <BtnsWrapper>
-                    <Input parentCallback={handleQuantitySubscribe} />
+                    <Input
+                      parentCallback={handleQuantitySubscribe}
+                      scale={'1'}
+                      value={0}
+                    />
                     <div onClick={() => handleSubscription(product.id)}>
-                      <Button bg={'#fff'}>Assinar</Button>
+                      <Button colorOne={'#fff'} colorTwo={'#000'}>
+                        Assinar
+                      </Button>
                     </div>
                   </BtnsWrapper>
                   <BtnsWrapper>
-                    <Input parentCallback={handleQuantityBuys} />
+                    <Input
+                      parentCallback={handleQuantityBuys}
+                      scale={'1'}
+                      value={0}
+                    />
                     <div onClick={() => handleBuy(product.id)}>
-                      <Button bg={'#fff'}>Comprar</Button>
+                      <Button colorOne={'#fff'} colorTwo={'#000'}>
+                        Comprar
+                      </Button>
                     </div>
                   </BtnsWrapper>
                 </Actions>

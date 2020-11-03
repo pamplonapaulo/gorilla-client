@@ -144,7 +144,9 @@ const FormLogin = () => {
         </S.Field>
       </S.Form>
       <div onClick={() => handleLogin()}>
-        <Button bg={'#facb37'}>Entrar</Button>
+        <Button colorOne={'#facb37'} colorTwo={'#000'}>
+          Entrar
+        </Button>
       </div>
     </>
   )

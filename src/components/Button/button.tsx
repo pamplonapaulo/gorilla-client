@@ -4,12 +4,15 @@ import * as S from './styles'
 
 type Props = {
   children: React.ReactNode
-  bg: string
+  colorOne: string
+  colorTwo: string
 }
 
-const Button = ({ children, bg }: Props) => (
+const Button = ({ children, colorOne, colorTwo }: Props) => (
   <>
-    <S.Btn color={bg}>{children}</S.Btn>
+    <S.Btn theme={{ primaryColor: colorOne, secondaryColor: colorTwo }}>
+      {children}
+    </S.Btn>
   </>
 )
 

@@ -1,12 +1,14 @@
 import styled from 'styled-components'
 import React, { useState } from 'react'
 
-interface setValue {
+type Props = {
   parentCallback: (total: number) => void
+  scale: string
+  value: number
 }
 
-const Input = ({ parentCallback }: setValue) => {
-  const [quantity, setQuantity] = useState(0)
+const Input = ({ parentCallback, scale, value }: Props) => {
+  const [quantity, setQuantity] = useState(value)
 
   function changeQuantity(value: string) {
     if (value === '-' && quantity > 0) {
@@ -20,7 +22,7 @@ const Input = ({ parentCallback }: setValue) => {
 
   return (
     <>
-      <Container>
+      <Container theme={{ size: scale }}>
         <Btn onClick={() => changeQuantity('-')}>{'-'}</Btn>
         <FakeInput>
           <P>{quantity}</P>
@@ -38,6 +40,8 @@ const HiddenInput = styled.input`
 
 const Container = styled.div`
   display: flex;
+  transform: scale(${(props) => props.theme.size});
+  transform-origin: left;
 
   @media only screen and (min-width: 1024px) {
     margin-right: 15px;
