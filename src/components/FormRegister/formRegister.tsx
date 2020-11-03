@@ -278,7 +278,9 @@ const FormRegister = () => {
             </S.Field>
           </S.Form>
           <S.BtnSave onClick={() => handleRegister()}>
-            <Button bg={'#facb37'}>Gravar</Button>
+            <Button colorOne={'#facb37'} colorTwo={'#000'}>
+              Gravar
+            </Button>
           </S.BtnSave>
         </>
       )}

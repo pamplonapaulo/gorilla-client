@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 export const Btn = styled.button`
   background: transparent;
-  color: ${(props) => props.color};
+  color: ${(props) => props.theme.primaryColor};
   font-weight: 100;
   text-transform: uppercase;
   height: 50px;
@@ -14,7 +14,7 @@ export const Btn = styled.button`
   letter-spacing: 1px;
   text-decoration: none;
   border: 2px solid;
-  border-color: ${(props) => props.color};
+  border-color: ${(props) => props.theme.primaryColor};
   cursor: pointer;
   transition: ease-out 0.1s;
   width: 140px;
@@ -25,7 +25,8 @@ export const Btn = styled.button`
 
   &:hover {
     animation: pulse 1s ease-out 0.4s;
-    color: #222222;
+    //color: #222222;
+    color: ${(props) => props.theme.secondaryColor};
 
     &:after {
       width: calc(100% + 2px);
@@ -54,8 +55,8 @@ export const Btn = styled.button`
     visibility: hidden;
     bottom: -2px;
     right: -2px;
-    border-left: 2px solid #222222;
-    border-bottom: 2px solid #222222;
+    border-left: 2px solid ${(props) => props.theme.secondaryColor};
+    border-bottom: 2px solid ${(props) => props.theme.secondaryColor};
     transition: width 0.05s ease 0.05s, height 0.05s ease, visibility 0s 0.1s;
   }
 
@@ -67,8 +68,8 @@ export const Btn = styled.button`
     visibility: hidden;
     top: -2px;
     left: -2px;
-    border-top: 2px solid #222222;
-    border-right: 2px solid #222222;
+    border-top: 2px solid ${(props) => props.theme.secondaryColor};
+    border-right: 2px solid ${(props) => props.theme.secondaryColor};
     transition: width 0.05s ease 0.15s, height 0.05s ease 0.1s,
       visibility 0s 0.2s;
   }
