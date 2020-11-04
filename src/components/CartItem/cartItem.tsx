@@ -6,15 +6,17 @@ import CloseIcon from 'components/CloseIcon'
 import * as S from './styles'
 
 type Props = {
+  id: number
   image: string
   name: string
-  price: string
+  price: number
   subscription: boolean
   quantity: number
-  parentCallback: (total: number) => void
+  parentCallback: (total: number, id: number) => void
 }
 
 const CartItem = ({
+  id,
   image,
   name,
   price,
@@ -23,14 +25,11 @@ const CartItem = ({
   parentCallback
 }: Props) => {
   const handleQuantity = (total: number) => {
-    console.log(total)
+    parentCallback(total, id)
   }
 
-  const handleDelete = (e: React.MouseEvent) => {
-    const target = e.target
-    console.log('this is cartItem.tsx')
-    console.log(target)
-    parentCallback(0)
+  const handleDelete = (id: number) => {
+    parentCallback(0, id)
   }
 
   return (
@@ -39,7 +38,7 @@ const CartItem = ({
         <S.Thumb>
           <S.ImgWrap
             src={getImageUrl('/uploads/thumbnail_' + image)}
-            alt={'p.Name'}
+            alt={name}
             unsized
           />
         </S.Thumb>
@@ -47,7 +46,7 @@ const CartItem = ({
           <S.Info>
             <S.Text>{name}</S.Text>
             {subscription && <S.Text>Assinatura</S.Text>}
-            <S.Text>R$ {price}</S.Text>
+            <S.Text>R$ {price * quantity}</S.Text>
           </S.Info>
           <Input
             parentCallback={handleQuantity}
@@ -55,7 +54,7 @@ const CartItem = ({
             value={quantity}
           />
         </S.Details>
-        <S.DeleteBtn onClick={handleDelete}>
+        <S.DeleteBtn onClick={() => handleDelete(id)}>
           <CloseIcon color={'#47311b'} />
         </S.DeleteBtn>
       </S.Container>

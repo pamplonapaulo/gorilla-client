@@ -16,14 +16,14 @@ const BagOverlay = () => {
     console.log('ir ao carrinho')
   }
 
-  const handleDeleteItem = (total: number) => {
-    console.log('this is bagOverlay.tsx')
-    console.log(total)
+  const handleDeleteItem = (total: number, id: number) => {
+    console.log('id: ', id)
+    console.log('total: ', total)
   }
 
   useEffect(() => {
     console.log(bag)
-    setTotalOnBag(bag.toBuy.length - 1 + (bag.toSubscribe.length - 1))
+    setTotalOnBag(bag.length - 1)
   }, [bag, setTotalOnBag])
 
   return (
@@ -33,25 +33,28 @@ const BagOverlay = () => {
           <S.Title>Carrinho de compras ({totalOnBag})</S.Title>
           <S.ProductsWrap>
             <CartItem
+              id={0}
               image={'tests_5be5068aaf.png'}
               name={'Banana'}
-              price={'9,99'}
+              price={9.99}
               subscription={true}
               quantity={3}
               parentCallback={handleDeleteItem}
             />
             <CartItem
+              id={1}
               image={'tests_5be5068aaf.png'}
               name={'Amendoim'}
-              price={'9,99'}
+              price={3.99}
               subscription={false}
               quantity={4}
               parentCallback={handleDeleteItem}
             />
             <CartItem
+              id={2}
               image={'tests_5be5068aaf.png'}
               name={'Banana com canela'}
-              price={'9,99'}
+              price={2.99}
               subscription={true}
               quantity={1}
               parentCallback={handleDeleteItem}

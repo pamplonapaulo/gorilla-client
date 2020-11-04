@@ -17,13 +17,19 @@ export function createCtx<ContextType>() {
 }
 
 type BagContextType = {
-  bag: Bag
-  setBag: Dispatch<SetStateAction<Bag>>
+  bag: Bag | []
+  setBag: Dispatch<SetStateAction<Bag | []>>
 }
 
-type Bag = {
-  toBuy: Array<string>
-  toSubscribe: Array<string>
+type Bag = Item[]
+
+type Item = {
+  id: string
+  name: string
+  imgHash: string
+  price: number
+  quantityToBuy: number
+  quantityToSubscribe: number
 }
 
 const [useBag, CtxProvider] = createCtx<BagContextType>()
@@ -33,7 +39,7 @@ type Props = {
 }
 
 const BagProvider = ({ children }: Props) => {
-  const [bag, setBag] = useState({ toBuy: [''], toSubscribe: [''] })
+  const [bag, setBag] = useState<Bag | []>([])
 
   // React.useEffect(() => {
   //   const currentUser = false
