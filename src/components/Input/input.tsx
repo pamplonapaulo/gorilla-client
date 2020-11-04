@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 type Props = {
   parentCallback: (total: number) => void
@@ -9,6 +9,13 @@ type Props = {
 
 const Input = ({ parentCallback, scale, value }: Props) => {
   const [quantity, setQuantity] = useState(value)
+
+  console.log('quantity')
+  console.log(quantity)
+
+  useEffect(() => {
+    setQuantity(value)
+  }, [value, setQuantity])
 
   function changeQuantity(value: string) {
     if (value === '-' && quantity > 0) {

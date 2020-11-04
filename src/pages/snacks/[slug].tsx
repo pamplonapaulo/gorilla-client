@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 import { GetStaticPaths } from 'next'
 
@@ -32,39 +32,78 @@ export default function Produto({ ...product }: Product) {
 
   const { bag, setBag } = useBag()
 
-  const handleSubscription = (p: string) => {
-    const quantity = []
-
-    for (let i = 0; i < quantitySubscribe; i++) {
-      quantity.push(p)
-    }
-
-    setBag({
-      toBuy: [...bag.toBuy],
-      toSubscribe: [...bag.toSubscribe, ...quantity]
-    })
+  type Item = {
+    id: string
+    name: string
+    imgHash: string
+    price: number
+    quantityToBuy: number
+    quantityToSubscribe: number
   }
 
-  const handleBuy = (p: string) => {
-    const quantity = []
+  const handleIncludeOnBag = () => {
+    const match = (p: Item) => p.id == product.id
 
-    for (let i = 0; i < quantityBuy; i++) {
-      quantity.push(p)
+    if (bag.some(match)) {
+      const arr = bag
+
+      arr.splice(arr.findIndex(match), 1)
+
+      setBag([
+        ...arr,
+        {
+          id: product.id,
+          name: product.Name,
+          imgHash: product.Image['hash'],
+          price: product.Price,
+          quantityToBuy: quantityBuy,
+          quantityToSubscribe: quantitySubscribe
+        }
+      ])
+    } else {
+      setBag([
+        ...bag,
+        {
+          id: product.id,
+          name: product.Name,
+          imgHash: product.Image['hash'],
+          price: product.Price,
+          quantityToBuy: quantityBuy,
+          quantityToSubscribe: quantitySubscribe
+        }
+      ])
     }
-
-    setBag({
-      ...bag,
-      toBuy: [...bag.toBuy, ...quantity]
-    })
   }
 
-  const handleQuantityBuys = (total: number) => {
+  const handleQuantityBuy = (total: number) => {
     setQuantityBuy(total)
   }
 
   const handleQuantitySubscribe = (total: number) => {
     setQuantitySubscribe(total)
   }
+
+  useEffect(() => {
+    const getMatch = (p: Item) => p.id == product.id
+    console.log('roda o use effect')
+    if (bag.some(getMatch)) {
+      console.log('found a match!')
+
+      console.log(bag.filter(getMatch)[0].quantityToBuy)
+      setQuantityBuy(bag.filter(getMatch)[0].quantityToBuy)
+
+      console.log(bag.filter(getMatch)[0].quantityToSubscribe)
+      setQuantitySubscribe(bag.filter(getMatch)[0].quantityToSubscribe)
+
+      setTimeout(() => {
+        console.log('quantitySubscribe')
+        console.log(quantitySubscribe)
+        console.log('quantityBuy')
+        console.log(quantityBuy)
+      }, 4000)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   return (
     <>
@@ -108,23 +147,23 @@ export default function Produto({ ...product }: Product) {
                     <Input
                       parentCallback={handleQuantitySubscribe}
                       scale={'1'}
-                      value={0}
+                      value={quantitySubscribe}
                     />
-                    <div onClick={() => handleSubscription(product.id)}>
+                    <div onClick={() => handleIncludeOnBag()}>
                       <Button colorOne={'#fff'} colorTwo={'#000'}>
-                        Assinar
+                        Assinatura
                       </Button>
                     </div>
                   </BtnsWrapper>
                   <BtnsWrapper>
                     <Input
-                      parentCallback={handleQuantityBuys}
+                      parentCallback={handleQuantityBuy}
                       scale={'1'}
-                      value={0}
+                      value={quantityBuy}
                     />
-                    <div onClick={() => handleBuy(product.id)}>
+                    <div onClick={() => handleIncludeOnBag()}>
                       <Button colorOne={'#fff'} colorTwo={'#000'}>
-                        Comprar
+                        Compra
                       </Button>
                     </div>
                   </BtnsWrapper>

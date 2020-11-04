@@ -17,7 +17,7 @@ const UserSection = () => {
 
   useEffect(() => {
     console.log(bag)
-    setTotalOnBag(bag.toBuy.length - 1 + (bag.toSubscribe.length - 1))
+    setTotalOnBag(bag.length)
   }, [bag, setTotalOnBag])
 
   return (
