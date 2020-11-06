@@ -6,6 +6,8 @@ import React, {
   useState
 } from 'react'
 
+import { Bag } from 'types/api'
+
 export function createCtx<ContextType>() {
   const ctx = createContext<ContextType | undefined>(undefined)
   function useCtx() {
@@ -19,17 +21,6 @@ export function createCtx<ContextType>() {
 type BagContextType = {
   bag: Bag | []
   setBag: Dispatch<SetStateAction<Bag | []>>
-}
-
-type Bag = Item[]
-
-type Item = {
-  id: string
-  name: string
-  imgHash: string
-  price: number
-  quantityToBuy: number
-  quantityToSubscribe: number
 }
 
 const [useBag, CtxProvider] = createCtx<BagContextType>()

@@ -18,6 +18,11 @@ export const Btn = styled.button`
   cursor: pointer;
   transition: ease-out 0.1s;
   width: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  justify-content: space-around;
+  padding: 12px 18px;
 
   @media only screen and (min-width: 1024px) {
     width: 140px;

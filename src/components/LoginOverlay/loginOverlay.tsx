@@ -5,7 +5,7 @@ import FormRegister from 'components/FormRegister'
 
 import CheckMark from 'components/CheckMark'
 import Button from 'components/Button'
-import Back from 'components/Back'
+import Arrow from 'components/Arrow'
 
 import { useUser, useOverlay } from 'contexts'
 
@@ -55,7 +55,7 @@ const LoginOverlay = () => {
             {userLog === 'false' && register && (
               <>
                 <S.BtnBack onClick={() => handleRegister()}>
-                  <Back color={'#facb37'} />
+                  <Arrow color={'#facb37'} rotate={'0'} />
                 </S.BtnBack>
                 <FormRegister />
               </>
