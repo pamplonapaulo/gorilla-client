@@ -103,10 +103,14 @@ const BagOverlay = () => {
   const hasSubs = (p: BagItem) => p.quantityToSubscribe > 0
 
   useEffect(() => {
+    console.log('something changed: bag')
+    console.log(bag)
     if (bag.some(hasBuys)) {
+      console.log('bag contains: buys')
       setArrBuys(bag.filter(hasBuys))
     }
     if (bag.some(hasSubs)) {
+      console.log('bag contains: subs')
       setArrSubs(bag.filter(hasSubs))
     }
   }, [bag, setTotalOnBag, setArrBuys, setArrSubs])
@@ -132,20 +136,20 @@ const BagOverlay = () => {
         <S.BagPopUp>
           <S.Title>Carrinho de compras ({totalOnBag})</S.Title>
           <S.ProductsWrap>
-            {arrBuys.map((p: BagItem) => (
-              <CartItem
-                key={p.name}
-                subscription={false}
-                quantity={p.quantityToBuy}
-                parentCallback={handleQuantity}
-                item={p}
-              />
-            ))}
             {arrSubs.map((p: BagItem) => (
               <CartItem
                 key={p.name}
                 subscription={true}
                 quantity={p.quantityToSubscribe}
+                parentCallback={handleQuantity}
+                item={p}
+              />
+            ))}
+            {arrBuys.map((p: BagItem) => (
+              <CartItem
+                key={p.name}
+                subscription={false}
+                quantity={p.quantityToBuy}
                 parentCallback={handleQuantity}
                 item={p}
               />

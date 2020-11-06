@@ -38,6 +38,11 @@ const CartItem = ({ subscription, quantity, parentCallback, item }: Props) => {
     }
   }, [bag, itemObj.id, subscription])
 
+  useEffect(() => {
+    console.log('quantity')
+    console.log(quantity)
+  }, [quantity])
+
   // useEffect(() => {
   //   parentCallback(itemObj, subscription, totalItems)
   // }, [totalItems, itemObj, subscription, parentCallback])
