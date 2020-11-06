@@ -2,15 +2,17 @@ import * as S from './styles'
 
 type Props = {
   color: string
+  rotate: string
 }
 
-const Back = ({ color }: Props) => (
+const Arrow = ({ color, rotate = '0' }: Props) => (
   <S.Svg
     aria-hidden="true"
     focusable="false"
     role="img"
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 512 512"
+    theme={{ direction: rotate }}
   >
     <path
       fill={color}
@@ -19,4 +21,4 @@ const Back = ({ color }: Props) => (
   </S.Svg>
 )
 
-export default Back
+export default Arrow

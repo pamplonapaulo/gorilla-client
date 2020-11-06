@@ -18,7 +18,6 @@ const Snacks = () => {
 
   if (loading) return <Loader isHidden={false} />
   if (error) return <p>Error :(</p>
-  if (data) console.log(data)
 
   return (
     <>

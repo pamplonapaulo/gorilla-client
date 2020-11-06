@@ -32,47 +32,90 @@ export default function Produto({ ...product }: Product) {
 
   const { bag, setBag } = useBag()
 
-  type Item = {
-    id: string
-    name: string
-    imgHash: string
-    price: number
-    quantityToBuy: number
-    quantityToSubscribe: number
-  }
+  useEffect(() => {
+    console.log('useEffect bag:')
+    console.log(bag)
+    console.log(' ')
+  }, [bag])
 
-  const handleIncludeOnBag = () => {
-    const match = (p: Item) => p.id == product.id
+  const handleIncludeOnBag = (subscription: boolean) => {
+    console.log('entrou....')
+    console.log('bag')
+    console.log(bag)
+    console.log(' ')
 
+    let newBag = []
+    let isNewOnBag = true
+
+    for (let i = 0; i < bag.length; i++) {
+      console.log('bag[i].id: ', bag[i].id)
+      console.log('product.id: ', product.id)
+
+      if (bag[i].id === product.id) {
+        isNewOnBag = false
+        const itemToAdd = {
+          ...bag[i],
+          quantityToSubscribe: subscription
+            ? quantitySubscribe
+            : bag[i].quantityToSubscribe,
+          quantityToBuy: !subscription ? quantityBuy : bag[i].quantityToBuy
+        }
+        newBag.push(itemToAdd)
+      } else {
+        newBag.push(bag[i])
+      }
+    }
+
+    if (bag.length === 0 || isNewOnBag) {
+      const itemToAdd = {
+        id: product.id,
+        name: product.Name,
+        imgHash: product.Image['hash'] + product.Image['ext'],
+        price: product.Price,
+        quantityToBuy: quantityBuy,
+        quantityToSubscribe: quantitySubscribe
+      }
+      newBag = [...newBag, itemToAdd]
+    }
+    setBag(newBag)
+    setQuantityBuy(0)
+    setQuantitySubscribe(0)
+
+    /*
+    const match = (p: BagItem) => p.id == product.id
     if (bag.some(match)) {
       const arr = bag
-
       arr.splice(arr.findIndex(match), 1)
 
-      setBag([
-        ...arr,
-        {
-          id: product.id,
-          name: product.Name,
-          imgHash: product.Image['hash'],
-          price: product.Price,
-          quantityToBuy: quantityBuy,
-          quantityToSubscribe: quantitySubscribe
-        }
-      ])
+      const selected = bag.filter(match)[0]
+      const updated = {
+        ...selected,
+        quantityToSubscribe: subscription
+          ? quantitySubscribe
+          : selected.quantityToSubscribe,
+        quantityToBuy: !subscription ? quantityBuy : selected.quantityToBuy
+      }
+      setBag([...arr, updated])
     } else {
+      console.log('primeiro do tipo')
       setBag([
         ...bag,
         {
           id: product.id,
           name: product.Name,
-          imgHash: product.Image['hash'],
+          imgHash: product.Image['hash'] + product.Image['ext'],
           price: product.Price,
           quantityToBuy: quantityBuy,
           quantityToSubscribe: quantitySubscribe
         }
       ])
     }
+    console.log('bag')
+    console.log(bag)
+    console.log(' ')
+    setQuantityBuy(0)
+    setQuantitySubscribe(0)
+    */
   }
 
   const handleQuantityBuy = (total: number) => {
@@ -83,27 +126,14 @@ export default function Produto({ ...product }: Product) {
     setQuantitySubscribe(total)
   }
 
-  useEffect(() => {
-    const getMatch = (p: Item) => p.id == product.id
-    console.log('roda o use effect')
-    if (bag.some(getMatch)) {
-      console.log('found a match!')
-
-      console.log(bag.filter(getMatch)[0].quantityToBuy)
-      setQuantityBuy(bag.filter(getMatch)[0].quantityToBuy)
-
-      console.log(bag.filter(getMatch)[0].quantityToSubscribe)
-      setQuantitySubscribe(bag.filter(getMatch)[0].quantityToSubscribe)
-
-      setTimeout(() => {
-        console.log('quantitySubscribe')
-        console.log(quantitySubscribe)
-        console.log('quantityBuy')
-        console.log(quantityBuy)
-      }, 4000)
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  // useEffect(() => {
+  //   const getMatch = (p: BagItem) => p.id == product.id
+  //   if (bag.some(getMatch)) {
+  //     setQuantityBuy(bag.filter(getMatch)[0].quantityToBuy)
+  //     setQuantitySubscribe(bag.filter(getMatch)[0].quantityToSubscribe)
+  //   }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [])
 
   return (
     <>
@@ -149,7 +179,7 @@ export default function Produto({ ...product }: Product) {
                       scale={'1'}
                       value={quantitySubscribe}
                     />
-                    <div onClick={() => handleIncludeOnBag()}>
+                    <div onClick={() => handleIncludeOnBag(true)}>
                       <Button colorOne={'#fff'} colorTwo={'#000'}>
                         Assinatura
                       </Button>
@@ -161,7 +191,7 @@ export default function Produto({ ...product }: Product) {
                       scale={'1'}
                       value={quantityBuy}
                     />
-                    <div onClick={() => handleIncludeOnBag()}>
+                    <div onClick={() => handleIncludeOnBag(false)}>
                       <Button colorOne={'#fff'} colorTwo={'#000'}>
                         Compra
                       </Button>

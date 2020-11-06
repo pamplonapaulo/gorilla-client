@@ -6,6 +6,8 @@ import Bag from 'components/Bag'
 
 import { useUser, useOverlay, useBag, useBagOverlay } from 'contexts'
 
+import { BagItem } from 'types/api'
+
 import * as S from './styles'
 
 const UserSection = () => {
@@ -16,8 +18,21 @@ const UserSection = () => {
   const [totalOnBag, setTotalOnBag] = useState(0)
 
   useEffect(() => {
-    console.log(bag)
-    setTotalOnBag(bag.length)
+    const hasBuys = (p: BagItem) => p.quantityToBuy > 0
+    const hasSubs = (p: BagItem) => p.quantityToSubscribe > 0
+    let total = 0
+
+    if (bag.some(hasBuys)) {
+      bag.filter(hasBuys).forEach((el) => {
+        total += el.quantityToBuy
+      })
+    }
+    if (bag.some(hasSubs)) {
+      bag.filter(hasSubs).forEach((el) => {
+        total += el.quantityToSubscribe
+      })
+    }
+    setTotalOnBag(total)
   }, [bag, setTotalOnBag])
 
   return (

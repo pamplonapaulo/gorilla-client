@@ -10,9 +10,6 @@ type Props = {
 const Input = ({ parentCallback, scale, value }: Props) => {
   const [quantity, setQuantity] = useState(value)
 
-  console.log('quantity')
-  console.log(quantity)
-
   useEffect(() => {
     setQuantity(value)
   }, [value, setQuantity])
@@ -54,6 +51,7 @@ const Container = styled.div`
     margin-right: 15px;
   }
 `
+
 const Btn = styled.button`
   background: wheat;
   border: none;

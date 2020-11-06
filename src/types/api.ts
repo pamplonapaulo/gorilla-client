@@ -55,6 +55,17 @@ export type Item = {
   Name: string
 }
 
+export type Bag = BagItem[]
+
+export type BagItem = {
+  id: string
+  name: string
+  imgHash: string
+  price: number
+  quantityToBuy: number
+  quantityToSubscribe: number
+}
+
 export type Params = {
   params: {
     slug: string
