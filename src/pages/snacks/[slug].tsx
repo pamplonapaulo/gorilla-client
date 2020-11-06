@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 
 import { GetStaticPaths } from 'next'
 
@@ -8,7 +8,7 @@ import { gql, GraphQLClient } from 'graphql-request'
 import { endpoint } from 'lib/apollo/client'
 import GET_PORTFOLIO from 'graphql/queries/getPortfolio'
 
-import { Product, Item, Params } from 'types/api'
+import { Product, Item, Params, BagItem } from 'types/api'
 
 import { useBag } from 'contexts'
 
@@ -32,27 +32,13 @@ export default function Produto({ ...product }: Product) {
 
   const { bag, setBag } = useBag()
 
-  useEffect(() => {
-    console.log('useEffect bag:')
-    console.log(bag)
-    console.log(' ')
-  }, [bag])
-
   const handleIncludeOnBag = (subscription: boolean) => {
-    console.log('entrou....')
-    console.log('bag')
-    console.log(bag)
-    console.log(' ')
-
     let newBag = []
-    let isNewOnBag = true
+
+    const match = (p: BagItem) => p.id == product.id
 
     for (let i = 0; i < bag.length; i++) {
-      console.log('bag[i].id: ', bag[i].id)
-      console.log('product.id: ', product.id)
-
       if (bag[i].id === product.id) {
-        isNewOnBag = false
         const itemToAdd = {
           ...bag[i],
           quantityToSubscribe: subscription
@@ -66,14 +52,25 @@ export default function Produto({ ...product }: Product) {
       }
     }
 
-    if (bag.length === 0 || isNewOnBag) {
+    console.log(
+      'Does the bag still miss a product with this ID ' + product.id + ' ?',
+      !bag.some(match)
+    )
+
+    console.log('Is the bag empty? ', bag.length === 0)
+
+    if (!bag.some(match)) {
+      console.log(
+        !subscription ? 'to subs will be zero' : 'to buy will be zero'
+      )
+
       const itemToAdd = {
         id: product.id,
         name: product.Name,
         imgHash: product.Image['hash'] + product.Image['ext'],
         price: product.Price,
-        quantityToBuy: quantityBuy,
-        quantityToSubscribe: quantitySubscribe
+        quantityToSubscribe: subscription ? quantitySubscribe : 0,
+        quantityToBuy: !subscription ? quantityBuy : 0
       }
       newBag = [...newBag, itemToAdd]
     }
@@ -110,9 +107,6 @@ export default function Produto({ ...product }: Product) {
         }
       ])
     }
-    console.log('bag')
-    console.log(bag)
-    console.log(' ')
     setQuantityBuy(0)
     setQuantitySubscribe(0)
     */
