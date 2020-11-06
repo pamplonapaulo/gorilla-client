@@ -1,10 +1,11 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState, useEffect } from 'react'
 
 import CartItem from 'components/CartItem'
 import Button from 'components/Button'
 import Arrow from 'components/Arrow'
 
-import { BagItem, Bag } from 'types/api'
+import { BagItem } from 'types/api'
 
 import { useBag, useBagOverlay } from 'contexts'
 
@@ -16,8 +17,10 @@ const BagOverlay = () => {
   const [totalOnBag, setTotalOnBag] = useState(0)
   // const [arrBuys, setArrBuys] = useState<BagItem[] | []>([])
   // const [arrSubscriptions, setArrSubscriptions] = useState<BagItem[] | []>([])
-  const [arrBuys, setArrBuys] = useState<Bag | []>([])
-  const [arrSubs, setArrSubs] = useState<Bag | []>([])
+  // const [arrBuys, setArrBuys] = useState<Bag | []>([])
+  // const [arrSubs, setArrSubs] = useState<Bag | []>([])
+  const [arrBuys, setArrBuys] = useState<any>([])
+  const [arrSubs, setArrSubs] = useState<any>([])
   const [subtotal, setSubtotal] = useState<number>(0)
 
   const handleGoToCart = () => {
