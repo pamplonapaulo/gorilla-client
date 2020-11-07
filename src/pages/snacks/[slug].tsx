@@ -52,18 +52,7 @@ export default function Produto({ ...product }: Product) {
       }
     }
 
-    console.log(
-      'Does the bag still miss a product with this ID ' + product.id + ' ?',
-      !bag.some(match)
-    )
-
-    console.log('Is the bag empty? ', bag.length === 0)
-
     if (!bag.some(match)) {
-      console.log(
-        !subscription ? 'to subs will be zero' : 'to buy will be zero'
-      )
-
       const itemToAdd = {
         id: product.id,
         name: product.Name,
@@ -119,15 +108,6 @@ export default function Produto({ ...product }: Product) {
   const handleQuantitySubscribe = (total: number) => {
     setQuantitySubscribe(total)
   }
-
-  // useEffect(() => {
-  //   const getMatch = (p: BagItem) => p.id == product.id
-  //   if (bag.some(getMatch)) {
-  //     setQuantityBuy(bag.filter(getMatch)[0].quantityToBuy)
-  //     setQuantitySubscribe(bag.filter(getMatch)[0].quantityToSubscribe)
-  //   }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [])
 
   return (
     <>

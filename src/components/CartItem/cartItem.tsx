@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { getImageUrl } from 'utils/getImageUrl'
 import Input from 'components/Input'
 import CloseIcon from 'components/CloseIcon'
-import { useBag } from 'contexts'
 
 import { BagItem } from 'types/api'
 
@@ -20,53 +19,16 @@ type Props = {
 }
 
 const CartItem = ({ subscription, quantity, parentCallback, item }: Props) => {
-  const { bag } = useBag()
-  const [itemObj] = useState(item)
-  const [totalItems, setTotalItems] = useState(quantity)
-
-  useEffect(() => {
-    const match = (p: BagItem) => p.id == itemObj.id
-    let selected
-
-    if (bag.some(match)) {
-      selected = bag.filter(match)
-      setTotalItems(
-        subscription
-          ? selected[0].quantityToSubscribe
-          : selected[0].quantityToBuy
-      )
-    }
-  }, [bag, itemObj.id, subscription])
-
-  useEffect(() => {
-    console.log('quantity')
-    console.log(quantity)
-  }, [quantity])
-
-  // useEffect(() => {
-  //   parentCallback(itemObj, subscription, totalItems)
-  // }, [totalItems, itemObj, subscription, parentCallback])
-
-  // useCallback(() => {
-  //   if (subscription) {
-  //     setItemObjt({
-  //       ...itemObj,
-  //       quantityToSubscribe: totalItems
-  //     })
-  //   }
-
-  //   if (subscription) {
-  //     setItemObjt({
-  //       ...itemObj,
-  //       quantityToBuy: totalItems
-  //     })
-  //   }
-  //   parentCallback(itemObj)
-  // }, [totalItems, subscription, itemObj, parentCallback])
+  const [multiple, setMultiple] = useState(quantity)
 
   const handleQuantity = (total: number) => {
-    setTotalItems(total)
-    parentCallback(itemObj, subscription, total)
+    const updated = {
+      ...item,
+      quantityToSubscribe: subscription ? total : item.quantityToSubscribe,
+      quantityToBuy: !subscription ? total : item.quantityToBuy
+    }
+    setMultiple(total)
+    parentCallback(updated, subscription, total)
   }
 
   return (
@@ -83,12 +45,12 @@ const CartItem = ({ subscription, quantity, parentCallback, item }: Props) => {
           <S.Info>
             <S.Text>{item.name}</S.Text>
             {subscription && <S.Text>Assinatura</S.Text>}
-            <S.Text>R$ {item.price * totalItems}</S.Text>
+            <S.Text>R$ {item.price * multiple}</S.Text>
           </S.Info>
           <Input
             parentCallback={handleQuantity}
             scale={'0.8'}
-            value={totalItems}
+            value={multiple}
           />
         </S.Details>
         <S.DeleteBtn onClick={() => handleQuantity(0)}>
