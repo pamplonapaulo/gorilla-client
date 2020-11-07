@@ -17,8 +17,6 @@ const BagOverlay = () => {
   const [totalOnBag, setTotalOnBag] = useState(0)
   // const [arrBuys, setArrBuys] = useState<BagItem[] | []>([])
   // const [arrSubscriptions, setArrSubscriptions] = useState<BagItem[] | []>([])
-  // const [arrBuys, setArrBuys] = useState<Bag | []>([])
-  // const [arrSubs, setArrSubs] = useState<Bag | []>([])
   const [arrBuys, setArrBuys] = useState<any>([])
   const [arrSubs, setArrSubs] = useState<any>([])
   const [subtotal, setSubtotal] = useState<number>(0)
@@ -46,88 +44,41 @@ const BagOverlay = () => {
 
       setBag([...arr, updated])
     }
-
-    // const match = (p: BagItem) => p.id == id
-
-    // const arr = bag
-    // arr.splice(arr.findIndex(match), 1)
-    // console.log('arr')
-    // console.log(arr)
-
-    // let selected
-
-    // for (let i = 0; i < bag.length; i++) {
-    //   console.log(bag[i])
-    //   console.log(bag[i].id)
-    //   console.log(id)
-    //   if (bag[i].id === id) {
-    //     selected = bag[i]
-    //   }
-    // }
-
-    // const selected = bag.filter(match)
-    // console.log('selected')
-    // console.log(selected)
-    // console.log(selected[0])
-
-    // if (subscription && total > 0) {
-    //   setBag([
-    //     ...arr,
-    //     {
-    //       id: id,
-    //       name: selected[0].name,
-    //       imgHash: selected[0].imgHash,
-    //       price: selected[0].price,
-    //       quantityToBuy: selected[0].quantityToBuy,
-    //       quantityToSubscribe: total
-    //     }
-    //   ])
-    // } else if (!subscription && total > 0) {
-    //   setBag([
-    //     ...arr,
-    //     {
-    //       id: id,
-    //       name: selected[0].name,
-    //       imgHash: selected[0].imgHash,
-    //       price: selected[0].price,
-    //       quantityToBuy: total,
-    //       quantityToSubscribe: selected[0].quantityToSubscribe
-    //     }
-    //   ])
-    // } else if (total <= 0) {
-    //   setBag([...arr])
-    // }
   }
 
   const hasBuys = (p: BagItem) => p.quantityToBuy > 0
   const hasSubs = (p: BagItem) => p.quantityToSubscribe > 0
 
   useEffect(() => {
-    console.log('something changed: bag')
-    console.log(bag)
     if (bag.some(hasBuys)) {
-      console.log('bag contains: buys')
       setArrBuys(bag.filter(hasBuys))
+    } else {
+      setArrBuys([])
     }
     if (bag.some(hasSubs)) {
-      console.log('bag contains: subs')
       setArrSubs(bag.filter(hasSubs))
+    } else {
+      setArrSubs([])
     }
-  }, [bag, setTotalOnBag, setArrBuys, setArrSubs])
+  }, [bag, setArrBuys, setArrSubs])
 
   useEffect(() => {
     let value = 0
-    let items = 0
+    let totalOnBuy = 0
+    let totalOnSub = 0
+
     for (let i = 0; i < arrBuys.length; i++) {
       value += arrBuys[i].price * arrBuys[i].quantityToBuy
-      items += arrBuys[i].quantityToBuy
+      totalOnBuy += arrBuys[i].quantityToBuy
     }
+
     for (let i = 0; i < arrSubs.length; i++) {
       value += arrSubs[i].price * arrSubs[i].quantityToSubscribe
-      items += arrSubs[i].quantityToSubscribe
+      totalOnSub += arrSubs[i].quantityToSubscribe
     }
+
     setSubtotal(value)
-    setTotalOnBag(items)
+    setTotalOnBag(totalOnSub + totalOnBuy)
   }, [arrBuys, arrSubs, setSubtotal])
 
   return (
