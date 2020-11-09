@@ -45,7 +45,7 @@ const CartItem = ({ subscription, quantity, parentCallback, item }: Props) => {
           <S.Info>
             <S.Text>{item.name}</S.Text>
             {subscription && <S.Text>Assinatura</S.Text>}
-            <S.Text>R$ {item.price * multiple}</S.Text>
+            <S.Text>R$ {(item.price * multiple).toFixed(2)}</S.Text>
           </S.Info>
           <Input
             parentCallback={handleQuantity}

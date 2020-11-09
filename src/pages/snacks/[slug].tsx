@@ -154,7 +154,11 @@ export default function Produto({ ...product }: Product) {
                       value={quantitySubscribe}
                     />
                     <div onClick={() => handleIncludeOnBag(true)}>
-                      <Button colorOne={'#fff'} colorTwo={'#000'}>
+                      <Button
+                        isBlinking={quantitySubscribe > 0}
+                        colorOne={'#fff'}
+                        colorTwo={'#000F08'}
+                      >
                         Assinatura
                       </Button>
                     </div>
@@ -166,7 +170,11 @@ export default function Produto({ ...product }: Product) {
                       value={quantityBuy}
                     />
                     <div onClick={() => handleIncludeOnBag(false)}>
-                      <Button colorOne={'#fff'} colorTwo={'#000'}>
+                      <Button
+                        isBlinking={quantityBuy > 0}
+                        colorOne={'#fff'}
+                        colorTwo={'#000F08'}
+                      >
                         Compra
                       </Button>
                     </div>

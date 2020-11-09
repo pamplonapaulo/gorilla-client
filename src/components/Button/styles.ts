@@ -1,6 +1,37 @@
-import styled from 'styled-components'
+import styled, { keyframes } from 'styled-components'
+
+const blinkLines = keyframes`
+ 0% {
+   background: #FACB37;
+   border-color: #47311B;
+   color: #47311B;
+  }
+ 25% {
+   background: #EF8321;
+   border-color: #fff;
+   color: #fff;
+  }
+ 50% {
+  background: #FACB37;
+  border-color: #47311B;
+  color: #47311B;
+ }
+ 75% {
+  background: #EF8321;
+  border-color: #fff;
+  color: #fff;
+  }
+ 100% {
+  background: #FACB37;
+  border-color: #47311B;
+  color: #47311B;
+ }
+`
 
 export const Btn = styled.button`
+  animation-duration: 1.7s;
+  animation-iteration-count: infinite;
+  animation-name: ${(props) => (props.theme.isBlinking ? blinkLines : 'none')};
   background: transparent;
   color: ${(props) => props.theme.primaryColor};
   font-weight: 100;
@@ -30,7 +61,6 @@ export const Btn = styled.button`
 
   &:hover {
     animation: pulse 1s ease-out 0.4s;
-    //color: #222222;
     color: ${(props) => props.theme.secondaryColor};
 
     &:after {
