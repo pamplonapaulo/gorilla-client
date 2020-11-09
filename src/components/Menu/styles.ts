@@ -71,6 +71,10 @@ export const Item = styled.li`
     cursor: pointer;
     color: #47311b;
 
+    &&:nth-of-type(1) {
+      margin-left: 3rem;
+    }
+
     &:hover {
       border: #EF8321 solid 1px;
       color: #EF8321;
@@ -78,7 +82,6 @@ export const Item = styled.li`
 
     &.active {
       color: #FACB37;
-      cursor: default;
       border-image: linear-gradient( to right,yellow,rgba(0,0,0,0) ) 0 0 1 0%;
       border-top: transparent;
     }
