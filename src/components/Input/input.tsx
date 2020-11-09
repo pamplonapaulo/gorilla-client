@@ -2,8 +2,6 @@ import React, { useState, useEffect } from 'react'
 
 import * as S from './styles'
 
-// TESTE
-
 type Props = {
   parentCallback: (total: number) => void
   scale: string

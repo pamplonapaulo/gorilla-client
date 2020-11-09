@@ -1,11 +1,11 @@
 import styled, { keyframes } from 'styled-components'
 
 const blink = keyframes`
- 0% { background: white; }
- 25% { background: #D9D9D9; }
- 50% { background: white; }
- 75% { background: #D9D9D9; }
- 100% { background: white; }
+ 0% { background: #D9D9D9; }
+ 25% { background: #fff; }
+ 50% { background: #D9D9D9; }
+ 75% { background: #fff; }
+ 100% { background: #D9D9D9; }
 `
 
 export const HiddenInput = styled.input`
@@ -51,7 +51,7 @@ export const Btn = styled.button`
 `
 
 export const FakeInput = styled.div`
-  animation-duration: 1.2s;
+  animation-duration: 1.7s;
   animation-iteration-count: infinite;
   animation-name: ${(props) => (props.theme.quantity > 0 ? blink : 'none')};
   text-align: center;
