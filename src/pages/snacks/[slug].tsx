@@ -259,6 +259,10 @@ const Background = styled.div`
     height: calc(100vh - 70px);
     padding: 35px 0vw 0;
     margin: 70px auto 0;
+
+    @media only screen and (max-height: 700px) {
+      height: 100%;
+    }
   }
 `
 
@@ -286,6 +290,12 @@ const ContainerOuter = styled.div`
     padding: 35px 0vw 0;
     max-width: 1200px;
     margin: 70px auto 0;
+
+    @media only screen and (max-height: 700px) {
+      height: auto;
+      padding-top: 0;
+      margin-top: 0;
+    }
   }
 `
 
