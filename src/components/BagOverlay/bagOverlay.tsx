@@ -15,6 +15,8 @@ const BagOverlay = () => {
   const { bag, setBag } = useBag()
   const { bagOverlay, setBagOverlay } = useBagOverlay()
   const [totalOnBag, setTotalOnBag] = useState(0)
+  const [arrowColor, setArrowColor] = useState('#47311b')
+
   // const [arrBuys, setArrBuys] = useState<BagItem[] | []>([])
   // const [arrSubscriptions, setArrSubscriptions] = useState<BagItem[] | []>([])
   const [arrBuys, setArrBuys] = useState<any>([])
@@ -118,10 +120,12 @@ const BagOverlay = () => {
             <div
               onClick={() => handleGoToCart()}
               style={{ width: 'fit-content' }}
+              onMouseOver={() => setArrowColor('#2DA650')}
+              onMouseLeave={() => setArrowColor('#47311b')}
             >
               <Button colorOne={'#47311b'} colorTwo={'#2DA650'}>
                 <span style={{ margin: '0 8px' }}>Avançar</span>
-                <Arrow color={'#47311b'} rotate={'180'} />
+                <Arrow color={arrowColor} rotate={'180'} />
               </Button>
             </div>
           )}
