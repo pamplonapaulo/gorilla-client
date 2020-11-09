@@ -13,7 +13,7 @@ import * as S from './styles'
 
 const BagOverlay = () => {
   const { bag, setBag } = useBag()
-  const { bagOverlay } = useBagOverlay()
+  const { bagOverlay, setBagOverlay } = useBagOverlay()
   const [totalOnBag, setTotalOnBag] = useState(0)
   // const [arrBuys, setArrBuys] = useState<BagItem[] | []>([])
   // const [arrSubscriptions, setArrSubscriptions] = useState<BagItem[] | []>([])
@@ -83,48 +83,50 @@ const BagOverlay = () => {
 
   return (
     <>
-      {bagOverlay && (
-        <S.BagPopUp>
-          <S.Title>Carrinho de compras ({totalOnBag})</S.Title>
-          <S.ProductsWrap>
-            {arrSubs.map((p: BagItem) => (
-              <CartItem
-                key={p.name}
-                subscription={true}
-                quantity={p.quantityToSubscribe}
-                parentCallback={handleQuantity}
-                item={p}
-              />
-            ))}
-            {arrBuys.map((p: BagItem) => (
-              <CartItem
-                key={p.name}
-                subscription={false}
-                quantity={p.quantityToBuy}
-                parentCallback={handleQuantity}
-                item={p}
-              />
-            ))}
-          </S.ProductsWrap>
-          <S.Footer>
-            <S.FooterText>Subtotal:</S.FooterText>
-            <S.FooterText>R$ {subtotal.toFixed(2)}</S.FooterText>
-          </S.Footer>
-          <S.CallCheckout>
-            {totalOnBag > 0 && (
-              <div
-                onClick={() => handleGoToCart()}
-                style={{ width: 'fit-content' }}
-              >
-                <Button colorOne={'#47311b'} colorTwo={'#2DA650'}>
-                  <span style={{ margin: '0 8px' }}>Avançar</span>
-                  <Arrow color={'#47311b'} rotate={'180'} />
-                </Button>
-              </div>
-            )}
-          </S.CallCheckout>
-        </S.BagPopUp>
-      )}
+      <S.BagPopUp
+        onMouseLeave={() => setBagOverlay(false)}
+        onMouseEnter={() => setBagOverlay(true)}
+        theme={{ isVisible: bagOverlay }}
+      >
+        <S.Title>Carrinho de compras ({totalOnBag})</S.Title>
+        <S.ProductsWrap>
+          {arrSubs.map((p: BagItem) => (
+            <CartItem
+              key={p.name}
+              subscription={true}
+              quantity={p.quantityToSubscribe}
+              parentCallback={handleQuantity}
+              item={p}
+            />
+          ))}
+          {arrBuys.map((p: BagItem) => (
+            <CartItem
+              key={p.name}
+              subscription={false}
+              quantity={p.quantityToBuy}
+              parentCallback={handleQuantity}
+              item={p}
+            />
+          ))}
+        </S.ProductsWrap>
+        <S.Footer>
+          <S.FooterText>Subtotal:</S.FooterText>
+          <S.FooterText>R$ {subtotal.toFixed(2)}</S.FooterText>
+        </S.Footer>
+        <S.CallCheckout>
+          {totalOnBag > 0 && (
+            <div
+              onClick={() => handleGoToCart()}
+              style={{ width: 'fit-content' }}
+            >
+              <Button colorOne={'#47311b'} colorTwo={'#2DA650'}>
+                <span style={{ margin: '0 8px' }}>Avançar</span>
+                <Arrow color={'#47311b'} rotate={'180'} />
+              </Button>
+            </div>
+          )}
+        </S.CallCheckout>
+      </S.BagPopUp>
     </>
   )
 }

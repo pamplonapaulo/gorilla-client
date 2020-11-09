@@ -22,7 +22,9 @@ export const BagPopUp = styled.div`
     padding-bottom: 10px;
     position: absolute;
     top: 0;
-    transition: opacity 0.2s;
+    transform: ${(props) =>
+      props.theme.isVisible ? 'translateY(0)' : 'translateY(-120%)'};
+    transition: all 0.2s;
     width: 385px;
     z-index: 1;
   }
