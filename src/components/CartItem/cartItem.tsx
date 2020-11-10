@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { getImageUrl } from 'utils/getImageUrl'
 import Input from 'components/Input'
 import CloseIcon from 'components/CloseIcon'
@@ -20,6 +20,10 @@ type Props = {
 
 const CartItem = ({ subscription, quantity, parentCallback, item }: Props) => {
   const [multiple, setMultiple] = useState(quantity)
+
+  useEffect(() => {
+    setMultiple(quantity)
+  }, [quantity, setMultiple])
 
   const handleQuantity = (total: number) => {
     const updated = {
