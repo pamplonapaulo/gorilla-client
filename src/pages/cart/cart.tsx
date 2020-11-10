@@ -5,15 +5,13 @@ import ItemsArrayMap from 'components/ItemsArrayMap'
 
 import { BagItem } from 'types/api'
 
-import { useBag, useBagOverlay } from 'contexts'
+import { useBag } from 'contexts'
 
-import * as S from './styles'
+import styled from 'styled-components'
 
-const BagOverlay = () => {
+const Cart = () => {
   const { bag, setBag } = useBag()
-  const { bagOverlay, setBagOverlay } = useBagOverlay()
   const [totalOnBag, setTotalOnBag] = useState(0)
-
   const [arrBuys, setArrBuys] = useState<BagItem[] | []>([])
   const [arrSubs, setArrSubs] = useState<BagItem[] | []>([])
   const [subtotal, setSubtotal] = useState<number>(0)
@@ -75,14 +73,11 @@ const BagOverlay = () => {
   }, [arrBuys, arrSubs, setSubtotal])
 
   return (
-    <>
-      <S.BagPopUp
-        onMouseLeave={() => setBagOverlay(false)}
-        onMouseEnter={() => setBagOverlay(true)}
-        theme={{ isVisible: bagOverlay }}
-      >
-        <S.Title>Carrinho de compras ({totalOnBag})</S.Title>
-        <S.ProductsWrap>
+    <Container>
+      <div>
+        <h1>Carrinho de compras ({totalOnBag})</h1>
+
+        <div>
           <ItemsArrayMap
             items={arrSubs}
             subscription={true}
@@ -93,19 +88,67 @@ const BagOverlay = () => {
             subscription={false}
             parentCallback={handleQuantity}
           />
-        </S.ProductsWrap>
-        <S.Footer>
-          <S.FooterText>Subtotal:</S.FooterText>
-          <S.FooterText>R$ {subtotal.toFixed(2)}</S.FooterText>
-        </S.Footer>
+        </div>
+        <Footer>
+          <FooterText>Subtotal:</FooterText>
+          <FooterText>R$ {subtotal.toFixed(2)}</FooterText>
+        </Footer>
         <CartAction
           isVisible={totalOnBag > 0}
-          actionLink={'/cart'}
-          actionName={'Avançar'}
+          actionLink={'/home'}
+          actionName={'Concluir'}
         />
-      </S.BagPopUp>
-    </>
+      </div>
+    </Container>
   )
 }
 
-export default BagOverlay
+const Container = styled.div`
+  background: #ef8321;
+  height: 100%;
+  width: 100%;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  &::-webkit-scrollbar {
+    width: 0 !important;
+  }
+
+  @media only screen and (min-width: 1024px) {
+    position: fixed;
+  }
+`
+
+const Footer = styled.div`
+  color: blue;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 95%;
+`
+
+const FooterText = styled.h6`
+  color: #47311b;
+  font-size: 1.5rem;
+  margin: 10px 0;
+  width: calc(95% / 2);
+
+  &&:nth-of-type(2) {
+    text-align: right;
+  }
+
+  @media only screen and (min-width: 1024px) {
+    font-size: 1.5rem;
+  }
+`
+
+export default Cart
