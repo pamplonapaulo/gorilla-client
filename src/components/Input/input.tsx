@@ -6,9 +6,10 @@ type Props = {
   parentCallback: (total: number) => void
   scale: string
   value: number
+  isCartPage?: boolean
 }
 
-const Input = ({ parentCallback, scale, value }: Props) => {
+const Input = ({ parentCallback, scale, value, isCartPage }: Props) => {
   const [quantity, setQuantity] = useState(value)
 
   useEffect(() => {
@@ -29,7 +30,9 @@ const Input = ({ parentCallback, scale, value }: Props) => {
     <>
       <S.Container theme={{ size: scale }}>
         <S.Btn onClick={() => changeQuantity('-')}>{'-'}</S.Btn>
-        <S.FakeInput theme={{ quantity: scale === '1' ? quantity : 0 }}>
+        <S.FakeInput
+          theme={{ quantity: scale === '1' ? quantity : 0, isCartPage }}
+        >
           <S.P>{quantity}</S.P>
         </S.FakeInput>
         <S.Btn onClick={() => changeQuantity('+')}>{'+'}</S.Btn>

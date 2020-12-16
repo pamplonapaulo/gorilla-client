@@ -19,23 +19,36 @@ export const ImgWrap = styled(Image)`
   width: 75px;
 `
 
-export const Details = styled.div`
+export const Details = styled.div<{
+  isCartPage?: boolean
+}>`
   display: flex;
-  flex-direction: column;
-  height: 100px;
+  flex-direction: ${(p) => (p.isCartPage ? 'row' : 'column')};
+  height: ${(p) => (p.isCartPage ? 'auto' : '100px')};
+
   justify-content: space-between;
-  width: 70%;
+  width: ${(p) => (p.isCartPage ? '90%' : '70%')};
 `
 
-export const Info = styled.div`
-  flex-direction: column;
+export const Info = styled.div<{
+  isCartPage?: boolean
+}>`
+  align-items: ${(p) => (p.isCartPage ? 'center' : 'end')};
+  display: ${(p) => (p.isCartPage ? 'flex' : 'block')};
+  flex-direction: ${(p) => (p.isCartPage ? 'row' : 'column')};
+  justify-content: ${(p) => (p.isCartPage ? 'space-around' : 'unset')};
+  width: ${(p) => (p.isCartPage ? '500px' : '100%')};
 `
 
 export const Text = styled.h1`
   font-weight: 200;
 `
 
-export const DeleteBtn = styled.div`
+export const DeleteBtn = styled.div<{
+  isCartPage?: boolean
+}>`
+  align-self: ${(p) => (p.isCartPage ? 'center' : 'end')};
+  margin: ${(p) => (p.isCartPage ? 'auto' : '0')};
   cursor: pointer;
   flex-direction: column;
   height: fit-content;

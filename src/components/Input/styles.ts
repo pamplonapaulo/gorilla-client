@@ -18,6 +18,7 @@ export const Container = styled.div`
   transform-origin: left;
 
   @media only screen and (min-width: 1024px) {
+    align-items: center;
     margin-right: 15px;
   }
 `
@@ -79,6 +80,7 @@ export const FakeInput = styled.div`
 
   @media only screen and (min-width: 1024px) {
     width: 140px;
+    width: ${(props) => (props.theme.isCartPage ? '80px' : '140px')};
   }
 `
 

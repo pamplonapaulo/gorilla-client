@@ -16,9 +16,16 @@ type Props = {
     totalItems: number
   ) => void
   item: BagItem
+  isCartPage?: boolean
 }
 
-const CartItem = ({ subscription, quantity, parentCallback, item }: Props) => {
+const CartItem = ({
+  subscription,
+  quantity,
+  parentCallback,
+  item,
+  isCartPage
+}: Props) => {
   const [multiple, setMultiple] = useState(quantity)
 
   useEffect(() => {
@@ -45,19 +52,27 @@ const CartItem = ({ subscription, quantity, parentCallback, item }: Props) => {
             unsized
           />
         </S.Thumb>
-        <S.Details>
-          <S.Info>
+        <S.Details isCartPage={isCartPage}>
+          <S.Info isCartPage={isCartPage}>
             <S.Text>{item.name}</S.Text>
             {subscription && <S.Text>Assinatura</S.Text>}
-            <S.Text>R$ {(item.price * multiple).toFixed(2)}</S.Text>
+            {!isCartPage && (
+              <S.Text>R$ {(item.price * multiple).toFixed(2)}</S.Text>
+            )}
           </S.Info>
           <Input
+            isCartPage={isCartPage}
             parentCallback={handleQuantity}
             scale={'0.8'}
             value={multiple}
           />
+          {isCartPage && (
+            <S.Info isCartPage={isCartPage}>
+              <S.Text>R$ {(item.price * multiple).toFixed(2)}</S.Text>
+            </S.Info>
+          )}
         </S.Details>
-        <S.DeleteBtn onClick={() => handleQuantity(0)}>
+        <S.DeleteBtn isCartPage={isCartPage} onClick={() => handleQuantity(0)}>
           <CloseIcon color={'#47311b'} />
         </S.DeleteBtn>
       </S.Container>

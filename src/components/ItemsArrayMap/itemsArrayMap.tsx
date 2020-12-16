@@ -12,9 +12,15 @@ type Props = {
     subscription: boolean,
     totalItems: number
   ) => void
+  isCartPage?: boolean
 }
 
-const ItemsArrayMap = ({ items, subscription, parentCallback }: Props) => {
+const ItemsArrayMap = ({
+  items,
+  subscription,
+  parentCallback,
+  isCartPage
+}: Props) => {
   const [arr, setArr] = useState(items)
 
   useEffect(() => {
@@ -25,6 +31,7 @@ const ItemsArrayMap = ({ items, subscription, parentCallback }: Props) => {
     <>
       {arr.map((p: BagItem) => (
         <CartItem
+          isCartPage={isCartPage}
           key={p.name}
           subscription={subscription}
           quantity={subscription ? p.quantityToSubscribe : p.quantityToBuy}
