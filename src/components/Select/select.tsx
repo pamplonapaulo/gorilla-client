@@ -15,7 +15,7 @@ const Select = ({ parentCallback, label, options }: Props) => {
     console.log(e.target)
     console.log(e)
     console.log('paulo')
-    setDropDown(true)
+    setDropDown(!dropDown)
   }
 
   const handleOption = (opt: string) => {
