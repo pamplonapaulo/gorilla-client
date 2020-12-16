@@ -16,13 +16,14 @@ const Cart = () => {
 }
 
 const Container = styled.div`
-  background: #ef8321;
-  height: 100%;
-  width: 100%;
-  justify-content: center;
-  display: flex;
   align-items: center;
+  background: #ef8321;
+  display: flex;
   flex-direction: column;
+
+  height: 100%;
+  justify-content: center;
+  width: 100%;
 
   -ms-overflow-style: none;
   scrollbar-width: none;
@@ -36,9 +37,8 @@ const Container = styled.div`
   }
 
   @media only screen and (min-width: 1024px) {
-    position: fixed;
     display: block;
-    padding: 25rem;
+    padding: 100px 25rem 0;
   }
 `
 

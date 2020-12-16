@@ -94,16 +94,25 @@ const MountOrders = ({ children, isCartPage }: Props) => {
           parentCallback={handleQuantity}
         />
       </ProductsWrap>
-      {children}
       <Footer>
-        <FooterText>Subtotal:</FooterText>
-        <FooterText>R$ {subtotal.toFixed(2)}</FooterText>
+        {!isCartPage && (
+          <>
+            <FooterText>Subtotal:</FooterText>
+            <FooterText>R$ {subtotal.toFixed(2)}</FooterText>
+          </>
+        )}
+        {isCartPage && (
+          <Title isCartPage={isCartPage}>
+            Subtotal: R$ {subtotal.toFixed(2)}
+          </Title>
+        )}
       </Footer>
       <CartAction
         isVisible={totalOnBag > 0}
         actionLink={'/cart'}
         actionName={'Concluir'}
       />
+      {children}
     </>
   )
 }
