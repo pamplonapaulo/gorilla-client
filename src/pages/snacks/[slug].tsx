@@ -598,7 +598,7 @@ export const getStaticProps = async ({ params }: Params) => {
         Weight
         Description
         InStock
-        IsActive
+        Active
         NutritionFacts {
           Obs
           Carbohydrates

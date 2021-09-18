@@ -13,6 +13,6 @@ module.exports = {
   images: {
     deviceSizes: [320, 420, 768, 1024, 1200],
     iconSizes: [],
-    domains: ['paulopamplona.com']
+    domains: ['142.93.139.20']
   }
 }
