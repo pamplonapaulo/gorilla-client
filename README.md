@@ -1,3 +1,1 @@
-## Live stage currently at:
-
-https://gorilla-pack-snacks.vercel.app/
+## E-commerce front-end with Next.js
