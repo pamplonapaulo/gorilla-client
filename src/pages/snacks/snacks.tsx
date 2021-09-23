@@ -27,6 +27,7 @@ const Snacks = () => {
           {data.products.map((p: Snack) => (
             <Item key={p.id}>
               <ImgWrap
+                // src='http://localhost:1337/uploads/small_banana_48c09b9bce.png'
                 src={getImageUrl(
                   '/uploads/small_' + p.Image['hash'] + p.Image['ext']
                 )}
